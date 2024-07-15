@@ -21,7 +21,7 @@ import { Text } from "../../../shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
-
+import { Title } from "../../../shared/ui/title";
 export const AuthWidget: React.FC = () => {
   const { t, i18n } = useTranslation("authWidget");
   const navigate = useNavigate();
@@ -74,7 +74,8 @@ export const AuthWidget: React.FC = () => {
 
   return (
     <div className={styles.auth}>
-      <h1 className={styles.auth__title}>PetSeeker</h1>
+      <Title>PetSeeker</Title>
+
       <div className={styles.auth__top}>
         <Button onClick={() => navigate(AUTH_ROUTE)} isDefault={isAuth}>
           {t("Login")}

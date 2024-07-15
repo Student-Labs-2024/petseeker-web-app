@@ -6,6 +6,7 @@ import styles from "../auth.module.scss";
 import InputMask from "react-input-mask-next";
 import { phoneConsts, nameConsts } from "../../../../shared/constants";
 import { useTranslation } from "react-i18next";
+import { Text } from "../../../../shared/ui/text";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -31,7 +32,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   return (
     <form className={styles.auth__form}>
       <label className={styles.label}>
-        {t("number")}
+        <Text>{t("number")}</Text>
+
         <InputMask
           onChange={handleChangePhone}
           value={phoneNumber}
@@ -44,7 +46,8 @@ export const AuthForm: React.FC<AuthFormProps> = ({
 
       {!isAuth && (
         <label className={styles.label}>
-          {t("name")}
+          <Text>{t("name")}</Text>
+
           <Input
             value={name}
             onChange={handleChangeName}
