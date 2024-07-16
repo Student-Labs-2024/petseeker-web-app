@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-
+import { setupListeners } from '@reduxjs/toolkit/query';
 import petsReducer from "../entities/pet/model/petsSlice";
 import { PetState } from "../entities/pet/index";
 import userReducer from "../entities/user/model/userSlice";
@@ -14,6 +14,8 @@ export const store = configureStore({
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),
 });
+
+setupListeners(store.dispatch);
 export type RootState = {
   pets: PetState;
   user: UserState;

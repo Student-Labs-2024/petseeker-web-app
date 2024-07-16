@@ -14,7 +14,7 @@ import {
   setIsConfirm,
 } from "../../../entities/user/index";
 import { Button } from "../../../shared/ui/button";
-import { AUTH_ROUTE, REGISTRATION_ROUTE } from "../../../app/router/consts";
+import { AUTH_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from "../../../app/router/consts";
 import styles from "./auth.module.scss";
 import { useNavigate } from "react-router-dom";
 import { Text } from "../../../shared/ui/text";
@@ -23,7 +23,7 @@ import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
 
 export const AuthWidget: React.FC = () => {
-  const { t, i18n } = useTranslation("authWidget");
+  const { t } = useTranslation("authWidget");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
@@ -50,6 +50,7 @@ export const AuthWidget: React.FC = () => {
       const response = await confirm({ phoneNumber, code }).unwrap();
       if (response.success) {
         dispatch(setToken(response.token));
+        navigate(MAIN_ROUTE)
       }
     } catch (err) {
       console.error("Failed to confirm", err);
