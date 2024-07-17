@@ -24,10 +24,10 @@ const Navbar: React.FC = () => {
             <Link to={REGISTRATION_ROUTE}>Войти</Link>
           </li>
         </ul>
-        <div style={{display:"flex",gap:"10px"}}>
+        {/* <div >
           <Button onClick={handleLightThemeClick}>Light</Button>
           <Button onClick={handleDarkThemeClick}>Dark</Button>
-        </div>
+        </div> */}
       </nav>
     </MainContainer>
   );
