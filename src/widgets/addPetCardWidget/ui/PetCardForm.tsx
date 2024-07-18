@@ -24,11 +24,12 @@ export const PetCardForm: React.FC = () => {
   const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit: SubmitHandler<PetCardFormType> = async (data) => {
     const formData = new FormData();
+    console.log(data)
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("type", data.type);
     formData.append("status", data.status);
-    formData.append("age", data.age.toString());
+    formData.append("age", data.age);
     match(isUserForm)
     .with(false, () => formData.append("address", data.address))
     .with(true, () => formData.append("itn", data.itn))
@@ -61,8 +62,9 @@ export const PetCardForm: React.FC = () => {
         />
 
         <TextArea
+           label={t("description")}
           id="description"
-          {...register("description", { required: true })}
+          register={register("description")}
         />
         {match(isUserForm)
           .with(false, () => (
@@ -85,7 +87,7 @@ export const PetCardForm: React.FC = () => {
           label={t("type")}
           id="type"
           options={petTypes}
-          register={register("type", { required: true })}
+          register={register("type" )}
         />
 
         <Input

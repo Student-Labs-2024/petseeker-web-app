@@ -9,7 +9,8 @@
       "status": "Status",
       "age": "Age",
       "create": "Create",
-      "loading": "Loading"
+      "loading": "Loading",
+      "description":"Description"
     },
     "ru": {
       "name": "Имя",
@@ -20,7 +21,8 @@
       "status": "Статус",
       "age": "Возраст",
       "create": "Создать",
-      "loading": "Загрузка"
+      "loading": "Загрузка",
+      "description":"Описание"
     }
   }
 }
