@@ -110,7 +110,7 @@ export const AuthWidget: React.FC = () => {
           ></ConfirmForm>
         ))
         .exhaustive()}
-      <Text style={{ textAlign: "center" }}>{t("AgreeMessage")}</Text>
+      <Text >{t("AgreeMessage")}</Text>
     </div>
   );
 };

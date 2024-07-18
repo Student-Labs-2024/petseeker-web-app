@@ -1,1 +1,1 @@
-export * from './MainContainer'
+export {MainContainer} from './ui/MainContainer'

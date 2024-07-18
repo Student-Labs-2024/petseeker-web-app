@@ -8,8 +8,11 @@ import {
 
 import { Navbar } from "../../widgets/navbar";
 import { MAIN_ROUTE } from "./consts";
-import { publicRoutes } from "./routes";
+import { authRoutes,publicRoutes } from "./routes";
+import { useAppSelector } from "../../shared/hooks";
 const AppRouter: React.FC = () => {
+  const token = useAppSelector((state) => state.user.token);
+
   return (
     <div className="wrapper">
       <Router>
@@ -17,6 +20,9 @@ const AppRouter: React.FC = () => {
         {/* убрать main */}
         
           <Routes>
+          {token && authRoutes.map(({ path, Component }) =>
+              <Route key={path} path={path} element={<Component/>} />
+           )}
             {publicRoutes.map(({ path, Component }) => (
               <Route key={path} path={path} element={<Component />} />
             ))}
