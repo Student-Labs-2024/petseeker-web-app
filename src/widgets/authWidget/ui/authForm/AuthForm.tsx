@@ -1,11 +1,12 @@
 // src/entities/user/model/authWidget.ts
 import React, { ChangeEvent } from "react";
-import { Input } from "../../../../shared/ui/Input";
+import { Input } from "../../../../shared/ui/input";
 import { Button } from "../../../../shared/ui/button";
 import styles from "../auth.module.scss";
 import InputMask from "react-input-mask-next";
 import { phoneConsts, nameConsts } from "../../../../shared/constants";
 import { useTranslation } from "react-i18next";
+import { Form } from "../../../../shared/ui/form";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -29,28 +30,23 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   const { t } = useTranslation("authForm");
   const textAuthButton = isAuth ? t("enter") : t("registration");
   return (
-    <form className={styles.auth__form}>
-      <label className={styles.label}>
-        {t("number")}
-        <InputMask
-          onChange={handleChangePhone}
-          value={phoneNumber}
-          mask={phoneConsts.mask}
-          placeholder={phoneConsts.placeholder}
-        >
-          <Input />
-        </InputMask>
-      </label>
+    <Form >
+      <InputMask
+        onChange={handleChangePhone}
+        value={phoneNumber}
+        mask={phoneConsts.mask}
+        placeholder={phoneConsts.placeholder}
+      >
+        <Input label={t("number")} />
+      </InputMask>
 
       {!isAuth && (
-        <label className={styles.label}>
-          {t("name")}
-          <Input
-            value={name}
-            onChange={handleChangeName}
-            placeholder={nameConsts.placeholder}
-          />
-        </label>
+        <Input
+          label={t("name")}
+          value={name}
+          onChange={handleChangeName}
+          placeholder={nameConsts.placeholder}
+        />
       )}
 
       <Button
@@ -60,6 +56,6 @@ export const AuthForm: React.FC<AuthFormProps> = ({
       >
         {textAuthButton}
       </Button>
-    </form>
+    </Form>
   );
 };

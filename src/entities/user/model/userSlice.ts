@@ -4,7 +4,7 @@ import {jwtDecode} from "jwt-decode";
 import { UserState } from "./userType";
 
 export const initialState: UserState = {
-  token: null,
+  token: "fakeToken",
   user: null,
   phoneNumber: "",
   name: "",

@@ -1,25 +1,23 @@
 import React from "react";
-import styles from "./input.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
-type InputProps = {
+import styles from "./textArea.module.scss";
+type TextareaProps = {
   onChange?: any;
-  placeholder?: string;
   value?: string;
   name?: string;
   style?: any;
   id?: string;
-  type?: string;
-  accept?: string;
-  multiple?: boolean;
   register?: UseFormRegisterReturn;
   label?: string;
 };
 
-export const Input: React.FC<InputProps> = ({ label, register, ...rest }) => {
+export const TextArea: React.FC<TextareaProps> = ({ label, register, ...rest }) => {
   return (
     <label className={styles.label}>
       {label}
-      <input className={styles.default} {...register} {...rest} />
+      <textarea className={styles.default} {...register} {...rest}></textarea>
     </label>
   );
 };
+
+

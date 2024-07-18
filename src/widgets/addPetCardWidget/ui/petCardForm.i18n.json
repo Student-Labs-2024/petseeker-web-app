@@ -1,0 +1,26 @@
+{
+  "petCardForm": {
+    "en": {
+      "name": "Name",
+      "images": "Images",
+      "address": "Address",
+      "itn": "ITN",
+      "type": "Type",
+      "status": "Status",
+      "age": "Age",
+      "create": "Create",
+      "loading": "Loading"
+    },
+    "ru": {
+      "name": "Имя",
+      "images": "Изображения",
+      "address": "Адрес",
+      "itn": "ИНН",
+      "type": "Тип",
+      "status": "Статус",
+      "age": "Возраст",
+      "create": "Создать",
+      "loading": "Загрузка"
+    }
+  }
+}

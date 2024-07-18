@@ -1,11 +1,12 @@
 // src/entities/user/model/authWidget.ts
 import React from "react";
-import { Input } from "../../../../shared/ui/Input";
+import { Input } from "../../../../shared/ui/input";
 import { Button } from "../../../../shared/ui/button";
 import styles from "../auth.module.scss";
 import InputMask from "react-input-mask-next";
 import { codeConsts } from "../../../../shared/constants";
 import { useTranslation } from 'react-i18next';
+import { Form } from "../../../../shared/ui/form";
 type ConfirmFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -24,13 +25,13 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
 }) => {
   const { t } = useTranslation('confirmForm');
   return (
-    <form className={styles.auth__form}>
+    <Form >
       <InputMask
         mask={codeConsts.mask}
         value={code}
         onChange={handleChangeCode}
         placeholder={codeConsts.placeholder}
-        style={{ letterSpacing: "6px", textAlign: "center" }}
+        className={styles.code_mask}
       >
         <Input />
       </InputMask>
@@ -45,6 +46,6 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
       >
         {t('sendCodeAgain')}
       </Button>
-    </form>
+    </Form>
   );
 };
