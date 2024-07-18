@@ -1,0 +1,27 @@
+html[data-theme="dark"] {
+    --input-border-color:#ffffff;
+    --text-color: #ffffff;
+    --button-text-color: #ffffff;
+    --button-background-color: #6c54f6;
+    --button-border-color: #6c54f6;
+  
+    --button-text-color-default: #ffffff;
+    --button-background-color-default: #404040;
+    --button-border-color-default: #404040;
+  
+    --background-color: #1b1b1b;
+  }
+  
+  html[data-theme="light"] {
+    --input-border-color:#585858;
+    --text-color: #1b1b1b;
+    --button-text-color: #ffffff;
+    --button-background-color: #1b1b1b;
+    --button-border-color: #1b1b1b;
+  
+    --button-text-color-default: #585858;
+    --button-background-color-default: #ffffff;
+    --button-border-color-default: #585858;
+  
+    --background-color: #ffffff;
+  }

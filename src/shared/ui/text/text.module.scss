@@ -1,3 +1,13 @@
-.default{
-    font-size: 16px;
+.default {
+  font-size: 16px;
+  color: var(--text-color);
+}
+
+.title {
+  color: var(--text-color);
+  margin: 0;
+  font-size: 32px;
+  font-weight: 600;
+}
+.subtitle {
 }

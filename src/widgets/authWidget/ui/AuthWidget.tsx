@@ -17,11 +17,10 @@ import { Button } from "../../../shared/ui/button";
 import { AUTH_ROUTE, MAIN_ROUTE, REGISTRATION_ROUTE } from "../../../app/router/consts";
 import styles from "./auth.module.scss";
 import { useNavigate } from "react-router-dom";
-import { Text } from "../../../shared/ui/text";
+import { Text } from "@shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
-
 export const AuthWidget: React.FC = () => {
   const { t } = useTranslation("authWidget");
   const navigate = useNavigate();
@@ -75,7 +74,8 @@ export const AuthWidget: React.FC = () => {
 
   return (
     <div className={styles.auth}>
-      <h1 className={styles.auth__title}>PetSeeker</h1>
+      <Text tag={'h1'} myClass="title">PetSeeker</Text>
+
       <div className={styles.auth__top}>
         <Button onClick={() => navigate(AUTH_ROUTE)} isDefault={isAuth}>
           {t("Login")}

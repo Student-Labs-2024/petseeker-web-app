@@ -1,10 +1,17 @@
-import React, { CSSProperties } from "react";
+import React, { CSSProperties, ReactNode, JSXElementConstructor } from "react";
 import styles from "./text.module.scss";
+
 type TextProps = {
-  children?: React.ReactNode;
+  children?: ReactNode;
   style?: CSSProperties;
+  tag?: keyof JSX.IntrinsicElements | JSXElementConstructor<any>;
+  myClass?: string;
 };
 
-export const Text: React.FC<TextProps> = ({ style, children }) => {
-  return <p className={styles.default} style={style}>{children}</p>;
+export const Text: React.FC<TextProps> = ({
+  myClass = "default",
+  tag: CustomTag = "span",
+  children,
+}) => {
+  return <CustomTag className={styles[myClass]}>{children}</CustomTag>;
 };
