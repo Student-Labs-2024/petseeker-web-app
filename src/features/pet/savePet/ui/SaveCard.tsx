@@ -1,11 +1,13 @@
 import React from "react";
-import { Button } from "../../../../shared/ui/button";
+import {ReactComponent as LikeIcon} from '../../../../shared/assets/like.svg'
+import styles from "./saveCard.module.scss";
+export const SaveCard: React.FC = () => {
+  const handleSaveButton = () => {
+  };
 
-export  const SaveCard: React.FC = () => {
-    const handleSaveButton=(event:any)=>{
-        console.log(event.target)
-    }
-  return <Button onClick={handleSaveButton}>Сохранить</Button>;
+  return (
+    <button onClick={handleSaveButton} className={styles.card__like_btn}>
+      <LikeIcon className={styles.card__like}></LikeIcon>
+    </button>
+  );
 };
-
-

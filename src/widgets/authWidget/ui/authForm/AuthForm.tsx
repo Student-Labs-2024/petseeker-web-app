@@ -1,8 +1,7 @@
 // src/entities/user/model/authWidget.ts
-import React, { ChangeEvent } from "react";
+import React from "react";
 import { Input } from "../../../../shared/ui/input";
 import { Button } from "../../../../shared/ui/button";
-import styles from "../auth.module.scss";
 import InputMask from "react-input-mask-next";
 import { phoneConsts, nameConsts } from "../../../../shared/constants";
 import { useTranslation } from "react-i18next";

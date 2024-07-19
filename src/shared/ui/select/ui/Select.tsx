@@ -23,7 +23,7 @@ export const Select: React.FC<SelectProps> = ({
       <label  className={styles.label}>
         {label}
         <select className={styles.default} {...register} {...rest}>
-          {options.map((option) => (
+          {options.length&&options.map((option) => (
             <option key={option} value={option}>
               {option}
             </option>

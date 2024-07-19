@@ -8,13 +8,14 @@ export const PetList: React.FC = () => {
   const { data: pets, isLoading, isError } = useGetPetsQuery();
 
   return (
-    <>
+    <div className={styles.container}>
+
       {match({ isLoading, isError, pets })
         .with({ isLoading: true }, () => <div>Loading...</div>)
-        .with({isError:true }, () => <div>Error: </div>)
+        .with({ isError: true }, () => <div>Error: </div>)
         .with({ pets: { length: 0 } }, () => <p>No pets available.</p>)
         .otherwise(() => (
-          <div className={styles.card_list_container}>
+          <div className={styles.card__list_container}>
             {pets?.pets?.map((pet: Pet) => (
               <PetCard
                 key={pet.id}
@@ -24,6 +25,6 @@ export const PetList: React.FC = () => {
             ))}
           </div>
         ))}
-    </>
+    </div>
   );
 };

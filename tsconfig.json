@@ -5,7 +5,9 @@
     "paths": {
       "@/*": ["src/*"],
       "@shared/*": ["src/shared/*"]
-    }
+    },
+    "types": ["vite-plugin-svgr/client"],
+
   },
 
   "references": [
