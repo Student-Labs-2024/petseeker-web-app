@@ -1,7 +1,7 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
-
+import svgr from "@svgr/rollup";
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
@@ -10,5 +10,5 @@ export default defineConfig({
       "@shared": path.resolve(__dirname, "./src/shared"),
     },
   },
-  plugins: [react()],
+  plugins: [react(),svgr()],
 });
