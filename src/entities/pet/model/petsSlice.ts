@@ -7,12 +7,17 @@ const initialState: PetState = {
   pets: [],
   loading: false,
   error: null,
+  activeButton:"1",
 };
 
 const petsSlice = createSlice({
   name: "pets",
   initialState,
-  reducers: {},
+  reducers: {
+    setActiveButton(state, action: PayloadAction<string>) {
+      state.activeButton = action.payload;
+    },
+  },
   extraReducers: (builder) => {
     builder.addMatcher(petsApi.endpoints.getPets.matchPending, (state) => ({
       ...state,
@@ -38,5 +43,5 @@ const petsSlice = createSlice({
 
   },
 });
-
+export const { setActiveButton } = petsSlice.actions;
 export default petsSlice.reducer;

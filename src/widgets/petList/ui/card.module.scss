@@ -8,11 +8,11 @@
   grid-template-columns: repeat(
     2,
     1fr
-  ); /* Две колонки, каждая занимает равную часть ширины контейнера */
-  gap: 10px; /* Задайте необходимый gap */
+  ); 
+  gap: 30px 10px;
   margin-bottom: var(--navbar-height);
 }
 
 .card__item {
-  width: 100%; /* Убедитесь, что элементы занимают всю ширину своей ячейки */
+  width: 100%; 
 }
