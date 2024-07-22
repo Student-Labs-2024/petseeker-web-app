@@ -1,1 +1,1 @@
-export {MainContainer} from './ui/MainContainer'
+export { MainContainer } from "./ui/MainContainer";

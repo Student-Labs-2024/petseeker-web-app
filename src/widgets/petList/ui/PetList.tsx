@@ -9,7 +9,6 @@ export const PetList: React.FC = () => {
 
   return (
     <div className={styles.container}>
-
       {match({ isLoading, isError, pets })
         .with({ isLoading: true }, () => <div>Loading...</div>)
         .with({ isError: true }, () => <div>Error: </div>)

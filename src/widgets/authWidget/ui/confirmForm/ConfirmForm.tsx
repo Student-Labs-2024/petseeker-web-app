@@ -5,7 +5,7 @@ import { Button } from "../../../../shared/ui/button";
 import styles from "../auth.module.scss";
 import InputMask from "react-input-mask-next";
 import { codeConsts } from "../../../../shared/constants";
-import { useTranslation } from 'react-i18next';
+import { useTranslation } from "react-i18next";
 import { Form } from "../../../../shared/ui/form";
 type ConfirmFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -23,9 +23,9 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
   isSendingConfirm,
   isSendingLogin,
 }) => {
-  const { t } = useTranslation('confirmForm');
+  const { t } = useTranslation("confirmForm");
   return (
-    <Form >
+    <Form>
       <InputMask
         mask={codeConsts.mask}
         value={code}
@@ -35,8 +35,12 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
       >
         <Input />
       </InputMask>
-      <Button type="button" onClick={handleClickConfirm} disabled={isSendingConfirm}>
-        {t('next')}
+      <Button
+        type="button"
+        onClick={handleClickConfirm}
+        disabled={isSendingConfirm}
+      >
+        {t("next")}
       </Button>
       <Button
         isDefault={true}
@@ -44,7 +48,7 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
         onClick={handleClickSubmit}
         disabled={isSendingConfirm || isSendingLogin}
       >
-        {t('sendCodeAgain')}
+        {t("sendCodeAgain")}
       </Button>
     </Form>
   );
