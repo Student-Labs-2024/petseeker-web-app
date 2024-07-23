@@ -4,7 +4,7 @@ import {jwtDecode} from "jwt-decode";
 import { UserState } from "./userType";
 
 export const initialState: UserState = {
-  token: localStorage.getItem('token'),
+  token: 'fakeToken',
   user: null,
   phoneNumber: "",
   name: "",
@@ -19,12 +19,12 @@ const userSlice = createSlice({
     setToken(state, action: PayloadAction<string>) {
       state.token = action.payload;
       state.user = jwtDecode(action.payload);
-      localStorage.setItem('token', action.payload);
+
     },
     logout(state) {
       state.token = null;
       state.user = null;
-      localStorage.removeItem('token');
+
     },
     setPhoneNumber(state, action: PayloadAction<string>) {
       state.phoneNumber = action.payload;
