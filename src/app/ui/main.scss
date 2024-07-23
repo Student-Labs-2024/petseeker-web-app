@@ -1,5 +1,6 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap");
+
 * {
   padding: 0px;
   margin: 0px;
@@ -130,6 +131,7 @@ html,
   min-height: 100%;
 }
 .wrapper {
+  height: 100%;
   background-color: var(--background-color);
   position: relative;
   min-height: 100%;
@@ -149,4 +151,25 @@ html,
   -webkit-box-flex: 1;
   -ms-flex: 1 1 auto;
   flex: 1 1 auto;
+}
+.swiper {
+  overflow: visible;
+}
+.swiper-pagination {
+  position: absolute;
+  bottom: -21px !important;
+}
+.swiper-pagination-bullet {
+  width: 6px !important;
+  height: 6px !important;
+  background: var(--secondary-gray);
+  opacity: 0.4;
+}
+.swiper-pagination-bullet-active {
+  background-color: var(--button-dark-defoult);
+  opacity: 1;
+}
+
+.auto-width > * > .swiper-slide {
+  width: auto !important;
 }

@@ -14,12 +14,9 @@ export const FilterPets: React.FC = () => {
 
     dispatch(setActiveButton(id));
   };
-  console.log( activeButton)
   return (
     <div className={styles.filter__list}>
       {buttonsData.map(({ id, label }) =>  {
-        console.log(id)
-        console.log(id===activeButton)
         return (
           <button
             key={id}
