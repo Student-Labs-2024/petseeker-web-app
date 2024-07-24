@@ -1,24 +1,41 @@
 import React from "react";
 import styles from "./filterPets.module.scss";
-import { Text } from "../../../../shared/ui/text";
-import {ReactComponent as CircleIcon} from '../../../../shared/assets/circle.svg'
+import { ReactComponent as CircleIcon } from "../../../../shared/assets/circle.svg";
+import { useAppDispatch, useAppSelector } from "../../../../shared/hooks";
+import { setActiveButton } from "../../../../entities/pet/index";
+import { buttonsData } from "../../../../shared/constants/filterPetsConsts";
 export const FilterPets: React.FC = () => {
+  const dispatch = useAppDispatch();
+  const activeButton = useAppSelector((state) => state.pets.activeButton);
 
+  const handleClick = (
+    id: string
+  ) => {
 
+    dispatch(setActiveButton(id));
+  };
+  console.log( activeButton)
   return (
     <div className={styles.filter__list}>
-      <button className={styles.filter__item}>
-        <CircleIcon className={styles.filter__item_icon}></CircleIcon>
-        <span className={styles.text}>Все</span>
-      </button>
-      <button className={styles.filter__item}>
-        <CircleIcon className={styles.filter__item_icon}></CircleIcon>
-        <span className={styles.text}>Недавние</span>
-      </button>
-      <button className={styles.filter__item}>
-        <CircleIcon className={styles.filter__item_icon}></CircleIcon>
-        <span className={styles.text}>Рядом с вами</span>
-      </button>
+      {buttonsData.map(({ id, label }) =>  {
+        console.log(id)
+        console.log(id===activeButton)
+        return (
+          <button
+            key={id}
+            
+            className={
+              activeButton === id
+                ? styles.filter__item_active
+                : styles.filter__item
+            }
+            onClick={()=>handleClick(id)}
+          >
+            <CircleIcon className={styles.filter__item_icon}></CircleIcon>
+            <span className={styles.text}>{label}</span>
+          </button>
+        )
+      })}
     </div>
   );
 };

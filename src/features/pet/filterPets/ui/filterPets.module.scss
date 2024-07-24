@@ -10,6 +10,19 @@ margin-top: 52px;
   display: flex;
   gap: 10px;
   align-items: center;
+  > * {
+    pointer-events: none
+  }
+
+}
+.filter__item_active{
+  @extend .filter__item;
+  > * {
+    color: var(--button-dark-defoult) !important;
+  }
+  > * > *{
+    fill: var(--button-dark-defoult);
+  }
 }
 .filter__item_icon {
 }

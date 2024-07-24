@@ -12,4 +12,5 @@ export type PetState = {
   pets: Pet[];
   loading: boolean;
   error: string | null;
+  activeButton?:string | null;
 };

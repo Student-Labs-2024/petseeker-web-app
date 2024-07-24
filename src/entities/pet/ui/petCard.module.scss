@@ -20,6 +20,9 @@
   border-radius: 8px;
   aspect-ratio: 1;
   margin-bottom: 4px;
+  > img{
+    object-fit: cover;
+  }
 }
 
 .card__like_container {

@@ -39,13 +39,6 @@ const Navbar: React.FC = () => {
           <span className={activeMainText}> Главная</span>
         </Link>
 
-        <Link className={styles.navbar__item} to={REGISTRATION_ROUTE}>
-          <div className={styles.navbar__icon_container}>
-            <ProfileIcon />
-          </div>
-          <span> Профиль</span>
-        </Link>
-
         <Link className={styles.navbar__item} to={ADD_PET_CARD}>
           <div className={styles.navbar__icon_container}>
             {" "}
@@ -53,12 +46,17 @@ const Navbar: React.FC = () => {
           </div>
           <span className={activeAddText}> Объявления</span>
         </Link>
-
         <Link className={styles.navbar__item} to={MAIN_ROUTE}>
           <div className={styles.navbar__icon_container}>
             <FavoriteIcon />
           </div>
           Избранное
+        </Link>
+        <Link className={styles.navbar__item} to={REGISTRATION_ROUTE}>
+          <div className={styles.navbar__icon_container}>
+            <ProfileIcon />
+          </div>
+          <span> Профиль</span>
         </Link>
       </div>
     </nav>
