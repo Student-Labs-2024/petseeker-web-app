@@ -13,6 +13,12 @@ export const petsApi = baseApi.injectEndpoints({
         return queryString;
       },
     }),
+    getPetDetail:builder.query<Pet, { id: string }>({
+      query: (params) => {
+        let queryString = "/"+params.id;
+        return queryString;
+      },
+    }),
     addPetCard: builder.mutation<void, FormData>({
       query: (newPetCard) => ({
         url: "/pet",
@@ -26,5 +32,5 @@ export const petsApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useGetPetsQuery, useAddPetCardMutation, useGetPetTypesQuery } =
+export const { useGetPetsQuery, useAddPetCardMutation, useGetPetTypesQuery,useGetPetDetailQuery } =
   petsApi;
