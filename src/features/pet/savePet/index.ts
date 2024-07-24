@@ -1,1 +1,1 @@
-export {SaveCard} from './ui/SaveCard'
+export { SaveCard } from "./ui/SaveCard";

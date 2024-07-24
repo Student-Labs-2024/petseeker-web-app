@@ -1,1 +1,1 @@
-export * from './authWidgetConsts'
+export * from "./authWidgetConsts";

@@ -9,21 +9,21 @@
 
 1. Клонируйте репозиторий:
 
-    ```sh
-    git clone https://github.com/Student-Labs-2024/petseeker-web-app
-    ```
+   ```sh
+   git clone https://github.com/Student-Labs-2024/petseeker-web-app
+   ```
 
 2. Перейдите в директорию проекта:
 
-    ```sh
-    cd petseeker-web-app
-    ```
+   ```sh
+   cd petseeker-web-app
+   ```
 
 3. Установите зависимости:
 
-    ```sh
-    npm install
-    ```
+   ```sh
+   npm install
+   ```
 
 ## Запуск проекта
 
@@ -32,3 +32,21 @@
 ```sh
 npm run dev
 ```
+
+## Supported platforms
+
+- Google Chrome — версии 49+
+- Mozilla Firefox — версии 52+
+- Safari — версии 9+
+- Microsoft Edge — версии 12+
+- Opera — версии 36+
+- Internet Explorer — версии 11
+
+- размеры устройства:
+  - минимальное размер устройства 320х640 px
+- Интернет - соединение:
+  - скорость загрузки - 1 Мбит/с, скорость отправки - 0.5 Мбит/с
+
+## Сайт проекта
+
+https://petseeker-vercel.vercel.app
