@@ -11,10 +11,18 @@
   }
 }
 
+.label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 112%;}
+
 .title {
-  margin: 0;
-  font-size: 32px;
-  font-weight: 600;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0.01em;
 }
 .subtitle {
   font-family: var(--font-family);
@@ -29,11 +37,11 @@
   }
 }
 
-.btn{
+.btn {
   font-family: var(--font-family);
-font-weight: 500;
-font-size: 14px;
-line-height: 129%;
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
 }
 
 .medium {
@@ -52,6 +60,6 @@ line-height: 129%;
 .gray {
   color: var(--gray-backgr-element);
 }
-.btn{
+.btn {
   color: var(--button-dark-defoult);
 }

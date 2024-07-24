@@ -6,6 +6,7 @@ type ButtonProps = {
   type?: "button" | "submit" | "reset";
   disabled?: boolean;
   isDefault?: boolean;
+  isAuthButton?: boolean;
 };
 
 export const Button: React.FC<ButtonProps> = ({
@@ -14,12 +15,19 @@ export const Button: React.FC<ButtonProps> = ({
   type,
   disabled,
   isDefault,
+  isAuthButton = false,
 }) => {
   return (
     <button
       type={type}
       disabled={disabled}
-      className={isDefault ? styles.default : styles.active}
+      className={`${
+        isDefault
+          ? styles.default
+          : isAuthButton
+          ? styles.authButton
+          : styles.active
+      } `}
       onClick={onClick}
     >
       {children}

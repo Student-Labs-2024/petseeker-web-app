@@ -1,0 +1,14 @@
+.confirm {
+  display: flex;
+  flex-direction: column;
+}
+.code_mask {
+    display: flex;
+    flex-direction: column;
+  > * {
+    letter-spacing: 6px;
+    text-align: center;
+  }
+
+
+}

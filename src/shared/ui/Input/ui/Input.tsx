@@ -14,15 +14,13 @@ type InputProps = {
   accept?: string;
   multiple?: boolean;
   register?: UseFormRegisterReturn;
-  label?: string;
 };
 
 // Компонент Input
-export const Input: React.FC<InputProps> = ({ label, register, ...rest }) => {
+export const Input: React.FC<InputProps> = ({  register, ...rest }) => {
   return (
-    <label className={styles.label}>
-      {label}
+ 
       <input className={styles.default} {...register} {...rest} />
-    </label>
+
   );
 };
