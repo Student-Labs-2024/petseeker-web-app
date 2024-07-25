@@ -6,6 +6,9 @@ import InputMask from "react-input-mask-next";
 import { phoneConsts, nameConsts } from "../../../../shared/constants";
 import { useTranslation } from "react-i18next";
 import { Form } from "../../../../shared/ui/form";
+import { Text } from "../../../../shared/ui/text";
+import { Label } from "../../../../shared/ui/label";
+import styles from "./authForm.module.scss";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
@@ -29,29 +32,36 @@ export const AuthForm: React.FC<AuthFormProps> = ({
   const { t } = useTranslation("authForm");
   const textAuthButton = isAuth ? t("enter") : t("registration");
   return (
-    <Form >
-      <InputMask
-        onChange={handleChangePhone}
-        value={phoneNumber}
-        mask={phoneConsts.mask}
-        placeholder={phoneConsts.placeholder}
-      >
-        <Input label={t("number")} />
-      </InputMask>
+    <Form>
+      <div className={styles.input_container}>
+        <Label>
+          <Text myClass="label">{t("number")}</Text>
+          <InputMask
+            onChange={handleChangePhone}
+            value={phoneNumber}
+            mask={phoneConsts.mask}
+            placeholder={phoneConsts.placeholder}
+          >
+            <Input />
+          </InputMask>
+        </Label>
 
-      {!isAuth && (
-        <Input
-          label={t("name")}
-          value={name}
-          onChange={handleChangeName}
-          placeholder={nameConsts.placeholder}
-        />
-      )}
-
+        {!isAuth && (
+          <Label>
+            <Text myClass="label">{t("name")}</Text>
+            <Input
+              value={name}
+              onChange={handleChangeName}
+              placeholder={nameConsts.placeholder}
+            />
+          </Label>
+        )}
+      </div>
       <Button
         type="button"
         onClick={handleClickSubmit}
         disabled={isSendingLogin}
+        isAuthButton={true}
       >
         {textAuthButton}
       </Button>

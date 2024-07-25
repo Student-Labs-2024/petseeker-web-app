@@ -3,20 +3,6 @@
   font-weight: 400;
   font-size: 10px;
   line-height: 202%;
-  color: var(--labels-primary);
-  @media (min-width: 360px) {
-    font-size: 11px;
-  }
-  @media (min-width: 412px) {
-    font-size: 12px;
-  }
-}
-.gray {
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 10px;
-  line-height: 202%;
-  color: var(--gray-backgr-element);
   @media (min-width: 360px) {
     font-size: 11px;
   }
@@ -25,22 +11,55 @@
   }
 }
 
+.label {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 112%;}
+
 .title {
-  color: var(--text-color);
-  margin: 0;
-  font-size: 32px;
-  font-weight: 600;
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 20px;
+  line-height: 100%;
+  letter-spacing: 0.01em;
 }
 .subtitle {
   font-family: var(--font-family);
   font-weight: 590;
   font-size: 14px;
   line-height: 145%;
-  color: var(--labels-primary);
   @media (min-width: 360px) {
     font-size: 15px;
   }
   @media (min-width: 412px) {
     font-size: 18px;
   }
+}
+
+.btn {
+  font-family: var(--font-family);
+  font-weight: 500;
+  font-size: 14px;
+  line-height: 129%;
+}
+
+.medium {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+}
+
+.black {
+  color: var(--labels-primary);
+}
+.white {
+  color: var(--white---primary);
+}
+.gray {
+  color: var(--gray-backgr-element);
+}
+.btn {
+  color: var(--button-dark-defoult);
 }
