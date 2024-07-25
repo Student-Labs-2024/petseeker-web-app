@@ -16,11 +16,13 @@ export const userApi = baseApi.injectEndpoints({
       }),
     }),
     confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
+
       query: (body) => ({
         url: "/api/sms-verification/auth/",
         method: "POST",
         body,
-      }),
+        
+      } ),
     }),
   }),
 });

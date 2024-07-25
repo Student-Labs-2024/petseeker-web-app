@@ -22,10 +22,10 @@ export type LoginRequest = {
 
 export type ConfirmRequest = {
   code: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 export type ConfirmResponse = {
   token: string;
-  success: boolean;
+  message: string;
 };

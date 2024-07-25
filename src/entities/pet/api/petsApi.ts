@@ -21,7 +21,7 @@ export const petsApi = baseApi.injectEndpoints({
     }),
     addPetCard: builder.mutation<void, FormData>({
       query: (newPetCard) => ({
-        url: "/pet",
+        url: "/api/announcement/create/",
         method: "POST",
         body: newPetCard,
       }),
