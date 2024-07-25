@@ -17,8 +17,8 @@ import { Button } from "../../../shared/ui/button";
 import {
   AUTH_ROUTE,
   MAIN_ROUTE,
-  PROFILE,
   REGISTRATION_ROUTE,
+  PROFILE,
 } from "../../../app/router/consts";
 import styles from "./auth.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -36,7 +36,10 @@ export const AuthWidget: React.FC = () => {
   const code = useAppSelector((state) => state.user.code);
   const isConfirm = useAppSelector((state) => state.user.isConfirm);
   const [login, { isLoading: isSendingLogin }] = useLoginMutation();
-  const [confirm, { isLoading: isSendingConfirm,isSuccess:isConfirmSuccess,isError }] = useConfirmMutation();
+  const [
+    confirm,
+    { isLoading: isSendingConfirm, isSuccess: isConfirmSuccess, isError },
+  ] = useConfirmMutation();
   const isAuth = location.pathname === AUTH_ROUTE;
 
   const handleClickSubmit = async () => {

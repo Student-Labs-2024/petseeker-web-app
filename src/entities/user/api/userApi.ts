@@ -16,15 +16,17 @@ export const userApi = baseApi.injectEndpoints({
       }),
     }),
     confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
-
       query: (body) => ({
         url: "/api/sms-verification/auth/",
         method: "POST",
         body,
-        
-      } ),
+      }),
     }),
+
+    // me: builder.query<ConfirmResponse,void>({
+    //   query: () => "/api/user/me/",
+    // }),
   }),
 });
 
-export const { useLoginMutation, useConfirmMutation } = userApi;
+export const { useLoginMutation, useConfirmMutation} = userApi;
