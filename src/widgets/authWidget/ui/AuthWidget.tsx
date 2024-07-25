@@ -40,7 +40,8 @@ export const AuthWidget: React.FC = () => {
 
   const handleClickSubmit = async () => {
     try {
-      const response = await login({ phoneNumber, name }).unwrap();
+      const response = await login({ "phone_number":phoneNumber }).unwrap();
+      console.log(response)
       if (response.success) {
         dispatch(setIsConfirm(true));
       }

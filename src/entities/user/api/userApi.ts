@@ -10,14 +10,14 @@ export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<LoginResponse, LoginRequest>({
       query: (body) => ({
-        url: "/auth/login",
+        url: "/api/sms-verification/create/",
         method: "POST",
         body,
       }),
     }),
     confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
       query: (body) => ({
-        url: "/auth/confirm",
+        url: "/api/sms-verification/auth/",
         method: "POST",
         body,
       }),

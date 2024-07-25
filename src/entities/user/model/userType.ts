@@ -16,8 +16,8 @@ export type LoginResponse = {
 };
 
 export type LoginRequest = {
-  phoneNumber: string;
-  name: string;
+  phone_number: string;
+  // name: string;
 };
 
 export type ConfirmRequest = {
