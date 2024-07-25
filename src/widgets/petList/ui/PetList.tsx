@@ -21,7 +21,7 @@ export const PetList: React.FC = () => {
               <PetCard
                 key={pet.id}
                 description={pet}
-                actionSlots={<SaveCard></SaveCard>}
+
               />
             ))}
           </div>

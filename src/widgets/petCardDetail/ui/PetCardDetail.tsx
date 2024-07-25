@@ -17,7 +17,8 @@ import { ReactComponent as Birthday } from "../../../shared/assets/birthday.svg"
 import { ReactComponent as Home } from "../../../shared/assets/home.svg";
 import { ReactComponent as ShelterArrow } from "../../../shared/assets/shelter_link_arrow.svg";
 import { useGetPetDetailQuery } from "../../../entities/pet";
-import test from '../../../shared/assets/test-cat.svg'
+import test from "../../../shared/assets/test-cat.svg";
+import { SaveCard } from "../../../features/pet/savePet";
 import { match } from "ts-pattern";
 export const PetCardDetail: React.FC = () => {
   let { id } = useParams();
@@ -70,16 +71,16 @@ export const PetCardDetail: React.FC = () => {
                     </div>
                   </SwiperSlide>
                 ))} */}
-                  <SwiperSlide>
-                    <div className={styles.slide_container}>
-                      <img src={test} alt={test} />
-                    </div>
-                  </SwiperSlide>
-                  <SwiperSlide>
-                    <div className={styles.slide_container}>
-                      <img src={test} alt={test} />
-                    </div>
-                  </SwiperSlide>
+                <SwiperSlide>
+                  <div className={styles.slide_container}>
+                    <img src={test} alt={test} />
+                  </div>
+                </SwiperSlide>
+                <SwiperSlide>
+                  <div className={styles.slide_container}>
+                    <img src={test} alt={test} />
+                  </div>
+                </SwiperSlide>
               </Swiper>
             </div>
             <div className={styles.info}>
@@ -108,7 +109,7 @@ export const PetCardDetail: React.FC = () => {
                   {" "}
                   <div className={styles.navbar__item}>
                     <Text myClass="medium" color="white">
-                      Прививки: <div>{pet.vaccinations?'Есть':'Нет'}</div>
+                      Прививки: <div>{pet.vaccinations ? "Есть" : "Нет"}</div>
                     </Text>
                   </div>{" "}
                 </SwiperSlide>
@@ -166,7 +167,7 @@ export const PetCardDetail: React.FC = () => {
                 </Text>
               </button>
               <div className={styles.m_top}>
-                <Button>Забрать в семью</Button>
+                <SaveCard id={id}></SaveCard>
               </div>
             </div>
           </div>

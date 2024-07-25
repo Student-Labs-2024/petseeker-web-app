@@ -5,6 +5,7 @@ import { Text } from "../../../shared/ui/text";
 import { NavLink } from "react-router-dom";
 import { PET_CARD } from "../../../app/router/consts";
 import useFormattedDate from "../../../shared/hooks/useFormattedDate";
+import { ReactComponent as LikeIcon } from "../../../shared/assets/like.svg";
 import cat from "../../../shared/assets/cat.jpg";
 type PetProps = {
   description: Pet;
@@ -21,7 +22,9 @@ export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
       <div className={styles.card__container}>
         <div className={styles.card__image_container}>
           <span className={styles.status}>
-            <Text myClass="small"  color="white">{description.status}</Text>
+            <Text myClass="small" color="white">
+              {description.status}
+            </Text>
           </span>
           <img
             // src={description.images?.length ? description.images[0] : ""}
@@ -31,7 +34,7 @@ export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
         </div>
         <div className={styles.card__like_container}>
           <Text myClass={"subtitle"}>{description.name}</Text>
-          {actionSlots}
+          <LikeIcon className={styles.card__like}></LikeIcon>
         </div>
         <Text myClass="subtitle">{description.user}</Text>
         <Text color={"gray"}>{description.address}</Text>

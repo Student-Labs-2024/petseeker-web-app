@@ -22,7 +22,6 @@ export const AddShelter: React.FC = () => {
   const handleAddShelterSubmit = async () => {
     try {
       const response = await addShelter({ name }).unwrap();
-
     } catch (err) {
       console.error( err);
     }
