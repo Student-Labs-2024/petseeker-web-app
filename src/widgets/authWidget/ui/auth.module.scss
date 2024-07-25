@@ -7,18 +7,18 @@
   &__top {
     display: flex;
     align-items: center;
+    margin-bottom: 28px;
     > * {
       width: 50%;
       flex: 1;
     }
-    margin-bottom: 28px;
   }
   &__form {
     display: flex;
     flex-direction: column;
     gap: 20px;
   }
-  &__container{
+  &__container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -39,7 +39,7 @@
   text-align: center;
   margin-top: 30px;
 }
-.confirm__text{
+.confirm__text {
   margin-top: -20px;
   display: flex;
   flex-direction: column;

@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.6",
     "@svgr/rollup": "^8.1.0",
+    "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
     "i18next": "^23.11.5",
     "jwt-decode": "^4.0.0",

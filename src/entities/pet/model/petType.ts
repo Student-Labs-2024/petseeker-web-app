@@ -1,8 +1,9 @@
 export type Pet = {
   id: number;
   name: string;
-  price: string;
-  geo: string;
+  published_at:string;
+  address: string;
+  user: string;
   images?: string[];
 };
 

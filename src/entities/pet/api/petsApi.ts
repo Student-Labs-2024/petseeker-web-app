@@ -4,7 +4,7 @@ export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<Pet[], { name?: string }>({
       query: (params) => {
-        let queryString = "/";
+        let queryString = "/api/search-announcement/?format=json";
         if (params) {
           const queryParts = [];
           if (params.name) queryParts.push(`name=${params.name}`);
@@ -15,7 +15,7 @@ export const petsApi = baseApi.injectEndpoints({
     }),
     getPetDetail:builder.query<Pet, { id: string }>({
       query: (params) => {
-        let queryString = "/"+params.id;
+        let queryString = "/api/shelter-announcement/detail/"+params.id;
         return queryString;
       },
     }),

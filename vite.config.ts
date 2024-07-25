@@ -1,8 +1,10 @@
-import { defineConfig } from "vite";
+import { defineConfig, loadEnv } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 import svgr from "@svgr/rollup";
-// https://vitejs.dev/config/
+import dotenv from "dotenv";
+
+dotenv.config();
 export default defineConfig({
   resolve: {
     alias: {
@@ -11,4 +13,13 @@ export default defineConfig({
     },
   },
   plugins: [react(), svgr()],
+  server: {
+    proxy: {
+      "/api": {
+        target: process.env.VITE_APP_URL,
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
+    },
+  },
 });

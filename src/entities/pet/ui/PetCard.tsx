@@ -4,12 +4,14 @@ import { Pet } from "../index";
 import { Text } from "../../../shared/ui/text";
 import { NavLink } from "react-router-dom";
 import { PET_CARD } from "../../../app/router/consts";
+import useFormattedDate from '../../../shared/hooks/useFormattedDate';
 type PetProps = {
   description: Pet;
   actionSlots?: React.ReactNode;
 };
 
 export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
+  const formattedDate = useFormattedDate(description.published_at);
   return (
     <NavLink
       className={styles.card__container}
@@ -26,11 +28,10 @@ export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
           <Text myClass={"subtitle"}>{description.name}</Text>
           {actionSlots}
         </div>
-
-        <Text>{description.price}</Text>
-        <Text myClass={"gray"}>{description.geo}</Text>
+        <Text myClass="subtitle">{description.user}</Text>
+        <Text color={"gray"}>{description.address}</Text>
+        <Text color={"gray"}>{formattedDate}</Text>
       </div>
-
     </NavLink>
   );
 };
