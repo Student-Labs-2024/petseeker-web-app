@@ -13,13 +13,14 @@ import { useTranslation } from "react-i18next";
 import { PetCardFormType } from "../model/petCardFormType";
 import { Label } from "../../../shared/ui/label";
 export const PetCardForm: React.FC = () => {
+  const { t } = useTranslation("petCardForm");
+
   const { register, handleSubmit } = useForm<PetCardFormType>();
   const [addPetCard, { isLoading, error: errorMessage }] =
     useAddPetCardMutation();
-  const { t } = useTranslation("petCardForm");
   const { data: petTypes = [], isLoading: petTypesLoading } =
     useGetPetTypesQuery();
-  const textSubmitButton = isLoading ? t("loading") : t("create");
+      const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit: SubmitHandler<PetCardFormType> = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
