@@ -4,7 +4,7 @@ import { Pet } from "../index";
 import { Text } from "../../../shared/ui/text";
 import { NavLink } from "react-router-dom";
 import { PET_CARD } from "../../../app/router/consts";
-import useFormattedDate from "../../../shared/hooks/useFormattedDate";
+import useFormattedDate from "../../../shared/hooks/useFormattedDate/useFormattedDate";
 import { ReactComponent as LikeIcon } from "../../../shared/assets/like.svg";
 import cat from "../../../shared/assets/cat.jpg";
 type PetProps = {

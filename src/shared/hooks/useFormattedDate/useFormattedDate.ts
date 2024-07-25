@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { format } from "date-fns";
-import { monthsInGenitive } from "../constants/useFormattedDateConsts";
+import { monthsInGenitive } from "../../constants/useFormattedDateConsts";
 
 const useFormattedDate = (isoDate: string) => {
   const formattedDate = useMemo(() => {
