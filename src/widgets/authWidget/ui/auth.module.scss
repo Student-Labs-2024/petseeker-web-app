@@ -7,11 +7,12 @@
   &__top {
     display: flex;
     align-items: center;
+    margin-bottom: 28px;
     > * {
       width: 50%;
       flex: 1;
     }
-    margin-bottom: 28px;
+
   }
   &__form {
     display: flex;
