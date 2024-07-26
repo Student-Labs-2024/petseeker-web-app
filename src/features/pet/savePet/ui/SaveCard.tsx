@@ -1,6 +1,6 @@
 import React from "react";
-import { useSaveFavoriteMutation } from "../../../../entities/pet/index";
-import {Button} from '../../../../shared/ui/button'
+import { useSaveFavoriteMutation } from "@entities/pet/index";
+import {Button} from '@shared/ui/button'
 type SaveButtonProps = {
   id: string;
 };

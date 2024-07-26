@@ -1,5 +1,5 @@
 import { Pet, PetDetail } from "../index";
-import { baseApi } from "../../../shared/api";
+import { baseApi } from "@shared/api";
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<Pet[], { name?: string }>({

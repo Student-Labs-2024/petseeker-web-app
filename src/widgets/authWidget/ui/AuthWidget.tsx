@@ -4,22 +4,22 @@ import { useTranslation } from "react-i18next";
 import {
   useLoginMutation,
   useConfirmMutation,
-} from "../../../entities/user/index";
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+} from "@entities/user/index";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import {
   setToken,
   setPhoneNumber,
   setName,
   setCode,
   setIsConfirm,
-} from "../../../entities/user/index";
-import { Button } from "../../../shared/ui/button";
+} from "@entities/user/index";
+import { Button } from "@shared/ui/button";
 import {
   AUTH_ROUTE,
   MAIN_ROUTE,
   REGISTRATION_ROUTE,
   PROFILE,
-} from "../../../app/router/consts";
+} from "@app/router/consts";
 import styles from "./auth.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";

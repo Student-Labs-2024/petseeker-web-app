@@ -1,11 +1,11 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { useAddShelterMutation } from "../../../entities/shelter/index";
-import { Button } from "../../../shared/ui/button";
+import { useAddShelterMutation } from "@entities/shelter/index";
+import { Button } from "@shared/ui/button";
 import styles from "./addShelter.module.scss";
-import { Input } from "../../../shared/ui/input";
-import { Form } from "../../../shared/ui/form";
-import { Label } from "../../../shared/ui/label";
+import { Input } from "@shared/ui/input";
+import { Form } from "@shared/ui/form";
+import { Label } from "@shared/ui/label";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { AddShelterFormType } from "../model/addShelterType";
 export const AddShelter: React.FC = () => {

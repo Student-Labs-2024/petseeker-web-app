@@ -3,15 +3,15 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {
   useAddPetCardMutation,
   useGetPetTypesQuery,
-} from "../../../entities/pet/index";
-import { Input } from "../../../shared/ui/input";
-import { TextArea } from "../../../shared/ui/textArea";
-import { Select } from "../../../shared/ui/select";
-import { Form } from "../../../shared/ui/form";
-import { Button } from "../../../shared/ui/button";
+} from "@entities/pet/index";
+import { Input } from "@shared/ui/input";
+import { TextArea } from "@shared/ui/textArea";
+import { Select } from "@shared/ui/select";
+import { Form } from "@shared/ui/form";
+import { Button } from "@shared/ui/button";
 import { useTranslation } from "react-i18next";
 import { PetCardFormType } from "../model/petCardFormType";
-import { Label } from "../../../shared/ui/label";
+import { Label } from "@shared/ui/label";
 export const PetCardForm: React.FC = () => {
   const { t } = useTranslation("petCardForm");
 
