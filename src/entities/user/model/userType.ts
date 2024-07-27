@@ -16,16 +16,16 @@ export type LoginResponse = {
 };
 
 export type LoginRequest = {
-  phoneNumber: string;
-  name: string;
+  phone_number: string;
+  // name: string;
 };
 
 export type ConfirmRequest = {
   code: string;
-  phoneNumber: string;
+  phone_number: string;
 };
 
 export type ConfirmResponse = {
   token: string;
-  success: boolean;
+  message: string;
 };

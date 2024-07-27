@@ -1,13 +1,13 @@
 // src/entities/user/model/authWidget.ts
 import React from "react";
-import { Input } from "../../../../shared/ui/input";
-import { Button } from "../../../../shared/ui/button";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
 import InputMask from "react-input-mask-next";
-import { phoneConsts, nameConsts } from "../../../../shared/constants";
+import { phoneConsts, nameConsts } from "@shared/constants";
 import { useTranslation } from "react-i18next";
-import { Form } from "../../../../shared/ui/form";
-import { Text } from "../../../../shared/ui/text";
-import { Label } from "../../../../shared/ui/label";
+import { Form } from "@shared/ui/form";
+import { Text } from "@shared/ui/text";
+import { Label } from "@shared/ui/label";
 import styles from "./authForm.module.scss";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;

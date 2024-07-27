@@ -1,13 +1,13 @@
 // src/entities/user/model/authWidget.ts
 import React from "react";
-import { Input } from "../../../../shared/ui/input";
-import { Button } from "../../../../shared/ui/button";
+import { Input } from "@shared/ui/input";
+import { Button } from "@shared/ui/button";
 import styles from "./confirmForm.module.scss";
 import InputMask from "react-input-mask-next";
-import { codeConsts } from "../../../../shared/constants";
+import { codeConsts } from "@shared/constants";
 import { useTranslation } from "react-i18next";
-import { Form } from "../../../../shared/ui/form";
-import { Text } from "../../../../shared/ui/text";
+import { Form } from "@shared/ui/form";
+import { Text } from "@shared/ui/text";
 type ConfirmFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;

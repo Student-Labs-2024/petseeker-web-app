@@ -1,9 +1,9 @@
 import React from "react";
 import styles from "./filterPets.module.scss";
-import { ReactComponent as CircleIcon } from "../../../../shared/assets/circle.svg";
-import { useAppDispatch, useAppSelector } from "../../../../shared/hooks";
-import { setActiveButton } from "../../../../entities/pet/index";
-import { buttonsData } from "../../../../shared/constants/filterPetsConsts";
+import { ReactComponent as CircleIcon } from "@shared/assets/circle.svg";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setActiveButton } from "@entities/pet/index";
+import { buttonsData } from "@shared/constants/filterPetsConsts";
 export const FilterPets: React.FC = () => {
   const dispatch = useAppDispatch();
   const activeButton = useAppSelector((state) => state.pets.activeButton);

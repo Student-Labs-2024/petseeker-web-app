@@ -6,11 +6,11 @@ import {
   PROFILE,
   PET_CARD,
 } from "./consts";
-import { Main } from "../../pages/main";
-import { Auth } from "../../pages/auth";
-import { Profile } from "../../pages/profile";
-import { AddPetCard } from "../../pages/addPetCard";
-import { PetCardPage } from "../../pages/petCardPage";
+import { Main } from "@pages/main";
+import { Auth } from "@pages/auth";
+import { Profile } from "@pages/profile";
+import { AddPetCard } from "@pages/addPetCard";
+import { PetCardPage } from "@pages/petCardPage";
 export const authRoutes = [
   {
     path: ADD_PET_CARD,

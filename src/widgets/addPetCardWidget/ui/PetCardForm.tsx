@@ -3,41 +3,42 @@ import { useForm, SubmitHandler } from "react-hook-form";
 import {
   useAddPetCardMutation,
   useGetPetTypesQuery,
-} from "../../../entities/pet/index";
-import { Input } from "../../../shared/ui/input";
-import { TextArea } from "../../../shared/ui/textArea";
-import { Select } from "../../../shared/ui/select";
-import { Form } from "../../../shared/ui/form";
-import { Button } from "../../../shared/ui/button";
-import { match } from "ts-pattern";
+} from "@entities/pet/index";
+import { Input } from "@shared/ui/input";
+import { TextArea } from "@shared/ui/textArea";
+import { Select } from "@shared/ui/select";
+import { Form } from "@shared/ui/form";
+import { Button } from "@shared/ui/button";
 import { useTranslation } from "react-i18next";
 import { PetCardFormType } from "../model/petCardFormType";
-
+import { Label } from "@shared/ui/label";
 export const PetCardForm: React.FC = () => {
+  const { t } = useTranslation("petCardForm");
+
   const { register, handleSubmit } = useForm<PetCardFormType>();
   const [addPetCard, { isLoading, error: errorMessage }] =
     useAddPetCardMutation();
-  const [isUserForm, setIsUserForm] = useState(false);
-  const { t } = useTranslation('petCardForm'); 
   const { data: petTypes = [], isLoading: petTypesLoading } =
     useGetPetTypesQuery();
-  const textSubmitButton = isLoading ? t("loading") : t("create");
+      const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit: SubmitHandler<PetCardFormType> = async (data) => {
     const formData = new FormData();
-    console.log(data)
     formData.append("name", data.name);
     formData.append("description", data.description);
     formData.append("type", data.type);
     formData.append("status", data.status);
-    formData.append("age", data.age);
-    match(isUserForm)
-    .with(false, () => formData.append("address", data.address))
-    .with(true, () => formData.append("itn", data.itn))
-    .exhaustive();
+    formData.append("age", data.age.toString());
+    formData.append("address", data.address);
+    formData.append("color", data.color);
+    formData.append("dimmensions", data.dimmensions.toString());
+    formData.append("health_issues", data.health_issues);
+    formData.append("contacts", data.contacts);
+    formData.append("weigth", data.weigth.toString());
     Array.from(data.images).forEach((file) => formData.append("images", file));
 
     try {
-      await addPetCard(formData).unwrap();
+      const response = await addPetCard(formData).unwrap();
+      console.log(response);
     } catch (error) {
       console.error(errorMessage);
     }
@@ -46,62 +47,87 @@ export const PetCardForm: React.FC = () => {
   return (
     <>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Input
-          label={t("name")}
-          id="name"
-          register={register("name", { required: true })}
-        />
+        <Label>
+          {t("name")}
+          <Input id="name" register={register("name", { required: true })} />
+        </Label>
 
-        <Input
-          label={t("images")}
-          id="images"
-          type="file"
-          accept="image/*"
-          multiple
-          register={register("images", { required: true })}
-        />
-
-        <TextArea
-           label={t("description")}
-          id="description"
-          register={register("description")}
-        />
-        {match(isUserForm)
-          .with(false, () => (
-            <Input
-              label={t("address")}
-              id="address"
-              register={register("address", { required: true })}
-            />
-          ))
-          .with(true, () => (
-            <Input
-              label={t("itn")}
-              id="itn"
-              register={register("itn", { required: true })}
-            />
-          ))
-          .exhaustive()}
-
-        <Select
-          label={t("type")}
-          id="type"
-          options={petTypes}
-          register={register("type" )}
-        />
-
-        <Input
-          label={t("status")}
-          id="status"
-          register={register("status", { required: true })}
-        />
-
-        <Input
-          label={t("age")}
-          id="age"
-          type="number"
-          register={register("age", { required: true })}
-        />
+        <Label>
+          {t("images")}{" "}
+          <Input
+            id="images"
+            type="file"
+            accept="image/*"
+            multiple
+            register={register("images")}
+          />
+        </Label>
+        <Label>
+          {t("description")}
+          <TextArea id="description" register={register("description")} />{" "}
+        </Label>
+        <Label>
+          {t("address")}
+          <Input
+            id="address"
+            register={register("address", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("type")}
+          <Select id="type" options={petTypes} register={register("type")} />
+        </Label>
+        <Label>
+          {t("status")}
+          <Input
+            id="status"
+            register={register("status", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("age")}
+          <Input
+            id="age"
+            type="number"
+            register={register("age", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("dimmensions")}
+          <Input
+            type="number"
+            id="dimmensions"
+            register={register("dimmensions", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("color")}
+          <Input id="color" register={register("color", { required: true })} />
+        </Label>
+        <Label>
+          {t("health_issues")}
+          <Input
+            id="health_issues"
+            register={register("health_issues", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("contacts")}
+          <Input
+            id="contacts"
+            register={register("contacts", { required: true })}
+          />
+        </Label>
+        <Label>
+          {t("weigth")}
+          <Input
+            type="number"
+            id="weigth"
+            register={register("weigth", { required: true })}
+          />
+        </Label>
+        <Label></Label>
+        <Label></Label>
 
         <Button type="submit">{textSubmitButton}</Button>
       </Form>

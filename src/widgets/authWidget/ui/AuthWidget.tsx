@@ -4,21 +4,22 @@ import { useTranslation } from "react-i18next";
 import {
   useLoginMutation,
   useConfirmMutation,
-} from "../../../entities/user/index";
-import { useAppDispatch, useAppSelector } from "../../../shared/hooks";
+} from "@entities/user/index";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import {
   setToken,
   setPhoneNumber,
   setName,
   setCode,
   setIsConfirm,
-} from "../../../entities/user/index";
-import { Button } from "../../../shared/ui/button";
+} from "@entities/user/index";
+import { Button } from "@shared/ui/button";
 import {
   AUTH_ROUTE,
   MAIN_ROUTE,
   REGISTRATION_ROUTE,
-} from "../../../app/router/consts";
+  PROFILE,
+} from "@app/router/consts";
 import styles from "./auth.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";
@@ -35,12 +36,17 @@ export const AuthWidget: React.FC = () => {
   const code = useAppSelector((state) => state.user.code);
   const isConfirm = useAppSelector((state) => state.user.isConfirm);
   const [login, { isLoading: isSendingLogin }] = useLoginMutation();
-  const [confirm, { isLoading: isSendingConfirm }] = useConfirmMutation();
+  const [
+    confirm,
+    { isLoading: isSendingConfirm, isSuccess: isConfirmSuccess, isError },
+  ] = useConfirmMutation();
   const isAuth = location.pathname === AUTH_ROUTE;
 
   const handleClickSubmit = async () => {
     try {
-      const response = await login({ phoneNumber, name }).unwrap();
+      const response = await login({ phone_number: phoneNumber }).unwrap();
+      console.log(response);
+      console.log({ phone_number: phoneNumber });
       if (response.success) {
         dispatch(setIsConfirm(true));
       }
@@ -51,10 +57,17 @@ export const AuthWidget: React.FC = () => {
 
   const handleClickConfirm = async () => {
     try {
-      const response = await confirm({ phoneNumber, code }).unwrap();
-      if (response.success) {
-        dispatch(setToken(response.token));
-        navigate(MAIN_ROUTE);
+      console.log({
+        phone_number: phoneNumber,
+        code: code,
+      });
+      const response = await confirm({
+        phone_number: phoneNumber,
+        code: code,
+      }).unwrap();
+      if (response.message) {
+        // dispatch(setToken(response.token));
+        navigate(PROFILE);
       }
     } catch (err) {
       console.error("Failed to confirm", err);
@@ -72,7 +85,7 @@ export const AuthWidget: React.FC = () => {
 
   const handleChangeCode = (event: ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    const masked = value.replace(/\D/g, "_");
+    const masked = value.replace(/\D/g, "");
     dispatch(setCode(masked));
   };
 

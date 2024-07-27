@@ -1,4 +1,4 @@
-import { baseApi } from "../../../shared/api";
+import { baseApi } from "@shared/api";
 import {
   AddShelterResponse,
   AddShelterRequest,
@@ -7,9 +7,9 @@ import {
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    addShelter: builder.mutation<AddShelterResponse, AddShelterRequest>({
+    addShelter: builder.mutation<void, FormData>({
       query: (body) => ({
-        url: "/shelter/auth",
+        url: "/api/shelter/create/",
         method: "POST",
         body,
       }),
