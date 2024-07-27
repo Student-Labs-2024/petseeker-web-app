@@ -1,12 +1,14 @@
 import React from "react";
-import { Pet, PetCard } from "../../../entities/pet";
-import { useGetPetsQuery } from "../../../entities/pet";
+import { Pet, PetCard } from "@entities/pet";
+import { useGetPetsQuery } from "@entities/pet";
 import styles from "./card.module.scss";
-import { SaveCard } from "../../../features/pet/savePet";
+import { SaveCard } from "@features/pet/savePet";
 import { match, P } from "ts-pattern";
 export const PetList: React.FC = () => {
-  const { data: pets, isLoading, isError } = useGetPetsQuery();
-
+  const { data: pets, isLoading, isError,error } = useGetPetsQuery();
+  console.log({isError})
+  console.log({error})
+  console.log(pets)
   return (
     <div className={styles.container}>
       {match({ isLoading, isError, pets })
@@ -15,11 +17,11 @@ export const PetList: React.FC = () => {
         .with({ pets: { length: 0 } }, () => <p>No pets available.</p>)
         .otherwise(() => (
           <div className={styles.card__list_container}>
-            {pets?.pets?.map((pet: Pet) => (
+            {pets?.results?.map((pet: Pet) => (
               <PetCard
                 key={pet.id}
                 description={pet}
-                actionSlots={<SaveCard></SaveCard>}
+
               />
             ))}
           </div>

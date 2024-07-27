@@ -4,12 +4,12 @@ import {
   MAIN_ROUTE,
   REGISTRATION_ROUTE,
   ADD_PET_CARD,
-} from "../../../app/router/consts";
-import { useTheme } from "../../../shared/hooks/useTheme";
-import { ReactComponent as MainIcon } from "../../../shared/assets/main_icon.svg";
-import { ReactComponent as ProfileIcon } from "../../../shared/assets/profile_icon.svg";
-import { ReactComponent as FavoriteIcon } from "../../../shared/assets/favorite_icon.svg";
-import { ReactComponent as AddIcon } from "../../../shared/assets/add_icon.svg";
+} from "@app/router/consts";
+import { useTheme } from "@shared/hooks/useTheme";
+import { ReactComponent as MainIcon } from "@shared/assets/main_icon.svg";
+import { ReactComponent as ProfileIcon } from "@shared/assets/profile_icon.svg";
+import { ReactComponent as FavoriteIcon } from "@shared/assets/favorite_icon.svg";
+import { ReactComponent as AddIcon } from "@shared/assets/add_icon.svg";
 import styles from "./navbar.module.scss";
 const Navbar: React.FC = () => {
   const activeMainIcon =

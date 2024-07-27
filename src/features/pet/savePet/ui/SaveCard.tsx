@@ -1,13 +1,21 @@
 import React from "react";
-import {ReactComponent as LikeIcon} from '../../../../shared/assets/like.svg'
-import styles from "./saveCard.module.scss";
-export const SaveCard: React.FC = () => {
-  const handleSaveButton = () => {
+import { useSaveFavoriteMutation } from "@entities/pet/index";
+import {Button} from '@shared/ui/button'
+type SaveButtonProps = {
+  id: string;
+};
+export const SaveCard: React.FC<SaveButtonProps> = ({ id }) => {
+  const [saveFavorite] = useSaveFavoriteMutation();
+  const handleSave = async () => {
+    try {
+      const response=await saveFavorite(id).unwrap();
+    } catch (error) {
+      console.error(error);
+    }
   };
-
   return (
-    <button onClick={handleSaveButton} className={styles.card__like_btn}>
-      <LikeIcon className={styles.card__like}></LikeIcon>
-    </button>
+    <Button onClick={handleSave} >
+        Забрать в семью
+    </Button>
   );
 };

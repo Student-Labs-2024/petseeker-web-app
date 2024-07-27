@@ -1,5 +1,5 @@
-$search-icon: url("../../../../shared/assets/search_icon.svg");
-$filter-icon: url("../../../../shared/assets/filter_icon.svg");
+$search-icon: url("@shared/assets/search_icon.svg");
+$filter-icon: url("@shared/assets/filter_icon.svg");
 .search_input {
   padding: 14px 48px 14px 60px;
   gap: 10px;
@@ -24,7 +24,7 @@ $filter-icon: url("../../../../shared/assets/filter_icon.svg");
   background-color: var(--white---primary);
   z-index: 10;
   position: sticky; 
-  top: 0; 
+  top:28px; 
   width: 100%;
 
 }

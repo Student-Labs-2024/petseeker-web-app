@@ -5,6 +5,11 @@ export type PetCardFormType = {
   address: string;
   type: string;
   status: string;
-  age: string;
+  age: number;
   itn: string;
+  color: string;
+  dimmensions: number;
+  health_issues: string;
+  contacts: string;
+  weigth:number;
 };
