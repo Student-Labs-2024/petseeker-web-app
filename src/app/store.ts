@@ -1,5 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { setupListeners } from '@reduxjs/toolkit/query';
+import { setupListeners } from "@reduxjs/toolkit/query";
 import petsReducer from "@entities/pet/model/petsSlice";
 import shelterReducer from "@entities/shelter/model/shelterSlice";
 import { PetState } from "@entities/pet/index";
