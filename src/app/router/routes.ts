@@ -6,7 +6,7 @@ import {
   PROFILE,
   PET_CARD,
 } from "./consts";
-import { Main } from "@pages/main";
+import { Main } from "@/pages/main";
 import { Auth } from "@pages/auth";
 import { Profile } from "@pages/profile";
 import { AddPetCard } from "@pages/addPetCard";
