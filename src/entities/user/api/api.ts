@@ -1,21 +1,16 @@
 import { baseApi } from "@shared/api";
-import {
-  LoginResponse,
-  LoginRequest,
-  ConfirmResponse,
-  ConfirmRequest,
-} from "../model/userType";
+import { type } from "../index";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<LoginResponse, LoginRequest>({
+    login: builder.mutation<type.LoginResponse, type.LoginRequest>({
       query: (body) => ({
         url: "/api/sms-verification/create/",
         method: "POST",
         body,
       }),
     }),
-    confirm: builder.mutation<ConfirmResponse, ConfirmRequest>({
+    confirm: builder.mutation<type.ConfirmResponse, type.ConfirmRequest>({
       query: (body) => ({
         url: "/api/sms-verification/auth/",
         method: "POST",
@@ -29,4 +24,4 @@ export const userApi = baseApi.injectEndpoints({
   }),
 });
 
-export const { useLoginMutation, useConfirmMutation} = userApi;
+export const { useLoginMutation, useConfirmMutation } = userApi;

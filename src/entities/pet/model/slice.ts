@@ -1,13 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Pet } from "../index";
-import { petsApi } from "../index";
-import { PetState } from "../index";
-
-const initialState: PetState = {
+import * as petModel from "../index";
+const initialState: petModel.type.PetState = {
   pets: [],
   loading: false,
   error: null,
-  activeButton:"1",
+  activeButton: "1",
 };
 
 const petsSlice = createSlice({
@@ -19,28 +16,30 @@ const petsSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder.addMatcher(petsApi.endpoints.getPets.matchPending, (state) => ({
-      ...state,
-      loading: true,
-      error: null,
-    }));
     builder.addMatcher(
-      petsApi.endpoints.getPets.matchFulfilled,
-      (state, action: PayloadAction<Pet[]>) => ({
+      petModel.api.petsApi.endpoints.getPets.matchPending,
+      (state) => ({
+        ...state,
+        loading: true,
+        error: null,
+      })
+    );
+    builder.addMatcher(
+      petModel.api.petsApi.endpoints.getPets.matchFulfilled,
+      (state, action: PayloadAction<petModel.type.Pet[]>) => ({
         ...state,
         pets: action.payload,
         loading: false,
       })
     );
     builder.addMatcher(
-      petsApi.endpoints.getPets.matchRejected,
+      petModel.api.petsApi.endpoints.getPets.matchRejected,
       (state, action) => ({
         ...state,
         error: action.error.message || "Failed to fetch cards",
         loading: false,
       })
     );
-
   },
 });
 export const { setActiveButton } = petsSlice.actions;

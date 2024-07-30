@@ -1,6 +1,6 @@
 import type { FC } from "react";
 import styles from "./petCard.module.scss";
-import { Pet } from "../index";
+import { type } from "../index";
 import { Text } from "@shared/ui/text";
 import { NavLink } from "react-router-dom";
 import { PET_CARD } from "@app/router/consts";
@@ -8,7 +8,7 @@ import useFormattedDate from "@shared/hooks/useFormattedDate/useFormattedDate";
 import { ReactComponent as LikeIcon } from "@shared/assets/like.svg";
 import cat from "@shared/assets/add_icon.svg";
 type PetProps = {
-  description: Pet;
+  description: type.Pet;
   actionSlots?: React.ReactNode;
 };
 
@@ -17,7 +17,7 @@ export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
   return (
     <NavLink
       className={styles.card__container}
-      to={PET_CARD + "/" + description.id}
+      to={`PET_CARD  ${"/"}  description.id`}
     >
       <div className={styles.card__container}>
         <div className={styles.card__image_container}>

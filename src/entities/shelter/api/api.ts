@@ -1,9 +1,4 @@
 import { baseApi } from "@shared/api";
-import {
-  AddShelterResponse,
-  AddShelterRequest,
-
-} from "../model/shelterType";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

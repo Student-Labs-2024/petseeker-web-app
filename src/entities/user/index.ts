@@ -1,3 +1,3 @@
-export * from './model/userType'
-export * from './model/userSlice'
-export * from './api/userApi'
+export * as type from "./model/type";
+export * as slice from "./model/slice";
+export * as api from "./api/api";

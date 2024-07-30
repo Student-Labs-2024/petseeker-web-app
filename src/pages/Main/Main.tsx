@@ -7,9 +7,10 @@ import { Button } from "@shared/ui/button";
 import { ADD_PET_CARD } from "@app/router/consts";
 import { Navbar } from "@widgets/navbar";
 import { FilterPets } from "@features/pet/filterPets";
+import { Morpher } from 'morpher-ws3-client';
 export const Main: React.FC = () => {
   const navigate = useNavigate();
-
+  const morpher = new Morpher('your-api-key');
   return (
     <>
       <MainContainer>
