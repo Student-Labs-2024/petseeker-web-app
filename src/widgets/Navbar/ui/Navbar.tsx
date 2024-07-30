@@ -5,7 +5,6 @@ import {
   REGISTRATION_ROUTE,
   ADD_PET_CARD,
 } from "@app/router/consts";
-import { useTheme } from "@shared/hooks/useTheme";
 import { ReactComponent as MainIcon } from "@shared/assets/main_icon.svg";
 import { ReactComponent as ProfileIcon } from "@shared/assets/profile_icon.svg";
 import { ReactComponent as FavoriteIcon } from "@shared/assets/favorite_icon.svg";

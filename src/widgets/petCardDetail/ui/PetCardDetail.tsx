@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@shared/ui/button";
 import { Text } from "@shared/ui/text";
 import { ReactComponent as GenderFemale } from "@shared/assets/gender_female_icon.svg";
 import { ReactComponent as GenderMale } from "@shared/assets/gender_male_icon.svg";
@@ -22,7 +21,11 @@ import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
 export const PetCardDetail: React.FC = () => {
   const { id } = useParams();
-  const { data: pet, isLoading, isError } = petModel.api.useGetPetDetailQuery({ id });
+  const {
+    data: pet,
+    isLoading,
+    isError,
+  } = petModel.api.useGetPetDetailQuery({ id });
   const navigate = useNavigate();
   return (
     <>

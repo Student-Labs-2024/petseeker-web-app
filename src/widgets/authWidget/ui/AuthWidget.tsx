@@ -1,7 +1,6 @@
-
 import React, { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import * as petModel from  "@entities/user/index"
+import * as petModel from "@entities/user/index";
 
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
@@ -27,7 +26,8 @@ export const AuthWidget: React.FC = () => {
   const name = useAppSelector((state) => state.user.name);
   const code = useAppSelector((state) => state.user.code);
   const isConfirm = useAppSelector((state) => state.user.isConfirm);
-  const [login, { isLoading: isSendingLogin }] =  petModel.api.useLoginMutation();
+  const [login, { isLoading: isSendingLogin }] =
+    petModel.api.useLoginMutation();
   const [
     confirm,
     { isLoading: isSendingConfirm, isSuccess: isConfirmSuccess, isError },
@@ -37,7 +37,7 @@ export const AuthWidget: React.FC = () => {
   const handleClickSubmit = async () => {
     try {
       const response = await login({ phone_number: phoneNumber }).unwrap();
-  
+
       if (response.success) {
         dispatch(petModel.slice.setIsConfirm(true));
       }
@@ -48,7 +48,6 @@ export const AuthWidget: React.FC = () => {
 
   const handleClickConfirm = async () => {
     try {
-
       const response = await confirm({
         phone_number: phoneNumber,
         code: code,

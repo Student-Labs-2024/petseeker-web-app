@@ -1,10 +1,14 @@
 import React from "react";
-import * as petModel from "@entities/pet"
+import * as petModel from "@entities/pet";
 import styles from "./card.module.scss";
-import { SaveCard } from "@features/pet/savePet";
-import { match, P } from "ts-pattern";
+import { match } from "ts-pattern";
 export const PetList: React.FC = () => {
-  const { data: pets, isLoading, isError,error } = petModel.api.useGetPetsQuery();
+  const {
+    data: pets,
+    isLoading,
+    isError,
+    error,
+  } = petModel.api.useGetPetsQuery();
 
   return (
     <div className={styles.container}>
@@ -15,11 +19,7 @@ export const PetList: React.FC = () => {
         .otherwise(() => (
           <div className={styles.card__list_container}>
             {pets?.results?.map((pet: petModel.type.Pet) => (
-              <petModel.PetCard
-                key={pet.id}
-                description={pet}
-
-              />
+              <petModel.PetCard key={pet.id} description={pet} />
             ))}
           </div>
         ))}
