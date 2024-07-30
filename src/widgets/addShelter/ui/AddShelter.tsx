@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import * as shelterModel from "@entities/shelter/index";
 import { Button } from "@shared/ui/button";
 import styles from "./addShelter.module.scss";
-import { Input } from "@shared/ui/input";
+import { Input } from "@/shared/ui/input";
 import { Form } from "@shared/ui/form";
 import { Label } from "@shared/ui/label";
 import { useForm, SubmitHandler } from "react-hook-form";
@@ -20,7 +20,6 @@ export const AddShelter: React.FC = () => {
     formData.append("contacts", data.contacts);
     try {
       const response = await addShelter(formData).unwrap();
-      
     } catch (error) {
       console.error(error);
     }

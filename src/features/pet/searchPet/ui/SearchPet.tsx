@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useState } from "react";
 import * as petModel from "@entities/pet/index";
-import { Input } from "@shared/ui/input";
+import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import searchIcon from "@shared/assets/search_icon.svg";
 import styles from "./searchPet.module.scss";

@@ -1,6 +1,5 @@
-
 import React from "react";
-import { Input } from "@shared/ui/input";
+import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import InputMask from "react-input-mask-next";
 import { phoneConsts, nameConsts } from "@shared/constants";
