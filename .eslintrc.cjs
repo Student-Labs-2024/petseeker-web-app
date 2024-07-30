@@ -19,10 +19,9 @@ module.exports = {
     "plugin:react/recommended",
     "plugin:react/jsx-runtime",
     "plugin:react-hooks/recommended",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
   ],
   rules: {
-    // Basic ESLint
     semi: "off", // Выключает правило требующее точки с запятой
     "react-refresh/only-export-components": [
       "warn",
