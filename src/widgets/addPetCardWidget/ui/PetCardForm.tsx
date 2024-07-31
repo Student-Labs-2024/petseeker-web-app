@@ -35,6 +35,7 @@ export const PetCardForm: React.FC = () => {
 
     try {
       const response = await addPetCard(formData).unwrap();
+      console.log(response);
     } catch (error) {
       console.error(errorMessage);
     }
