@@ -1,26 +1,23 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import {
-  useAddPetCardMutation,
-  useGetPetTypesQuery,
-} from "@entities/pet/index";
-import { Input } from "@shared/ui/input";
+import * as petModel from "@entities/pet/index";
+import { Input } from "@/shared/ui/input";
 import { TextArea } from "@shared/ui/textArea";
 import { Select } from "@shared/ui/select";
 import { Form } from "@shared/ui/form";
 import { Button } from "@shared/ui/button";
 import { useTranslation } from "react-i18next";
-import { PetCardFormType } from "../model/petCardFormType";
+import { PetCardFormType } from "../model/type";
 import { Label } from "@shared/ui/label";
 export const PetCardForm: React.FC = () => {
   const { t } = useTranslation("petCardForm");
 
   const { register, handleSubmit } = useForm<PetCardFormType>();
   const [addPetCard, { isLoading, error: errorMessage }] =
-    useAddPetCardMutation();
+    petModel.api.useAddPetCardMutation();
   const { data: petTypes = [], isLoading: petTypesLoading } =
-    useGetPetTypesQuery();
-      const textSubmitButton = isLoading ? t("loading") : t("create");
+    petModel.api.useGetPetTypesQuery();
+  const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit: SubmitHandler<PetCardFormType> = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);
@@ -38,7 +35,6 @@ export const PetCardForm: React.FC = () => {
 
     try {
       const response = await addPetCard(formData).unwrap();
-      console.log(response);
     } catch (error) {
       console.error(errorMessage);
     }

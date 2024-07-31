@@ -7,7 +7,6 @@ import { NavLink } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
-import { Button } from "@shared/ui/button";
 import { Text } from "@shared/ui/text";
 import { ReactComponent as GenderFemale } from "@shared/assets/gender_female_icon.svg";
 import { ReactComponent as GenderMale } from "@shared/assets/gender_male_icon.svg";
@@ -16,13 +15,17 @@ import { ReactComponent as Back } from "@shared/assets/back_arrow_icon.svg";
 import { ReactComponent as Birthday } from "@shared/assets/birthday.svg";
 import { ReactComponent as Home } from "@shared/assets/home.svg";
 import { ReactComponent as ShelterArrow } from "@shared/assets/shelter_link_arrow.svg";
-import { useGetPetDetailQuery } from "@entities/pet";
+import * as petModel from "@entities/pet";
 import test from "@shared/assets/add_icon.svg";
 import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
 export const PetCardDetail: React.FC = () => {
-  let { id } = useParams();
-  const { data: pet, isLoading, isError } = useGetPetDetailQuery({ id });
+  const { id } = useParams();
+  const {
+    data: pet,
+    isLoading,
+    isError,
+  } = petModel.api.useGetPetDetailQuery({ id });
   const navigate = useNavigate();
   return (
     <>

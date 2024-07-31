@@ -9,7 +9,6 @@ import { Navbar } from "@widgets/navbar";
 import { FilterPets } from "@features/pet/filterPets";
 export const Main: React.FC = () => {
   const navigate = useNavigate();
-  
 
   return (
     <>

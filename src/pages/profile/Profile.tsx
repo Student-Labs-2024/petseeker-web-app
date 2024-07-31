@@ -2,11 +2,11 @@ import React, { useEffect } from "react";
 import { MainContainer } from "@shared/ui/mainContainer";
 import { Navbar } from "@widgets/navbar";
 import { AddShelter } from "@widgets/addShelter/index.ts";
-import { useGetFavoritesQuery } from '@entities/pet/index.ts';
+import * as petModel from '@entities/pet/index.ts';
 export const Profile: React.FC = () => {
-  const { data: favorites } = useGetFavoritesQuery();
+  const { data: favorites } = petModel.api.useGetFavoritesQuery();
   useEffect(()=>{
-    console.log(favorites)
+  
   },[favorites])
   return (
     <>

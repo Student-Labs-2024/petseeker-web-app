@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./input.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-// Типизация пропсов компонента Input
+
 type InputProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
   placeholder?: string;
@@ -16,7 +16,7 @@ type InputProps = {
   register?: UseFormRegisterReturn;
 };
 
-// Компонент Input
+
 export const Input: React.FC<InputProps> = ({  register, ...rest }) => {
   return (
  

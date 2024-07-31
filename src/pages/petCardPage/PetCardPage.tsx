@@ -8,6 +8,7 @@ import { ADD_PET_CARD } from "@app/router/consts";
 import { Navbar } from "@widgets/navbar";
 import { FilterPets } from "@features/pet/filterPets";
 import { PetCardDetail } from "@widgets/petCardDetail/ui/PetCardDetail";
+
 export const PetCardPage: React.FC = () => {
   return (
     <>

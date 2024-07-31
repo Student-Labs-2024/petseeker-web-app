@@ -1,15 +1,14 @@
-// src/entities/user/model/userSlice.ts
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import {jwtDecode} from "jwt-decode";
-import { UserState } from "./userType";
+import { jwtDecode } from "jwt-decode";
+import { UserState } from "./type";
 
 export const initialState: UserState = {
-  token: 'fakeToken',
+  token: "fakeToken",
   user: null,
   phoneNumber: "",
   name: "",
   code: "",
-  isConfirm:false
+  isConfirm: false,
 };
 
 const userSlice = createSlice({
@@ -23,7 +22,6 @@ const userSlice = createSlice({
     logout(state) {
       state.token = null;
       state.user = null;
-
     },
     setPhoneNumber(state, action: PayloadAction<string>) {
       state.phoneNumber = action.payload;
@@ -34,11 +32,18 @@ const userSlice = createSlice({
     setCode(state, action: PayloadAction<string>) {
       state.code = action.payload;
     },
-    setIsConfirm(state,action:PayloadAction<boolean>){
-      state.isConfirm=action.payload
-    }
+    setIsConfirm(state, action: PayloadAction<boolean>) {
+      state.isConfirm = action.payload;
+    },
   },
 });
 
-export const { setToken, logout, setPhoneNumber, setName, setCode,setIsConfirm } = userSlice.actions;
+export const {
+  setToken,
+  logout,
+  setPhoneNumber,
+  setName,
+  setCode,
+  setIsConfirm,
+} = userSlice.actions;
 export default userSlice.reducer;

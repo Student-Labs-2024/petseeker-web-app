@@ -1,8 +1,8 @@
-import { Pet, PetDetail } from "../index";
+import * as petModel from "../index";
 import { baseApi } from "@shared/api";
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPets: builder.query<Pet[], { name?: string }>({
+    getPets: builder.query<petModel.type.Pet[], { name?: string }>({
       query: (params) => {
         let queryString = "/api/search-announcement/?format=json";
         if (params) {
@@ -13,9 +13,9 @@ export const petsApi = baseApi.injectEndpoints({
         return queryString;
       },
     }),
-    getPetDetail: builder.query<PetDetail, { id: string }>({
+    getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
       query: (params) => {
-        let queryString = "/api/shelter-announcement/detail/" + params.id + "/";
+        const queryString = `/api/shelter-announcement/detail/  ${params.id}  /`;
         return queryString;
       },
     }),
@@ -37,7 +37,7 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<Pet[], void>({
+    getFavorites: builder.query<petModel.type.Pet[], void>({
       query: () => "favorites",
       providesTags: ["Favorites"],
     }),

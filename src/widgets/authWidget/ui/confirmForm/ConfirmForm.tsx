@@ -1,6 +1,5 @@
-// src/entities/user/model/authWidget.ts
 import React from "react";
-import { Input } from "@shared/ui/input";
+import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import styles from "./confirmForm.module.scss";
 import InputMask from "react-input-mask-next";
@@ -34,7 +33,6 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
             value={code}
             onChange={handleChangeCode}
             placeholder={codeConsts.placeholder}
-
           >
             <Input />
           </InputMask>

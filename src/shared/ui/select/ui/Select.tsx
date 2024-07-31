@@ -2,7 +2,7 @@ import React from "react";
 import styles from "./select.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
 
-// Типизация пропсов компонента Select
+
 type SelectProps = {
   onChange?: React.ChangeEventHandler<HTMLSelectElement>;
   value?: string;
@@ -14,7 +14,7 @@ type SelectProps = {
   options: string[];
 };
 
-// Компонент Select
+
 export const Select: React.FC<SelectProps> = ({
   label,
   options,

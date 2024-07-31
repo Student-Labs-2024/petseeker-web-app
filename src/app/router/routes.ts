@@ -37,7 +37,7 @@ export const publicRoutes = [
   },
 
   {
-    path: PET_CARD+ "/:id",
-    Component: PetCardPage 
+    path: `PET_CARD ${"/:id"}`,
+    Component: PetCardPage,
   },
 ];
