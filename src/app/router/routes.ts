@@ -5,12 +5,14 @@ import {
   ADD_PET_CARD,
   PROFILE,
   PET_CARD,
+  FAVORITE_ROUTE,
 } from "./consts";
 import { Main } from "@/pages/main";
 import { Auth } from "@pages/auth";
 import { Profile } from "@pages/profile";
 import { AddPetCard } from "@pages/addPetCard";
 import { PetCardPage } from "@pages/petCardPage";
+import { Favorite } from "@pages/favorite";
 export const authRoutes = [
   {
     path: ADD_PET_CARD,
@@ -19,6 +21,10 @@ export const authRoutes = [
   {
     path: PROFILE,
     Component: Profile,
+  },
+  {
+    path: FAVORITE_ROUTE,
+    Component: Favorite,
   },
 ];
 
