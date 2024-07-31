@@ -13,16 +13,20 @@ export const store = configureStore({
     pets: petsReducer,
     user: userReducer,
     shelter: shelterReducer,
+    geolocation: geolocationReducer, // Добавляем geolocationReducer
+    [geolocationApi.reducerPath]: geolocationApi.reducer, // Добавляем geolocationApi.reducer
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware().concat(baseApi.middleware).concat(geolocationApi.middleware), // Добавляем middleware geolocationApi
 });
 
 setupListeners(store.dispatch);
+
 export type RootState = {
   pets: PetState;
   user: UserState;
   shelter: ShelterState;
+  geolocation: GeolocationState; // Добавляем тип для geolocation
 };
 
 export type AppDispatch = typeof store.dispatch;

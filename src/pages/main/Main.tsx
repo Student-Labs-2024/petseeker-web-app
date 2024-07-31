@@ -14,6 +14,7 @@ export const Main: React.FC = () => {
     <>
       <MainContainer>
         <SearchPet></SearchPet>
+
         <FilterPets></FilterPets>
         <PetList></PetList>
       </MainContainer>
