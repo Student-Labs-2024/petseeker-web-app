@@ -1,27 +1,21 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
 import { UserState } from "./type";
 
 export const initialState: UserState = {
-  token: "fakeToken",
   user: null,
   phoneNumber: "",
   name: "",
   code: "",
   isConfirm: false,
+  auth: null,
 };
 
 const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setToken(state, action: PayloadAction<string>) {
-      state.token = action.payload;
-      state.user = jwtDecode(action.payload);
-    },
-    logout(state) {
-      state.token = null;
-      state.user = null;
+    setAuthenticated(state, action: PayloadAction<boolean>) {
+      state.auth = action.payload;
     },
     setPhoneNumber(state, action: PayloadAction<string>) {
       state.phoneNumber = action.payload;
@@ -39,11 +33,10 @@ const userSlice = createSlice({
 });
 
 export const {
-  setToken,
-  logout,
   setPhoneNumber,
   setName,
   setCode,
   setIsConfirm,
+  setAuthenticated,
 } = userSlice.actions;
 export default userSlice.reducer;
