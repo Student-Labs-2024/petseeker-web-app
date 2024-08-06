@@ -2,14 +2,19 @@ import * as petModel from "../index";
 import { baseApi } from "@shared/api";
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPets: builder.query<petModel.type.Pet[], { name?: string }>({
+    getPets: builder.query<
+      petModel.type.Pet[],
+      { pet_type?: string; male?: string }
+    >({
       query: (params) => {
-        let queryString = "/api/search-announcement/?format=json";
+        let queryString = "/api/search-announcement/";
         if (params) {
           const queryParts = [];
-          if (params.name) queryParts.push(`name=${params.name}`);
+          if (params.pet_type) queryParts.push(`pet_type=${params.pet_type}`);
+          if (params.male) queryParts.push(`male=${params.male}`);
           if (queryParts.length) queryString += `?${queryParts.join("&")}`;
         }
+        console.log(queryString);
         return queryString;
       },
     }),
@@ -51,4 +56,5 @@ export const {
   useGetPetDetailQuery,
   useSaveFavoriteMutation,
   useGetFavoritesQuery,
+  useLazyGetPetsQuery,
 } = petsApi;

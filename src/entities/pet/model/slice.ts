@@ -5,6 +5,7 @@ const initialState: petModel.type.PetState = {
   loading: false,
   error: null,
   activeButton: "1",
+  openFilters: false,
 };
 
 const petsSlice = createSlice({
@@ -13,6 +14,9 @@ const petsSlice = createSlice({
   reducers: {
     setActiveButton(state, action: PayloadAction<string>) {
       state.activeButton = action.payload;
+    },
+    setOpenFilters(state, action: PayloadAction<boolean>) {
+      state.openFilters = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -42,5 +46,5 @@ const petsSlice = createSlice({
     );
   },
 });
-export const { setActiveButton } = petsSlice.actions;
+export const { setActiveButton, setOpenFilters } = petsSlice.actions;
 export default petsSlice.reducer;

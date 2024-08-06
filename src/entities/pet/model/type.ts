@@ -41,4 +41,5 @@ export type PetState = {
   loading: boolean;
   error: string | null;
   activeButton?: string | null;
+  openFilters: boolean;
 };
