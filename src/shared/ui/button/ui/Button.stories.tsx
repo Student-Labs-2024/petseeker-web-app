@@ -9,7 +9,7 @@ export default {
 } as Meta<typeof Button>;
 
 const Template: StoryFn<typeof Button> = (args) => <Button {...args} />;
-document.documentElement.setAttribute("data-theme", "dark");
+document.documentElement.setAttribute("data-theme", "light");
 export const Default = Template.bind({});
 Default.args = {
   children: "Default Button",
