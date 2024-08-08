@@ -1,0 +1,81 @@
+import React, { useEffect, useState } from "react";
+import * as petModel from "@entities/pet/index";
+import { useTranslation } from "react-i18next";
+import { Text } from "@shared/ui/text";
+import styles from "./petCardForm.module.scss";
+import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
+import { useAppDispatch } from "@/shared/hooks";
+import { useAppSelector } from "@/shared/hooks";
+import { Label } from "@shared/ui/label";
+import { Radio } from "@shared/ui/radio";
+import { Button } from "@shared/ui/button";
+import { Input } from "@shared/ui/input";
+import { useForm } from "react-hook-form";
+import classNames from "classnames";
+import { UseFormRegister } from "react-hook-form";
+import { Toggle } from "@/shared/ui/toggle";
+interface InfoFormProps {
+  onChangeForm: (data: any) => void;
+  handleNext: (data: any) => void;
+  control: any;
+  register: UseFormRegister<any>;
+}
+export const CharacteristicForm3: React.FC<InfoFormProps> = ({
+  onChangeForm,
+  handleNext,
+  control,
+  register,
+}) => {
+  const dispatch = useAppDispatch();
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.top}>
+        <Star />
+        <Text myClass="bold_big">Характеристики</Text>
+      </div>
+      <form onSubmit={onChangeForm} className={styles.form}>
+        <div className={styles.form__item}>
+          <Text myClass="btn">Алергенность</Text>
+
+          <label className={styles.form__label_toggle}>
+            <Text myClass="medium_big" color="gray">
+              Наличие аллергена
+            </Text>
+            <Toggle
+              name="allergenicity"
+              control={control}
+              value={"true"}
+            ></Toggle>
+          </label>
+        </div>
+        <div className={styles.form__item}>
+          <Text myClass="btn">Тип шерсти</Text>
+          <label className={styles.form__label_default}>
+            <Radio name="wool_type" control={control} value={"string"}></Radio>{" "}
+            <Text myClass="medium_big">Бесшерстная</Text>
+          </label>
+          <label className={styles.form__label_default}>
+            <Radio name="wool_type" control={control} value={"string1"}></Radio>{" "}
+            <Text myClass="medium_big">Пушистая</Text>
+          </label>
+          <label className={styles.form__label_default}>
+            <Radio name="wool_type" control={control} value={"string2"}></Radio>
+            <Text myClass="medium_big">Жесткая</Text>
+          </label>
+          <label className={styles.form__label_default}>
+            <Radio name="wool_type" control={control} value={"string3"}></Radio>{" "}
+            <Text myClass="medium_big">Длинная</Text>
+          </label>
+          <label className={styles.form__label_default}>
+            <Radio name="wool_type" control={control} value={"string4"}></Radio>{" "}
+            <Text myClass="medium_big">Короткая</Text>
+          </label>
+        </div>
+        <div className={styles.bottom}>
+          <Button type="submit">Далее</Button>
+        </div>
+      </form>
+    </div>
+  );
+};

@@ -14,7 +14,7 @@ export const petsApi = baseApi.injectEndpoints({
           if (params.male) queryParts.push(`male=${params.male}`);
           if (queryParts.length) queryString += `?${queryParts.join("&")}`;
         }
-        console.log(queryString);
+
         return queryString;
       },
     }),
@@ -24,9 +24,9 @@ export const petsApi = baseApi.injectEndpoints({
         return queryString;
       },
     }),
-    addPetCard: builder.mutation<void, FormData>({
+    addPetCard: builder.mutation<void, Record<string, any>>({
       query: (newPetCard) => ({
-        url: "/api/announcement/create/",
+        url: "/api/private-announcement/create/",
         method: "POST",
         body: newPetCard,
       }),

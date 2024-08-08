@@ -71,7 +71,7 @@ export const DetailFilterPets: React.FC = () => {
             Фильтры
           </Text>
           <button onClick={handleResetFilters} className={styles.filter__reset}>
-            <Text color="btn" myClass="medium">
+            <Text color="btn_color" myClass="medium">
               Сбросить
             </Text>
           </button>

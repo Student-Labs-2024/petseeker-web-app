@@ -1,0 +1,39 @@
+.toggle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.custom {
+  cursor: pointer;
+  border: 1px solid var(--gray-backgr-element);
+  background: var(--white---primary);
+  display: block;
+  border-radius: 100px;
+  position: relative;
+  width: 40px;
+  height: 24px;
+  &::after {
+    content: "";
+    background: var(--gray-backgr-element);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 3px;
+    width: 18px;
+    height: 18px;
+
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+}
+.active {
+  background: var(--button-dark-defoult);
+  border: 1px solid var(--button-dark-defoult);
+  &::after {
+    background: var(--white---primary);
+    left: calc(100% - 3px);
+    transform: translateX(-100%) translateY(-50%);
+  }
+}

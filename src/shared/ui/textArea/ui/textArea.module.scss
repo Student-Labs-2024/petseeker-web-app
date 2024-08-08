@@ -11,8 +11,17 @@
   line-height: 18px;
   text-align: left;
 }
-.label {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+
+.form_textArea {
+  border-radius: 8px;
+  padding: 10px 16px;
+  background: var(--def-sec-gray);
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 236%;
+  color: var(--gray-backgr-element);
+  &:focus {
+    outline: none;
+  }
 }

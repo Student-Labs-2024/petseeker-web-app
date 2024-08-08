@@ -54,6 +54,33 @@
   line-height: 129%;
 }
 
+.bold_big {
+  font-family: var(--font-family);
+  font-weight: 700;
+
+  font-size: 18px;
+  line-height: 122%;
+}
+
+.bold_medium {
+  font-family: var(--font-family);
+  font-weight: 590;
+  font-size: 14px;
+  line-height: 157%;
+}
+.bold_medium_big {
+  font-family: var(--font-family);
+  font-weight: 590;
+  font-size: 16px;
+  line-height: 157%;
+}
+.medium_big {
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 150%;
+}
+
 .medium {
   font-family: var(--font-family);
   font-weight: 400;
@@ -64,10 +91,10 @@
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 9px;
-  line-height: 200%;
+  line-height: 120%;
 }
 .black {
-  color: var(--labels-primary);
+  color: var(--dark-theme-background);
 }
 .white {
   color: var(--white---primary);
@@ -78,6 +105,9 @@
 .dark {
   color: var(--imput-text-field);
 }
-.btn {
+.btn_color {
   color: var(--button-dark-defoult);
+}
+.light_gray {
+  color: var(--imput-name);
 }

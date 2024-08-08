@@ -1,13 +1,16 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import * as petModel from "../index";
+import { AnnouncmentType } from "./type"; // Импортируем тип
 const initialState: petModel.type.PetState = {
   pets: [],
   loading: false,
   error: null,
   activeButton: "1",
   openFilters: false,
+  step: 1,
+  announcmentType: "private",
+  data: JSON.parse(localStorage.getItem("announcmentFormData")) || {},
 };
-
 const petsSlice = createSlice({
   name: "pets",
   initialState,
@@ -17,6 +20,18 @@ const petsSlice = createSlice({
     },
     setOpenFilters(state, action: PayloadAction<boolean>) {
       state.openFilters = action.payload;
+    },
+    nextStep(state) {
+      state.step += 1;
+    },
+    prevStep(state) {
+      state.step -= 1;
+    },
+    setFormData(state, action: PayloadAction<Record<string, any>>) {
+      state.data = { ...state.data, ...action.payload };
+    },
+    setAnnouncmentType(state, action: PayloadAction<AnnouncmentType>) {
+      state.announcmentType = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -46,5 +61,12 @@ const petsSlice = createSlice({
     );
   },
 });
-export const { setActiveButton, setOpenFilters } = petsSlice.actions;
+export const {
+  setActiveButton,
+  setOpenFilters,
+  nextStep,
+  prevStep,
+  setFormData,
+  setAnnouncmentType,
+} = petsSlice.actions;
 export default petsSlice.reducer;
