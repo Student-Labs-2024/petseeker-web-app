@@ -52,6 +52,7 @@ export const AuthWidget: React.FC = () => {
         phone_number: phoneNumber,
         code: code,
       }).unwrap();
+      console.log(response);
       if (response.message) {
         // dispatch(setToken(response.token));
         navigate(PROFILE);

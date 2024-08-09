@@ -17,7 +17,7 @@ export const PetCard: FC<PetProps> = ({ description, actionSlots }) => {
   return (
     <NavLink
       className={styles.card__container}
-      to={`PET_CARD  ${"/"}  description.id`}
+      to={`${PET_CARD}/${description.id}`}
     >
       <div className={styles.card__container}>
         <div className={styles.card__image_container}>
