@@ -6,7 +6,7 @@ import { NavLink } from "react-router-dom";
 import { PET_CARD } from "@app/router/consts";
 import useFormattedDate from "@shared/hooks/useFormattedDate/useFormattedDate";
 import { ReactComponent as LikeIcon } from "@shared/assets/like.svg";
-import cat from "@shared/assets/add_icon.svg";
+import cat from "@shared/assets/cat.png";
 type PetProps = {
   description: type.Pet;
   actionSlots?: React.ReactNode;

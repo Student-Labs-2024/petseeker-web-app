@@ -153,7 +153,7 @@ export const PetCardDetail: React.FC = () => {
                 </div>
               </div>
               <NavLink className={styles.shelter__link} to={"#"}>
-                <Text myClass="btn" color="btn">
+                <Text myClass="btn" color="btn_color">
                   Приют Омские хвостики
                 </Text>
                 <ShelterArrow></ShelterArrow>
@@ -165,7 +165,7 @@ export const PetCardDetail: React.FC = () => {
                 </Text>
               </div>
               <button className={styles.more}>
-                <Text myClass="medium" color="btn">
+                <Text myClass="medium" color="btn_color">
                   Читать больше
                 </Text>
               </button>

@@ -32,10 +32,15 @@
   --secondary-gray: #d1d3d9;
   --primary-red: #dd2323;
   --primary-40: rgba(108, 84, 246, 0.4);
+  --male: #6f93f6;
+  --female: #efb8c8;
+  --def-back-gray---light: #828282;
+  --def-sec-gray: #f5f5f5;
+  --accent-blue: #0a7aff;
 
   --navbar-height: 60px;
 
-  
+  --container-padding: 28px;
 }
 
 html[data-theme="dark"] {
@@ -56,14 +61,21 @@ html[data-theme="dark"] {
 html[data-theme="light"] {
   --input-border-color: #585858;
   --text-color: #1b1b1b;
+
   --button-text-color: #ffffff;
   --button-background-color: #6c54f6;
   --button-border-color: #6c54f6;
+
+  --button-text-color-default: #585858;
+  --button-background-color-default: #f1f1f1;
+  --button-border-color-default: #f1f1f1;
+
   --button-background-color-auth: #1b1b1b;
   --button-border-color-auth: #1b1b1b;
-  --button-text-color-default: #585858;
-  --button-background-color-default: #ffffff;
-  --button-border-color-default: #585858;
+
+  --button-text-color-default-auth: #585858;
+  --button-background-color-default-auth: #ffffff;
+  --button-border-color-default-auth: #585858;
 
   --background-color: #ffffff;
 }

@@ -21,7 +21,7 @@
   border-radius: 8px;
   aspect-ratio: 1;
   margin-bottom: 4px;
-  > img{
+  > img {
     object-fit: cover;
   }
 }
@@ -36,28 +36,29 @@
   }
 }
 
-  .status {
-    z-index: 5;
-    position: absolute;
-    top: 8px;
-    right: 6px;
-    width: fit-content;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 10px;
-    padding: 0px 14px;
-    background-color: var(--primary-green);
-    max-height: 18px;
-    @media (min-width: 360px) {
-      max-height: 21px;
-    }
-    @media (min-width: 412px) {
-      max-height: 24px;
-    }
+.status {
+  padding: 2px 0;
+  z-index: 5;
+  position: absolute;
+  top: 8px;
+  right: 6px;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  padding: 0px 14px;
+  background-color: var(--primary-green);
+  max-height: 18px;
+  @media (min-width: 360px) {
+    max-height: 21px;
   }
+  @media (min-width: 412px) {
+    max-height: 24px;
+  }
+}
 
-  .card__like {
-    width: 16px;
-    height: 15px;
-  }
+.card__like {
+  width: 16px;
+  height: 15px;
+}

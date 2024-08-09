@@ -9,18 +9,16 @@ type TextareaProps = {
   style?: CSSProperties;
   id?: string;
   register?: UseFormRegisterReturn;
-  label?: string;
+  placeholder?: string;
+  myClass?: string;
 };
 
 export const TextArea: React.FC<TextareaProps> = ({
-  label,
   register,
+  myClass = "default",
   ...rest
 }) => {
   return (
-    <label className={styles.label}>
-      {label}
-      <textarea className={styles.default} {...register} {...rest}></textarea>
-    </label>
+    <textarea className={styles[myClass]} {...register} {...rest}></textarea>
   );
 };

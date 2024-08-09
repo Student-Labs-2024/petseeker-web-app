@@ -1,9 +1,6 @@
-
-
 .navbar__container {
   position: fixed;
   bottom: 4px;
-  width: 100%;
   width: 100%;
   text-align: center;
   height: 60px;
@@ -34,16 +31,15 @@
   color: var(--imput-text-field);
 }
 
-.navbar__icon_container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 36px; 
+.navbar__icon_container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 36px;
 }
-.active_icon *{
-    stroke: var(--button-dark-defoult);
-   
+.active_icon * {
+  stroke: var(--button-dark-defoult);
 }
-.active_text{
-  color:  var(--button-dark-defoult);
+.active_text {
+  color: var(--button-dark-defoult);
 }

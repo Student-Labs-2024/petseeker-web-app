@@ -41,4 +41,16 @@ export type PetState = {
   loading: boolean;
   error: string | null;
   activeButton?: string | null;
+  openFilters: boolean;
+  step: number;
+  data: Record<string, any>;
+  announcmentType: AnnouncmentType;
 };
+export const announcmentValues = {
+  private: "private",
+  shelter: "shelter",
+  message: "message",
+} as const;
+
+export type AnnouncmentType =
+  (typeof announcmentValues)[keyof typeof announcmentValues];
