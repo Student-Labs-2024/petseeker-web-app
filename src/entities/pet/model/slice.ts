@@ -11,6 +11,7 @@ const initialState: petModel.type.PetState = {
   announcmentType: "private",
   data: JSON.parse(localStorage.getItem("announcmentFormData")) || {},
   images: [],
+  previewUrl: "",
 };
 
 const petsSlice = createSlice({
@@ -37,6 +38,10 @@ const petsSlice = createSlice({
     },
     addImages: (state, action: PayloadAction<File[]>) => {
       state.images = action.payload;
+    },
+
+    setPreviewUrl: (state, action: PayloadAction<string>) => {
+      state.previewUrl = action.payload;
     },
     clearImages: (state) => {
       state.images = [];
@@ -78,5 +83,6 @@ export const {
   setAnnouncmentType,
   addImages,
   clearImages,
+  setPreviewUrl,
 } = petsSlice.actions;
 export default petsSlice.reducer;

@@ -131,6 +131,7 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(3, () => (
             <CharacteristicForm1
+              getValues={getValues}
               control={control}
               register={register}
               handleNext={handleNext}

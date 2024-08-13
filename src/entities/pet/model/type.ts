@@ -46,6 +46,7 @@ export type PetState = {
   data: Record<string, any>;
   announcmentType: AnnouncmentType;
   images: File[];
+  previewUrl: string;
 };
 export const announcmentValues = {
   private: "private",
