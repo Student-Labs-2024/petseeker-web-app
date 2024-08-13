@@ -23,10 +23,9 @@ $filter-icon: url("@shared/assets/filter_icon.svg");
 .search_container {
   background-color: var(--white---primary);
   z-index: 10;
-  position: sticky; 
-  top:28px; 
+  position: sticky;
+  top: 28px;
   width: 100%;
-
 }
 .search_btn {
   cursor: pointer;

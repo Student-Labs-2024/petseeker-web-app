@@ -1,0 +1,20 @@
+.radio {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+.custom {
+  cursor: pointer;
+
+  display: block;
+  width: 20px;
+  height: 20px;
+  background-image: url("../assets/radio.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.active {
+  background-image: url("../assets/radio_active.svg");
+}
