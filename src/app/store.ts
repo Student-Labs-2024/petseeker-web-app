@@ -15,7 +15,9 @@ export const store = configureStore({
     shelter: shelterReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(baseApi.middleware),
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }).concat(baseApi.middleware),
 });
 
 setupListeners(store.dispatch);

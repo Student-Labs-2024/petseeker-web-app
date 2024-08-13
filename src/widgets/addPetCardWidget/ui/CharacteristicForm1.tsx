@@ -13,12 +13,7 @@ import { Input } from "@shared/ui/input";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
-interface InfoFormProps {
-  onChangeForm: (data: any) => void;
-  handleNext: (data: any) => void;
-  control: any;
-  register: UseFormRegister<any>;
-}
+import { InfoFormProps } from "../model/type";
 export const CharacteristicForm1: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,

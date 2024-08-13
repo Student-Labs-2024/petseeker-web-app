@@ -12,13 +12,7 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
 import { TextArea } from "@/shared/ui/textArea";
-interface InfoFormProps {
-  onChangeForm: (data: any) => void;
-  handleNext: (data: any) => void;
-  control: any;
-  register: UseFormRegister<any>;
-  onSubmitForm: (data: any) => void;
-}
+import { InfoFormProps } from "../model/type";
 export const AddressForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   onSubmitForm,
@@ -43,7 +37,7 @@ export const AddressForm: React.FC<InfoFormProps> = ({
         </div>
         <div className={styles.bottom}>
           <Button onClick={onSubmitForm} type="submit">
-            Создать
+            Далее
           </Button>
         </div>
       </form>

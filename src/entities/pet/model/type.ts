@@ -45,6 +45,7 @@ export type PetState = {
   step: number;
   data: Record<string, any>;
   announcmentType: AnnouncmentType;
+  images: File[];
 };
 export const announcmentValues = {
   private: "private",
@@ -54,3 +55,8 @@ export const announcmentValues = {
 
 export type AnnouncmentType =
   (typeof announcmentValues)[keyof typeof announcmentValues];
+
+export type UploadImageRequest = {
+  id: string;
+  formData: FormData;
+};

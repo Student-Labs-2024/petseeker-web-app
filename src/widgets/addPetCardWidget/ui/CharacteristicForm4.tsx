@@ -15,12 +15,7 @@ import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
 import { Toggle } from "@/shared/ui/toggle";
 import { ReactComponent as UploadIcon } from "@shared/assets/upload_icon.svg";
-interface InfoFormProps {
-  onChangeForm: (data: any) => void;
-  handleNext: (data: any) => void;
-  control: any;
-  register: UseFormRegister<any>;
-}
+import { InfoFormProps } from "../model/type";
 export const CharacteristicForm4: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
