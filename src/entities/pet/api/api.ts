@@ -2,14 +2,19 @@ import * as petModel from "../index";
 import { baseApi } from "@shared/api";
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPets: builder.query<petModel.type.Pet[], { name?: string }>({
+    getPets: builder.query<
+      petModel.type.Pet[],
+      { pet_type?: string; male?: string }
+    >({
       query: (params) => {
-        let queryString = "/api/search-announcement/?format=json";
+        let queryString = "/api/search-announcement/";
         if (params) {
           const queryParts = [];
-          if (params.name) queryParts.push(`name=${params.name}`);
+          if (params.pet_type) queryParts.push(`pet_type=${params.pet_type}`);
+          if (params.male) queryParts.push(`male=${params.male}`);
           if (queryParts.length) queryString += `?${queryParts.join("&")}`;
         }
+
         return queryString;
       },
     }),
@@ -19,9 +24,9 @@ export const petsApi = baseApi.injectEndpoints({
         return queryString;
       },
     }),
-    addPetCard: builder.mutation<void, FormData>({
+    addPetCard: builder.mutation<void, Record<string, any>>({
       query: (newPetCard) => ({
-        url: "/api/announcement/create/",
+        url: "/api/private-announcement/create/",
         method: "POST",
         body: newPetCard,
       }),
@@ -51,4 +56,5 @@ export const {
   useGetPetDetailQuery,
   useSaveFavoriteMutation,
   useGetFavoritesQuery,
+  useLazyGetPetsQuery,
 } = petsApi;

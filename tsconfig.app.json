@@ -33,5 +33,5 @@
       "@app/*": ["./src/app/*"]
     }
   },
-  "include": ["src"]
+  "include": ["src", "src/widgets/addPetCardWidget/ui/.tsx"]
 }

@@ -1,5 +1,7 @@
 import React from "react";
+import classNames from "classnames";
 import styles from "./button.module.scss";
+
 export type ButtonProps = {
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   children?: React.ReactNode;
@@ -7,27 +9,37 @@ export type ButtonProps = {
   disabled?: boolean;
   isDefault?: boolean;
   isAuthButton?: boolean;
+  isSmall?: boolean;
+  name?: string;
+  value?: string;
 };
 
 export const Button: React.FC<ButtonProps> = ({
   onClick,
   children,
-  type,
-  disabled,
-  isDefault,
+  type = "button",
+  disabled = false,
+  isDefault = false,
   isAuthButton = false,
+  isSmall = false,
+  name,
+  value,
 }) => {
+  const buttonClass = classNames({
+    [styles.small]: isSmall,
+    [styles.default]: isDefault,
+    [styles.active]: !isDefault,
+    [styles.auth_default]: isDefault && isAuthButton,
+    [styles.auth_active]: !isDefault && isAuthButton,
+  });
+
   return (
     <button
+      value={value}
+      name={name}
       type={type}
       disabled={disabled}
-      className={`${
-        isDefault
-          ? styles.default
-          : isAuthButton
-          ? styles.authButton
-          : styles.active
-      } `}
+      className={buttonClass}
       onClick={onClick}
     >
       {children}
