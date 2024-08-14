@@ -4,15 +4,10 @@ import { Navbar } from "@widgets/navbar";
 import { AddShelter } from "@widgets/addShelter/index.ts";
 import * as petModel from "@entities/pet/index.ts";
 import { ProfileInfo } from "@/widgets/profileInfo/index";
-export const Profile: React.FC = () => {
-  const { data: favorites } = petModel.api.useGetFavoritesQuery();
-  useEffect(() => {}, [favorites]);
+export const ProfileEdit: React.FC = () => {
   return (
     <>
-      <MainContainer>
-        <ProfileInfo></ProfileInfo>
-      </MainContainer>
-      <Navbar />
+      <MainContainer>edit</MainContainer>
     </>
   );
 };
