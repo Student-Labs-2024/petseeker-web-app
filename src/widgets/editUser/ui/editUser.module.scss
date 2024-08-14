@@ -1,0 +1,25 @@
+.form {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.auth {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.bottom {
+  display: flex;
+  flex-direction: column;
+  margin-top: auto;
+}
+.checkBox__container {
+  align-items: center;
+  display: flex;
+  gap: 16px;
+}
+.top {
+  display: flex;
+  margin-bottom: 24px;
+}
