@@ -10,6 +10,7 @@ export const SaveCard: React.FC<SaveButtonProps> = ({ id }) => {
   const handleSave = async () => {
     try {
       const response = await saveFavorite(id).unwrap();
+      console.log(response);
     } catch (error) {
       console.error(error);
     }

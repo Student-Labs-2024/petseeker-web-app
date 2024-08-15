@@ -4,3 +4,4 @@ export const MAIN_ROUTE = "/";
 export const ADD_PET_CARD = "/addpetcard";
 export const PROFILE = "/profile";
 export const PET_CARD = "/petcard";
+export const FAVORITES = "/favorites";

@@ -36,14 +36,14 @@ export const petsApi = baseApi.injectEndpoints({
     }),
     saveFavorite: builder.mutation<void, string>({
       query: (id) => ({
-        url: `favorites`,
+        url: `/api/favourites/private-announcement/${id}/`,
         method: "POST",
         body: { id },
       }),
       invalidatesTags: ["Favorites"],
     }),
     getFavorites: builder.query<petModel.type.Pet[], void>({
-      query: () => "favorites",
+      query: () => "/api/favourites/",
       providesTags: ["Favorites"],
     }),
   }),
