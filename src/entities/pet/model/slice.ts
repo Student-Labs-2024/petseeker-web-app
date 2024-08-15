@@ -23,6 +23,7 @@ const initialState: petModel.type.PetState = {
   step: 1,
   announcmentType: "private",
   data: JSON.parse(localStorage.getItem("announcmentFormData")) || {},
+  ids: [],
 };
 const petsSlice = createSlice({
   name: "pets",
@@ -37,7 +38,10 @@ const petsSlice = createSlice({
     setSearchOnFocus(state, action: PayloadAction<boolean>) {
       state.searchOnFocus = action.payload;
     },
-    setFilters(state, action: PayloadAction<Partial<FilterState>>) {
+    setFilters(
+      state,
+      action: PayloadAction<Partial<petModel.type.FilterState>>
+    ) {
       state.filters = {
         ...state.filters,
         ...action.payload,
@@ -68,6 +72,12 @@ const petsSlice = createSlice({
     },
     setAnnouncmentType(state, action: PayloadAction<AnnouncmentType>) {
       state.announcmentType = action.payload;
+    },
+    addFavorite: (state, action: PayloadAction<string>) => {
+      state.ids.push(action.payload);
+    },
+    removeFavorite: (state, action: PayloadAction<string>) => {
+      state.ids = state.ids.filter((id) => id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -108,5 +118,7 @@ export const {
   setAnnouncmentType,
   setHistorySearch,
   setSearchOnFocus,
+  addFavorite,
+  removeFavorite,
 } = petsSlice.actions;
 export default petsSlice.reducer;

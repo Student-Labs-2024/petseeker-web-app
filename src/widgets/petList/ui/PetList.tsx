@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as petModel from "@entities/pet";
 import styles from "./card.module.scss";
 import { match } from "ts-pattern";
-import { useAppSelector } from "@/shared/hooks/index";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks/index";
 export const PetList: React.FC = () => {
+  const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.pets.filters);
   const isOpenFilters = useAppSelector((state) => state.pets.openFilters);
   const isSearchOnFocus = useAppSelector((state) => state.pets.searchOnFocus);
@@ -13,6 +14,17 @@ export const PetList: React.FC = () => {
     isError,
   } = petModel.api.useGetPetsQuery(filters);
   const isShowList = !isSearchOnFocus && !isOpenFilters;
+
+  const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
+  const favorites = useAppSelector((state) => state.pets.ids);
+  console.log(favorites);
+
+  // useEffect(() => {
+  //   if (favoriteIds.length > 0) {
+  //     const ids = favoriteIds.map((i) => i.id);
+  //     dispatch(petModel.slice.addFavorite(ids));
+  //   }
+  // }, [favoriteIds]);
   return (
     <div className={styles.container}>
       <h1>{isOpenFilters}</h1>
@@ -25,7 +37,12 @@ export const PetList: React.FC = () => {
           .otherwise(() => (
             <div className={styles.card__list_container}>
               {pets?.results?.map((pet: petModel.type.Pet) => (
-                <petModel.PetCard key={pet.id} description={pet} />
+                <petModel.PetCard
+                  key={pet.id}
+                  description={pet}
+                  isSaved={favorites.includes(`${pet.id}`)}
+                  isFavoritePage={false}
+                />
               ))}
             </div>
           ))}

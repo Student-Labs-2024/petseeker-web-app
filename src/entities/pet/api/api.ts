@@ -42,6 +42,14 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
+    deleteFavorite: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `/api/favourites/private-announcement/${id}/`,
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: ["Favorites"],
+    }),
     getFavorites: builder.query<petModel.type.Pet[], void>({
       query: () => "/api/favourites/",
       providesTags: ["Favorites"],
@@ -57,4 +65,5 @@ export const {
   useSaveFavoriteMutation,
   useGetFavoritesQuery,
   useLazyGetPetsQuery,
+  useDeleteFavoriteMutation,
 } = petsApi;

@@ -16,7 +16,7 @@ export const Main: React.FC = () => {
       <MainContainer>
         <SearchPet></SearchPet>
         <FilterPets></FilterPets>
-        <PetList pets={petData} isLoading={isLoading} isError={isError} />
+        <PetList />
       </MainContainer>
       <Navbar />
     </>

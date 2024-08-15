@@ -3,13 +3,13 @@ import { MainContainer } from "@shared/ui/mainContainer";
 import { Navbar } from "@widgets/navbar";
 import { AddShelter } from "@widgets/addShelter/index.ts";
 import * as petModel from "@entities/pet/index.ts";
+import { FavoriteList } from "@/widgets/favoriteList";
 export const Favorites: React.FC = () => {
-  const { data: favorites } = petModel.api.useGetFavoritesQuery();
-
-  console.log(favorites);
   return (
     <>
-      <MainContainer></MainContainer>
+      <MainContainer>
+        <FavoriteList></FavoriteList>
+      </MainContainer>
       <Navbar />
     </>
   );
