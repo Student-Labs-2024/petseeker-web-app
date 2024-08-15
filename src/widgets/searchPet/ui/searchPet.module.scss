@@ -51,3 +51,29 @@ $filter-icon: url("@shared/assets/filter_icon.svg");
   background-size: cover;
   background-position: center;
 }
+.search_discard {
+}
+
+.search {
+  display: flex;
+  gap: 6px;
+}
+
+.modal__active {
+  top: 0;
+  left: 0;
+  position: absolute;
+  width: 100vw;
+  padding: var(--container-padding);
+  background-color: var(--white---primary);
+  z-index: 20;
+}
+.option__list {
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  > * {
+    text-align: left;
+  }
+}

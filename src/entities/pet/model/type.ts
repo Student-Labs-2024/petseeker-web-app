@@ -44,6 +44,9 @@ export type PetState = {
   openFilters: boolean;
   step: number;
   data: Record<string, any>;
+  historySearch: string[];
+  searchOnFocus: boolean;
+  filters: Record<string, any>;
   announcmentType: AnnouncmentType;
 };
 export const announcmentValues = {
@@ -54,3 +57,12 @@ export const announcmentValues = {
 
 export type AnnouncmentType =
   (typeof announcmentValues)[keyof typeof announcmentValues];
+export type FilterState = {
+  pet_type: "";
+  male: "";
+  age: "";
+  fatness: "";
+  health__issues: "";
+  wool_type: "";
+  allergenicity: "";
+};
