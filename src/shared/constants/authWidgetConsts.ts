@@ -3,6 +3,11 @@ export const phoneConsts = {
   maskChar: "_",
   placeholder: "+7 (",
 };
+export const tgConsts = {
+  mask: "@***************************",
+  maskChar: "",
+  placeholder: "@",
+};
 export const nameConsts = {
   placeholder: "Имя",
 };

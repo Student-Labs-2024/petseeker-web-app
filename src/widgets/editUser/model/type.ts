@@ -1,6 +1,7 @@
 export type EditUserType = {
   name?: string;
-  contacts?: string;
+  surname?: string;
+  phone_number?: string;
   tg?: string;
   patr?: string;
   male?: string;

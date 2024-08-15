@@ -23,3 +23,64 @@
   display: flex;
   margin-bottom: 24px;
 }
+.avatar {
+  position: relative;
+  background-image: url("../../../shared//assets//avatar.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  width: 100%;
+  aspect-ratio: 1.77;
+  > input {
+    pointer-events: none;
+    opacity: 0;
+  }
+}
+
+.avatar__logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 40%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: var(--imput-name);
+  border: 2px solid var(--def-sec-gray);
+}
+.avatar__camera {
+  z-index: 10;
+  width: 32%;
+  aspect-ratio: 1;
+  background-image: url("../../../shared//assets//camera.svg");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+
+.preview_image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  z-index: 8;
+}
+
+.avatar_male {
+  @extend .avatar;
+  background-image: url("../../../shared//assets//avatar_male.svg");
+  > * > .avatar__camera {
+    background-image: url("../../../shared//assets//camera_male.svg");
+  }
+}
+.avatar_female {
+  @extend .avatar;
+  background-image: url("../../../shared//assets//avatar_female.svg");
+  > * > .avatar__camera {
+    background-image: url("../../../shared//assets//camera_female.svg");
+  }
+}

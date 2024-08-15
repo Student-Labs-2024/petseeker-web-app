@@ -1,5 +1,5 @@
 import React from "react";
-import * as petModel from "@entities/pet";
+import * as userModel from "@entities/user";
 import styles from "./profileInfo.module.scss";
 import { match } from "ts-pattern";
 import { Text } from "@shared/ui/text";
@@ -18,9 +18,16 @@ import { NavLink } from "react-router-dom";
 import { PROFILE_EDIT } from "@/app/router/consts";
 
 export const ProfileInfo: React.FC = () => {
-  const profile = false;
   const totalStars = 5;
   const stars = 4;
+
+  const {
+    data: userInfo,
+    isLoading,
+    isError,
+    error,
+  } = userModel.api.useGetMeQuery();
+
   return (
     <>
       <div className={styles.profile}>
@@ -40,13 +47,15 @@ export const ProfileInfo: React.FC = () => {
             </button>
           </div>
         </div>
-        {profile ? (
+        {userInfo && !userInfo.name ? (
           <div className={styles.modal}>
             <div className={styles.modal__container}>
               <div className={styles.modal__content}>
                 <div className={styles.modal__image}></div>
 
-                <Button isAuthButton={true}>Заполнить профиль</Button>
+                <Button isAuthButton={true}>
+                  <NavLink to={PROFILE_EDIT}>Заполнить профиль</NavLink>
+                </Button>
               </div>
             </div>
           </div>
@@ -57,7 +66,9 @@ export const ProfileInfo: React.FC = () => {
               <div className={styles.profile__shelter}></div>
             </div>
             <div className={styles.profile__info}>
-              <Text myClass="bold_medium_big">Имя Фамилия</Text>
+              <Text myClass="bold_medium_big">
+                {userInfo?.name} {userInfo?.surname}
+              </Text>
               <Text myClass="medium_big">Частное</Text>
               <Text myClass="medium_big">дата рег</Text>
             </div>

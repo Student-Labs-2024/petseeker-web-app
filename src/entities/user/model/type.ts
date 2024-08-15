@@ -9,6 +9,9 @@ export type UserState = {
   name: string;
   code: string;
   isConfirm: boolean;
+
+  profileData: Record<string, any>;
+  profile_image: File;
 };
 
 export type LoginResponse = {
@@ -28,4 +31,7 @@ export type ConfirmRequest = {
 export type ConfirmResponse = {
   token: string;
   message: string;
+};
+export type UploadImageRequest = {
+  formData: FormData;
 };
