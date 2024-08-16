@@ -16,11 +16,10 @@
   width: 100%;
 }
 .favorite {
+  flex-direction: row;
   > * {
     flex: 1 1 50%;
   }
-
-  flex-direction: row;
 }
 .card__image_container {
   position: relative;
@@ -63,11 +62,6 @@
   @media (min-width: 412px) {
     max-height: 24px;
   }
-}
-
-.card__like {
-  width: 16px;
-  height: 15px;
 }
 
 .card__content {

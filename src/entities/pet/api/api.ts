@@ -1,28 +1,18 @@
 import * as petModel from "../index";
 import { baseApi } from "@shared/api";
+import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
+
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<
       petModel.type.Pet[],
       { pet_type?: string; male?: string }
     >({
-      query: (params) => {
-        let queryString = "/api/search-announcement/";
-        if (params) {
-          const queryParts = [];
-          if (params.pet_type) queryParts.push(`pet_type=${params.pet_type}`);
-          if (params.male) queryParts.push(`male=${params.male}`);
-          if (queryParts.length) queryString += `?${queryParts.join("&")}`;
-        }
-
-        return queryString;
-      },
+      query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
     getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
-      query: (params) => {
-        const queryString = `/api/shelter-announcement/detail/  ${params.id}  /`;
-        return queryString;
-      },
+      query: (params) =>
+        buildQueryString(`/api/shelter-announcement/detail/${params.id}/`),
     }),
     addPetCard: builder.mutation<void, Record<string, any>>({
       query: (newPetCard) => ({
@@ -34,7 +24,7 @@ export const petsApi = baseApi.injectEndpoints({
     getPetTypes: builder.query<string[], void>({
       query: () => "/petTypes",
     }),
-    saveFavorite: builder.mutation<void, string>({
+    saveFavorite: builder.mutation<void, number>({
       query: (id) => ({
         url: `/api/favourites/private-announcement/${id}/`,
         method: "POST",
@@ -42,7 +32,7 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    deleteFavorite: builder.mutation<void, string>({
+    deleteFavorite: builder.mutation<void, number>({
       query: (id) => ({
         url: `/api/favourites/private-announcement/${id}/`,
         method: "DELETE",
@@ -50,8 +40,8 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<petModel.type.Pet[], void>({
-      query: () => "/api/favourites/",
+    getFavorites: builder.query<petModel.type.Pet[], { pet_type?: string }>({
+      query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),
   }),

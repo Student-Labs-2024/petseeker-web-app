@@ -48,7 +48,8 @@ export type PetState = {
   searchOnFocus: boolean;
   filters: Record<string, any>;
   announcmentType: AnnouncmentType;
-  ids: string[];
+  ids: number[];
+  favoriteFilters: Record<string, any>;
 };
 export const announcmentValues = {
   private: "private",

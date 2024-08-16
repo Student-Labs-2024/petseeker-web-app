@@ -18,6 +18,7 @@ const initialState: petModel.type.PetState = {
   activeButton: "1",
   openFilters: false,
   filters: initialFilterState,
+  favoriteFilters: {},
   historySearch: JSON.parse(localStorage.getItem("historySearch")) || [],
   searchOnFocus: false,
   step: 1,
@@ -47,6 +48,12 @@ const petsSlice = createSlice({
         ...action.payload,
       };
     },
+    setFavoriteFilters(state, action: PayloadAction<Record<string, any>>) {
+      state.favoriteFilters = {
+        ...state.favoriteFilters,
+        ...action.payload,
+      };
+    },
     setHistorySearch(state, action: PayloadAction<string>) {
       if (!state.historySearch.includes(action.payload)) {
         state.historySearch.push(action.payload);
@@ -73,10 +80,14 @@ const petsSlice = createSlice({
     setAnnouncmentType(state, action: PayloadAction<AnnouncmentType>) {
       state.announcmentType = action.payload;
     },
-    addFavorite: (state, action: PayloadAction<string>) => {
-      state.ids.push(action.payload);
+    addFavorites: (state, action: PayloadAction<number | number[]>) => {
+      const idsToAdd = Array.isArray(action.payload)
+        ? action.payload
+        : [action.payload];
+      const uniqueIds = new Set([...state.ids, ...idsToAdd]);
+      state.ids = Array.from(uniqueIds);
     },
-    removeFavorite: (state, action: PayloadAction<string>) => {
+    removeFavorite: (state, action: PayloadAction<number>) => {
       state.ids = state.ids.filter((id) => id !== action.payload);
     },
   },
@@ -118,7 +129,8 @@ export const {
   setAnnouncmentType,
   setHistorySearch,
   setSearchOnFocus,
-  addFavorite,
+  setFavoriteFilters,
   removeFavorite,
+  addFavorites,
 } = petsSlice.actions;
 export default petsSlice.reducer;

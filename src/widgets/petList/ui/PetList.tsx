@@ -14,17 +14,15 @@ export const PetList: React.FC = () => {
     isError,
   } = petModel.api.useGetPetsQuery(filters);
   const isShowList = !isSearchOnFocus && !isOpenFilters;
-
-  const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
   const favorites = useAppSelector((state) => state.pets.ids);
-  console.log(favorites);
+  const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
 
-  // useEffect(() => {
-  //   if (favoriteIds.length > 0) {
-  //     const ids = favoriteIds.map((i) => i.id);
-  //     dispatch(petModel.slice.addFavorite(ids));
-  //   }
-  // }, [favoriteIds]);
+  useEffect(() => {
+    if (favoriteIds.length > 0) {
+      const ids = favoriteIds.map((i) => i.id);
+      dispatch(petModel.slice.addFavorites(ids));
+    }
+  }, [favoriteIds]);
   return (
     <div className={styles.container}>
       <h1>{isOpenFilters}</h1>
@@ -40,7 +38,7 @@ export const PetList: React.FC = () => {
                 <petModel.PetCard
                   key={pet.id}
                   description={pet}
-                  isSaved={favorites.includes(`${pet.id}`)}
+                  isSaved={favorites.includes(pet.id)}
                   isFavoritePage={false}
                 />
               ))}

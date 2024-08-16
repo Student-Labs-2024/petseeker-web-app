@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import * as petModel from "@entities/pet";
 import styles from "./favorite.module.scss";
 import { match } from "ts-pattern";
@@ -10,19 +10,20 @@ import { ReactComponent as SortIcon } from "@shared/assets/sort_icon.svg";
 import { useNavigate } from "react-router-dom";
 import { MAIN_ROUTE } from "@/app/router/consts";
 import { Button } from "@/shared/ui/button";
-
+import { FilterPetType } from "@/features/pet/filterPetType";
 export const FavoriteList: React.FC = () => {
   const navigate = useNavigate();
+  const filters = useAppSelector((state) => state.pets.favoriteFilters);
   const {
     data: pets,
     isLoading,
     isError,
-  } = petModel.api.useGetFavoritesQuery();
-  console.log(pets);
+  } = petModel.api.useGetFavoritesQuery(filters);
+
   const handleBack = () => {
     navigate(MAIN_ROUTE);
   };
-  const favorites = useAppSelector((state) => state.pets.ids);
+
   return (
     <div className={styles.container}>
       <div className={styles.form__top}>
@@ -33,16 +34,7 @@ export const FavoriteList: React.FC = () => {
           <Text myClass="bold_medium_big">Избранное</Text>
         </div>
       </div>
-      <div className={styles.filter_list}>
-        <Button isSmall={true}>Все</Button>
-        <Button isDefault={true} isSmall={true}>
-          Кошки
-        </Button>
-        <Button isDefault={true} isSmall={true}>
-          Собаки
-        </Button>
-      </div>
-
+      <FilterPetType></FilterPetType>
       <div className={styles.sort}>
         <SortIcon />
 
