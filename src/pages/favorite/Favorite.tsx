@@ -1,6 +1,6 @@
 import React from "react";
 import { PetList } from "@widgets/petList";
-import { Navbar } from "@/widgets/temp_navbar";
+import { Navbar } from "@/widgets/navbar";
 import { MainContainer } from "@shared/ui/mainContainer";
 import * as petModel from "@entities/pet";
 export const Favorite: React.FC = () => {
