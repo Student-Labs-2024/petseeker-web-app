@@ -59,7 +59,7 @@ export const PetList: React.FC = () => {
   }, [allPets]);
 
   useEffect(() => {
-    // Observe container size changes
+
     const resizeObserver = new ResizeObserver(updateRowHeight);
     if (containerRef.current) {
       resizeObserver.observe(containerRef.current);
@@ -104,7 +104,7 @@ export const PetList: React.FC = () => {
 
   const gridStyle = {
     columnCount: 2,
-    columnWidth: (width: number) => (width - 30) / 2,  // Adjust for gaps between columns
+    columnWidth: (width: number) => (width ) / 2,  
     rowHeight: rowHeight,
   };
 
