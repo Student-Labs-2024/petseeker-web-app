@@ -6,7 +6,7 @@ export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<
       petModel.type.Pet[],
-      { pet_type?: string; male?: string }
+      { page?: number; per_page?: number; pet_type?: string; male?: string }
     >({
       query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
