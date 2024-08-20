@@ -5,6 +5,7 @@ import {
   REGISTRATION_ROUTE,
   ADD_PET_CARD,
   FAVORITE_ROUTE,
+  PROFILE,
 } from "@app/router/consts";
 import { ReactComponent as MainIcon } from "@shared/assets/main_icon.svg";
 import { ReactComponent as ProfileIcon } from "@shared/assets/profile_icon.svg";
