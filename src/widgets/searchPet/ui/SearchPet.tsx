@@ -1,5 +1,5 @@
 import React, { ChangeEvent, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import searchIcon from "@shared/assets/search_icon.svg";
@@ -19,7 +19,7 @@ export const SearchPet: React.FC = () => {
     pet_type?: string;
   }>({});
 
-  petModel.api.useGetPetsQuery(searchParams);
+  petModel.useGetPetsQuery(searchParams);
 
   const handleOpenFilters = () => {
     dispatch(petModel.slice.setOpenFilters(true));

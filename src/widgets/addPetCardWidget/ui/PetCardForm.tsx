@@ -1,7 +1,11 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import * as petModel from "@entities/pet/index";
-
+import { petModel } from "@entities/pet";
+import { Input } from "@/shared/ui/input";
+import { TextArea } from "@shared/ui/textArea";
+import { Select } from "@shared/ui/select";
+import { Form } from "@shared/ui/form";
+import { Button } from "@shared/ui/button";
 import { useTranslation } from "react-i18next";
 
 import { Text } from "@shared/ui/text";
@@ -28,10 +32,11 @@ export const PetCardForm: React.FC = () => {
   const navigate = useNavigate();
 
   const [addPetCard, { isLoading, error: errorMessage }] =
-    petModel.api.useAddPetCardMutation();
-  // const { data: petTypes = [], isLoading: petTypesLoading } =
-  //   petModel.api.useGetPetTypesQuery();
-
+    petModel.useAddPetCardMutation();
+  const { data: petTypes = [], isLoading: petTypesLoading } =
+    petModel.useGetPetTypesQuery();
+  const textSubmitButton = isLoading ? t("loading") : t("create");
+  const onSubmit = async (data) => {};
   const formData = useAppSelector((state) => state.pets.data);
   const { control, handleSubmit, register, getValues, setValue, watch } =
     useForm({
@@ -63,7 +68,7 @@ export const PetCardForm: React.FC = () => {
     if (step === 1) {
       navigate(MAIN_ROUTE);
     } else {
-      dispatch(petModel.slice.prevStep());
+      dispatch(petModel.prevStep());
     }
   };
   const handleSave = () => {
@@ -73,10 +78,10 @@ export const PetCardForm: React.FC = () => {
   };
 
   const handleNext = () => {
-    dispatch(petModel.slice.nextStep());
+    dispatch(petModel.nextStep());
   };
   const onChangeForm = (data: any) => {
-    dispatch(petModel.slice.setFormData(data));
+    dispatch(petModel.setFormData(data));
 
     handleNext();
   };

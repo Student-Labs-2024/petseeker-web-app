@@ -1,7 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import * as petModel from "../index";
-import { AnnouncmentType } from "./type"; // Импортируем тип
-const initialState: petModel.type.PetState = {
+import { petModel } from "../index";
+const initialState: petModel.PetState = {
   pets: [],
   loading: false,
   error: null,
@@ -30,13 +29,13 @@ const petsSlice = createSlice({
     setFormData(state, action: PayloadAction<Record<string, any>>) {
       state.data = { ...state.data, ...action.payload };
     },
-    setAnnouncmentType(state, action: PayloadAction<AnnouncmentType>) {
+    setAnnouncmentType(state, action: PayloadAction<petModel.AnnouncmentType>) {
       state.announcmentType = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchPending,
+      petModel.petsApi.endpoints.getPets.matchPending,
       (state) => ({
         ...state,
         loading: true,
@@ -44,15 +43,15 @@ const petsSlice = createSlice({
       })
     );
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchFulfilled,
-      (state, action: PayloadAction<petModel.type.Pet[]>) => ({
+      petModel.petsApi.endpoints.getPets.matchFulfilled,
+      (state, action: PayloadAction<petModel.Pet[]>) => ({
         ...state,
         pets: action.payload,
         loading: false,
       })
     );
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchRejected,
+      petModel.petsApi.endpoints.getPets.matchRejected,
       (state, action) => ({
         ...state,
         error: action.error.message || "Failed to fetch cards",
@@ -69,4 +68,5 @@ export const {
   setFormData,
   setAnnouncmentType,
 } = petsSlice.actions;
-export default petsSlice.reducer;
+
+export const petsReducer = petsSlice.reducer;

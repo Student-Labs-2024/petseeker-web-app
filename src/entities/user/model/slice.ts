@@ -3,11 +3,11 @@ import { jwtDecode } from "jwt-decode";
 import { UserState } from "./type";
 
 export const initialState: UserState = {
-  token: "fakeToken",
+  token: undefined,
   user: null,
-  phoneNumber: "",
-  name: "",
-  code: "",
+  phoneNumber: undefined,
+  name: undefined,
+  code: undefined,
   isConfirm: false,
 };
 
@@ -46,4 +46,5 @@ export const {
   setCode,
   setIsConfirm,
 } = userSlice.actions;
-export default userSlice.reducer;
+
+export const userReducer = userSlice.reducer;
