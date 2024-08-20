@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import * as petModel from "@entities/pet/";
+import { petModel } from "@entities/pet/";
 import { Input } from "@/shared/ui/input";
 import { TextArea } from "@shared/ui/textArea";
 import { Select } from "@shared/ui/select";
@@ -14,9 +14,9 @@ export const PetCardForm: React.FC = () => {
 
   const { register, handleSubmit } = useForm<PetCardFormType>();
   const [addPetCard, { isLoading, error: errorMessage }] =
-    petModel.api.useAddPetCardMutation();
+    petModel.useAddPetCardMutation();
   const { data: petTypes = [], isLoading: petTypesLoading } =
-    petModel.api.useGetPetTypesQuery();
+    petModel.useGetPetTypesQuery();
   const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit: SubmitHandler<PetCardFormType> = async (data) => {
     const formData = new FormData();

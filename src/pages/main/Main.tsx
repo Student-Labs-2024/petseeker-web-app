@@ -5,9 +5,9 @@ import { MainContainer } from "@shared/ui/mainContainer";
 import { SearchPet } from "@features/pet/searchPet";
 import { Navbar } from "@/widgets/navbar";
 import { FilterPets } from "@features/pet/filterPets";
-import * as petModel from "@entities/pet";
+import { petModel } from "@entities/pet/";
 export const Main: React.FC = () => {
-  const { data: pets, isLoading, isError } = petModel.api.useGetPetsQuery();
+  const { data: pets, isLoading, isError } = petModel.useGetPetsQuery();
 
   const petData = pets?.results || [];
 

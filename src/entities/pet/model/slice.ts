@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import * as petModel from "../index";
-const initialState: petModel.type.PetState = {
+import { petModel } from "../index";
+const initialState: petModel.PetState = {
   pets: [],
   loading: false,
   error: null,
@@ -17,7 +17,7 @@ const petsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchPending,
+      petModel.petsApi.endpoints.getPets.matchPending,
       (state) => ({
         ...state,
         loading: true,
@@ -25,15 +25,15 @@ const petsSlice = createSlice({
       })
     );
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchFulfilled,
-      (state, action: PayloadAction<petModel.type.Pet[]>) => ({
+      petModel.petsApi.endpoints.getPets.matchFulfilled,
+      (state, action: PayloadAction<petModel.Pet[]>) => ({
         ...state,
         pets: action.payload,
         loading: false,
       })
     );
     builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchRejected,
+      petModel.petsApi.endpoints.getPets.matchRejected,
       (state, action) => ({
         ...state,
         error: action.error.message || "Failed to fetch cards",

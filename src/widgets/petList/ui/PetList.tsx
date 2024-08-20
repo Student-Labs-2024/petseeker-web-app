@@ -1,10 +1,10 @@
 import React from "react";
-import * as petModel from "@entities/pet";
+import { petModel, PetCard } from "@entities/pet/";
 import styles from "./card.module.scss";
 import { match } from "ts-pattern";
 
 type PetListProps = {
-  pets: petModel.type.Pet[];
+  pets: petModel.Pet[];
   isLoading: boolean;
   isError: boolean;
   error?: string;
@@ -23,8 +23,8 @@ export const PetList: React.FC<PetListProps> = ({
         .with({ pets: { length: 0 } }, () => <p>No pets available.</p>)
         .otherwise(() => (
           <div className={styles.card__list_container}>
-            {pets?.map((pet: petModel.type.Pet) => (
-              <petModel.PetCard key={pet.id} description={pet} />
+            {pets?.map((pet: petModel.Pet) => (
+              <PetCard key={pet.id} description={pet} />
             ))}
           </div>
         ))}

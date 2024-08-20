@@ -1,16 +1,19 @@
 import { baseApi } from "@shared/api";
-import { type } from "../index";
+import { userModel } from "../index";
 
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation<type.LoginResponse, type.LoginRequest>({
+    login: builder.mutation<userModel.LoginResponse, userModel.LoginRequest>({
       query: (body) => ({
         url: "/api/sms-verification/create/",
         method: "POST",
         body,
       }),
     }),
-    confirm: builder.mutation<type.ConfirmResponse, type.ConfirmRequest>({
+    confirm: builder.mutation<
+      userModel.ConfirmResponse,
+      userModel.ConfirmRequest
+    >({
       query: (body) => ({
         url: "/api/sms-verification/auth/",
         method: "POST",
