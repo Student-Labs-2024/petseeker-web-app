@@ -19,7 +19,6 @@ export const EditUser: React.FC = () => {
     // formData.append("is_shelter_owner", data.contacts);
     try {
       const response = await editUser(formData).unwrap();
-      console.log(response);
     } catch (error) {
       console.error(error);
     }
