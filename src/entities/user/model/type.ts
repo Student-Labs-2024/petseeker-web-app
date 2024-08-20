@@ -3,12 +3,12 @@ export type User = {
   phoneNumber: string;
 };
 export type UserState = {
-  token: string | null;
   user: User | null;
   phoneNumber: string;
   name: string;
   code: string;
   isConfirm: boolean;
+  auth: boolean | null;
 };
 
 export type LoginResponse = {

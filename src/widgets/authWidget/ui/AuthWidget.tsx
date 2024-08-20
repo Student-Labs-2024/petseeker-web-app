@@ -17,6 +17,7 @@ import { Text } from "@shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
+import * as userModel from "@/entities/user/index";
 
 export const AuthWidget: React.FC = () => {
   const { t } = useTranslation("authWidget");
@@ -53,6 +54,7 @@ export const AuthWidget: React.FC = () => {
       }).unwrap();
 
       if (response.message) {
+        dispatch(userModel.slice.setAuthenticated(true));
         navigate(PROFILE);
       }
     } catch (err) {

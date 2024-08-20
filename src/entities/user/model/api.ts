@@ -27,11 +27,15 @@ export const userApi = baseApi.injectEndpoints({
         body,
       }),
     }),
-    // me: builder.query<ConfirmResponse,void>({
-    //   query: () => "/api/user/me/",
-    // }),
+    getMe: builder.query<type.ConfirmResponse, void>({
+      query: () => "/api/user/me/",
+    }),
   }),
 });
 
-export const { useLoginMutation, useConfirmMutation, useEditUserMutation } =
-  userApi;
+export const {
+  useLoginMutation,
+  useConfirmMutation,
+  useEditUserMutation,
+  useGetMeQuery,
+} = userApi;
