@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import React from "react";
+import { petModel } from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -10,26 +10,43 @@ import { useAppSelector, useAppDispatch } from "@/shared/hooks";
 import { TextArea } from "@/shared/ui/textArea";
 import { ReactComponent as ImageIcon } from "@shared/assets/image_icon.svg";
 import { InfoFormProps } from "../model/type";
+import editIcon from "@shared/assets/edit_icon.svg";
 
 type FormData = {
-  imageFiles: FileList;
+  imageFiles: FileList | null;
 };
+
 export const ImagesForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
 }) => {
-  const { control, handleSubmit, reset } = useForm<FormData>();
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
-
+  const storedImages = useAppSelector((state) => state.pets.images);
+  const previewUrl = useAppSelector((state) => state.pets.previewUrl);
+  const { control, handleSubmit, reset } = useForm<FormData>({
+    defaultValues: {
+      imageFiles:
+        storedImages.length > 0 ? (storedImages as unknown as FileList) : null,
+    },
+  });
   const dispatch = useAppDispatch();
 
-  const handleImageSave = (data: FormData) => {
-    const filesArray = Array.from(data.imageFiles);
-    dispatch(petModel.slice.addImages(filesArray));
-    setPreviewUrl(URL.createObjectURL(filesArray[0]));
-    handleNext();
+  const handleImageSave = (files: FileList) => {
+    const filesArray = Array.from(files);
+    dispatch(petModel.addImages(filesArray));
+    if (filesArray.length > 0) {
+      const preview = URL.createObjectURL(filesArray[0]);
+      dispatch(petModel.setPreviewUrl(preview));
+    }
   };
-
+  const handleFileChange = (
+    e: React.ChangeEvent<HTMLInputElement>,
+    onChange: (files: FileList | null) => void
+  ) => {
+    if (e.target.files && e.target.files.length > 0) {
+      handleImageSave(e.target.files);
+      onChange(e.target.files);
+    }
+  };
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -39,41 +56,46 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
       <Text color="dark" myClass="btn">
         не более 10 изображений
       </Text>
-      <form onSubmit={handleSubmit(handleImageSave)} className={styles.form}>
+      <form onSubmit={handleSubmit(handleNext)} className={styles.form}>
         <div className={styles.form__item}>
-          <label className={styles.upload_image}>
-            <ImageIcon />
-            <Text color="gray">Выбрать изображение</Text>
-            <Controller
-              name="imageFiles"
-              control={control}
-              defaultValue={null}
-              render={({ field: { onChange, ref, disabled } }) => (
-                <input
-                  type="file"
-                  multiple
-                  disabled={disabled}
-                  ref={ref}
-                  onChange={(e) => {
-                    onChange(e.target.files);
-                    if (e.target.files && e.target.files.length > 0) {
-                      setPreviewUrl(URL.createObjectURL(e.target.files[0]));
-                    }
-                  }}
+          <div className={styles.images_container}>
+            <div className={styles.form__preview}>
+              <div className={styles.text_container}>
+                <Text color="white" myClass="small_bold">
+                  Главная
+                </Text>
+              </div>
+
+              {previewUrl && (
+                <img
+                  className={styles.preview_image}
+                  src={previewUrl}
+                  alt="Preview"
                 />
               )}
-            />
-          </label>
-          {previewUrl && (
-            <div>
-              <h3>Предварительный просмотр первой фотографии:</h3>
-              <img
-                src={previewUrl}
-                alt="Preview"
-                style={{ maxWidth: "100%", height: "auto" }}
-              />
+              <button className={styles.edit_btn}>
+                <img src={editIcon} alt="" />
+              </button>
             </div>
-          )}
+
+            <label className={styles.upload_image}>
+              <ImageIcon />
+              <Text color="gray">Выбрать изображение</Text>
+              <Controller
+                name="imageFiles"
+                control={control}
+                render={({ field: { onChange, ref, disabled } }) => (
+                  <input
+                    type="file"
+                    multiple
+                    disabled={disabled}
+                    ref={ref}
+                    onChange={(e) => handleFileChange(e, onChange)}
+                  />
+                )}
+              />
+            </label>
+          </div>
         </div>
         <div className={styles.bottom}>
           <Button type="submit">Далее</Button>

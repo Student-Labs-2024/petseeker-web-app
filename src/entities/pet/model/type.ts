@@ -51,6 +51,7 @@ export type PetState = {
   images: File[];
   ids: number[];
   favoriteFilters: Record<string, any>;
+  previewUrl: string;
 };
 export const announcmentValues = {
   private: "private",

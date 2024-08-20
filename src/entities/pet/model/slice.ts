@@ -25,6 +25,8 @@ const initialState: petModel.PetState = {
   data: {},
   favoriteFilters: {},
   ids: [],
+  images: [],
+  previewUrl: "",
 };
 
 const petsSlice = createSlice({
@@ -87,6 +89,10 @@ const petsSlice = createSlice({
     addImages: (state, action: PayloadAction<File[]>) => {
       state.images = action.payload;
     },
+
+    setPreviewUrl: (state, action: PayloadAction<string>) => {
+      state.previewUrl = action.payload;
+    },
     clearImages: (state) => {
       state.images = [];
     },
@@ -145,6 +151,7 @@ export const {
   setFavoriteFilters,
   removeFavorite,
   addFavorites,
+  setPreviewUrl,
 } = petsSlice.actions;
 
 export const petsReducer = petsSlice.reducer;
