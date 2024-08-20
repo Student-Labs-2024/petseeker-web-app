@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import { userModel } from "@entities/user/";
+import { userModel } from "@entities/user";
 
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
@@ -17,7 +17,6 @@ import { Text } from "@shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
-import * as userModel from "@/entities/user/index";
 
 export const AuthWidget: React.FC = () => {
   const { t } = useTranslation("authWidget");
@@ -54,7 +53,7 @@ export const AuthWidget: React.FC = () => {
       }).unwrap();
 
       if (response.message) {
-        dispatch(userModel.slice.setAuthenticated(true));
+        dispatch(userModel.setAuthenticated(true));
         navigate(PROFILE);
       }
     } catch (err) {
