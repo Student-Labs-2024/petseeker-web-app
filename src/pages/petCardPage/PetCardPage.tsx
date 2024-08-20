@@ -6,7 +6,6 @@ import { MainContainer } from "@shared/ui/mainContainer";
 import { Button } from "@shared/ui/button";
 import { ADD_PET_CARD } from "@app/router/consts";
 import { Navbar } from "@/widgets/navbar";
-
 import { PetCardDetail } from "@widgets/petCardDetail/ui/PetCardDetail";
 
 export const PetCardPage: React.FC = () => {
