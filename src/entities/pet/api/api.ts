@@ -15,7 +15,7 @@ export const petsApi = baseApi.injectEndpoints({
     }),
     getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
       query: (params) => {
-        const queryString = `/api/shelter-announcement/detail/  ${params.id}  /`;
+        const queryString = `/api/shelter-announcement/detail/${params.id}/`;
         return queryString;
       },
     }),
