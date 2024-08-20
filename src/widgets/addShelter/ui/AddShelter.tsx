@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import * as shelterModel from "@entities/shelter/";
+import { shelterModel } from "@entities/shelter/";
 import { Button } from "@shared/ui/button";
 import styles from "./addShelter.module.scss";
 import { Input } from "@/shared/ui/input";
@@ -11,7 +11,7 @@ import { AddShelterFormType } from "../model/addShelterType";
 export const AddShelter: React.FC = () => {
   const { register, handleSubmit } = useForm<AddShelterFormType>();
   const { t } = useTranslation("AddShelter");
-  const [addShelter, { isLoading }] = shelterModel.api.useAddShelterMutation();
+  const [addShelter, { isLoading }] = shelterModel.useAddShelterMutation();
   const onSubmit: SubmitHandler<AddShelterFormType> = async (data) => {
     const formData = new FormData();
     formData.append("name", data.name);

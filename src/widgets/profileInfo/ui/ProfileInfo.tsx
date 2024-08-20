@@ -1,5 +1,5 @@
 import React from "react";
-import * as userModel from "@entities/user";
+import { userModel } from "@entities/user";
 import styles from "./profileInfo.module.scss";
 import { match } from "ts-pattern";
 import { Text } from "@shared/ui/text";
@@ -26,7 +26,7 @@ export const ProfileInfo: React.FC = () => {
     isLoading,
     isError,
     error,
-  } = userModel.api.useGetMeQuery();
+  } = userModel.useGetMeQuery();
 
   return (
     <>

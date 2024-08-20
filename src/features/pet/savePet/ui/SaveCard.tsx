@@ -18,11 +18,11 @@ export const SaveCard: React.FC<SaveButtonProps> = ({ id, isSaved }) => {
     try {
       event.preventDefault();
       if (isSaved) {
-        const response = await deleteFavorite(id).unwrap();
         dispatch(petModel.removeFavorite(id));
+        const response = await deleteFavorite(id).unwrap();
       } else {
-        const response = await saveFavorite(id).unwrap();
         dispatch(petModel.addFavorites(id));
+        const response = await saveFavorite(id).unwrap();
       }
     } catch (error) {
       console.error(error);

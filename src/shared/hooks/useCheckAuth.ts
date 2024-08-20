@@ -1,16 +1,16 @@
 import { useEffect } from "react";
-import * as userModel from "@/entities/user/index";
+import { userModel } from "@/entities/user/index";
 import { useAppDispatch } from "@shared/hooks";
 
 const useAuthCheck = () => {
   const dispatch = useAppDispatch();
-  const { data, error, isLoading } = userModel.api.useGetMeQuery();
+  const { data, error, isLoading } = userModel.useGetMeQuery();
 
   useEffect(() => {
     if (data && !isLoading && !error) {
-      dispatch(userModel.slice.setAuthenticated(true));
+      dispatch(userModel.setAuthenticated(true));
     } else if (error) {
-      dispatch(userModel.slice.setAuthenticated(false));
+      dispatch(userModel.setAuthenticated(false));
     }
   }, [data, error, isLoading, dispatch]);
 

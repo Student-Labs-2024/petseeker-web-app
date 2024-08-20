@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -25,7 +25,7 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
 
   const handleImageSave = (data: FormData) => {
     const filesArray = Array.from(data.imageFiles);
-    dispatch(petModel.slice.addImages(filesArray));
+    dispatch(petModel.addImages(filesArray));
     setPreviewUrl(URL.createObjectURL(filesArray[0]));
     handleNext();
   };

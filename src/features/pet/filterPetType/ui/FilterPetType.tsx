@@ -3,16 +3,14 @@ import styles from "./filterPetType.module.scss";
 import { ReactComponent as CircleIcon } from "@shared/assets/circle.svg";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { Button } from "@/shared/ui/button";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/index";
 import { buttonsData } from "@shared/constants/filterPetsConsts";
 export const FilterPetType: React.FC = () => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.pets.favoriteFilters);
   const handleFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
-    dispatch(
-      petModel.slice.setFavoriteFilters({ [target.name]: target.value })
-    );
+    dispatch(petModel.setFavoriteFilters({ [target.name]: target.value }));
   };
 
   return (

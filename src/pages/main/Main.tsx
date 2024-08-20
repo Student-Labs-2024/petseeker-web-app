@@ -7,13 +7,14 @@ import { Button } from "@shared/ui/button";
 import { ADD_PET_CARD } from "@app/router/consts";
 import { Navbar } from "@/widgets/navbar";
 import { FilterPets } from "@features/pet/filterPets";
-import { petModel } from "@entities/pet/";
+import * as petModel from "@entities/pet";
 export const Main: React.FC = () => {
   const navigate = useNavigate();
 
   return (
     <>
       <MainContainer>
+        <SearchPet></SearchPet>
         <FilterPets></FilterPets>
         <PetList />
       </MainContainer>

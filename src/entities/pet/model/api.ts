@@ -5,12 +5,12 @@ import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импо�
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<
-      petModel.type.Pet[],
+      petModel.Pet[],
       { pet_type?: string; male?: string }
     >({
       query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
-    getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
+    getPetDetail: builder.query<petModel.PetDetail, { id: string }>({
       query: (params) =>
         buildQueryString(`/api/shelter-announcement/detail/${params.id}/`),
     }),
@@ -40,11 +40,11 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<petModel.type.Pet[], { pet_type?: string }>({
+    getFavorites: builder.query<petModel.Pet[], { pet_type?: string }>({
       query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),
-    uploadImage: builder.mutation<string, petModel.type.UploadImageRequest>({
+    uploadImage: builder.mutation<string, petModel.UploadImageRequest>({
       query: ({ id, formData }) => ({
         url: `/api/image-loader/load/private-announcement/${id}/`,
         method: "POST",
