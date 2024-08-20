@@ -1,6 +1,6 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
-import * as shelterModel from "@entities/shelter/index";
+import * as shelterModel from "@entities/shelter/";
 import { Button } from "@shared/ui/button";
 import styles from "./addShelter.module.scss";
 import { Input } from "@/shared/ui/input";

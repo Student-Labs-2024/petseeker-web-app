@@ -1,5 +1,5 @@
 import React from "react";
-import * as petModel from "@entities/pet/index";
+import * as petModel from "@entities/pet/";
 import { Button } from "@shared/ui/button";
 type SaveButtonProps = {
   id: string;

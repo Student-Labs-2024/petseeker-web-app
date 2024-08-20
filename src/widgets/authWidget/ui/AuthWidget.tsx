@@ -1,6 +1,6 @@
 import React, { ChangeEvent } from "react";
 import { useTranslation } from "react-i18next";
-import * as petModel from "@entities/user/index";
+import * as petModel from "@entities/user/";
 
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 

@@ -43,4 +43,4 @@ const petsSlice = createSlice({
   },
 });
 export const { setActiveButton } = petsSlice.actions;
-export default petsSlice.reducer;
+export const petsReducer = petsSlice.reducer;

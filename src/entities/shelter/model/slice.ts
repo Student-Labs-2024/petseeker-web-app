@@ -17,4 +17,4 @@ const shelterSlice = createSlice({
 });
 
 export const { setName } = shelterSlice.actions;
-export default shelterSlice.reducer;
+export const shelterReducer = shelterSlice.reducer;

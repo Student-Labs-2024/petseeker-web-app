@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
-import * as petModel from "@entities/pet/index";
+import * as petModel from "@entities/pet/";
 import { Input } from "@/shared/ui/input";
 import { TextArea } from "@shared/ui/textArea";
 import { Select } from "@shared/ui/select";
