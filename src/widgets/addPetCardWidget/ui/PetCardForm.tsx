@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { petModel } from "@entities/pet";
 import { Input } from "@/shared/ui/input";
@@ -25,6 +25,7 @@ import { CharacteristicForm4 } from "./CharacteristicForm4";
 import { DescriptionForm } from "./DescriptionForm";
 import { ImagesForm } from "./ImagesForm";
 import { AddressForm } from "./AddressForm";
+
 export const PetCardForm: React.FC = () => {
   const { t } = useTranslation("petCardForm");
   const step = useAppSelector((state) => state.pets.step);
@@ -43,8 +44,9 @@ export const PetCardForm: React.FC = () => {
   const [uploadImage, { isLoading: isUploadImageLoading }] =
     petModel.useUploadImageMutation();
   const formData = useAppSelector((state) => state.pets.data);
-  const { control, handleSubmit, register, getValues, setValue, watch } =
-    useForm<petModel.FormDataType>({
+
+  const { control, handleSubmit, register, getValues, setValue, watch, reset } =
+    useForm({
       defaultValues: {
         pet_type: formData.pet_type,
         name: formData.name,
@@ -59,6 +61,7 @@ export const PetCardForm: React.FC = () => {
         // health_issues: formData.health_issues,
         vaccinations: formData.vaccinations,
         address: formData.address,
+
         description: formData.description,
         //временно
         status: "Нашел",
@@ -70,7 +73,15 @@ export const PetCardForm: React.FC = () => {
         health_issues: "string",
       },
     });
-
+  useEffect(() => {
+    const savedAnnouncmentFormData = JSON.parse(
+      localStorage.getItem("announcmentFormData") || "{}"
+    );
+    dispatch(petModel.setFormData(savedAnnouncmentFormData));
+  }, []);
+  useEffect(() => {
+    reset(formData);
+  }, [formData]);
   const handleBack = () => {
     if (step === 1) {
       navigate(MAIN_ROUTE);

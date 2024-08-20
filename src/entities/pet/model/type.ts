@@ -44,6 +44,9 @@ export type PetState = {
   openFilters: boolean;
   step: number;
   data: Record<string, any>;
+  historySearch: string[];
+  searchOnFocus: boolean;
+  filters: Record<string, any>;
   announcmentType: AnnouncmentType;
   images: File[];
 };
@@ -82,4 +85,14 @@ export type FormDataType = {
   color: string;
   state: string;
   health_issues: string;
+};
+
+export type FilterState = {
+  pet_type: "";
+  male: "";
+  age: "";
+  fatness: "";
+  health__issues: "";
+  wool_type: "";
+  allergenicity: "";
 };

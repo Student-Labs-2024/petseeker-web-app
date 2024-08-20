@@ -1,39 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import { useAppDispatch, useAppSelector } from "@/shared/hooks"; // Хуки для работы с Redux
 import * as petModel from "@entities/pet/index";
 import { Button } from "@shared/ui/button";
 import styles from "./detailFilterPets.module.scss";
-import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import { ReactComponent as Close } from "@shared/assets/close_icon.svg";
-import { useAppDispatch } from "@/shared/hooks";
 import { pluralize } from "numeralize-ru";
+
 export const DetailFilterPets: React.FC = () => {
-  const [announcementWord, setAnnouncementWord] = useState({
-    one: "объявление",
-    two: "объявления",
-    five: "объявлений",
-  });
-
   const dispatch = useAppDispatch();
-  const [filters, setFilters] = useState({
-    pet_type: "",
-    male: "",
-  });
+  const filters = useAppSelector((state) => state.pets.filters);
 
-  const [trigger, { data: animals, isFetching }] =
-    petModel.api.useLazyGetPetsQuery();
-
-  useEffect(() => {
-    trigger(filters);
-  }, []);
+  const { data: animals } = petModel.api.useGetPetsQuery(filters);
 
   const handleFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
-    setFilters((prevState) => {
-      const newState = { ...prevState, [target.name]: target.value };
-      trigger(newState);
-      return newState;
-    });
+    dispatch(petModel.slice.setFilters({ [target.name]: target.value }));
   };
 
   const handleCloseFilters = () => {
@@ -41,23 +23,11 @@ export const DetailFilterPets: React.FC = () => {
   };
 
   const handleResetFilters = () => {
-    setFilters(() => {
-      const newState = {
-        pet_type: "",
-        male: "",
-      };
-      trigger(newState);
-      return newState;
-    });
+    dispatch(petModel.slice.resetFilters());
   };
 
   const getDeclinedAnnouncementWord = (number: number) => {
-    return pluralize(
-      number,
-      announcementWord.one,
-      announcementWord.two,
-      announcementWord.five
-    );
+    return pluralize(number, "объявление", "объявления", "объявлений");
   };
 
   return (
@@ -145,7 +115,7 @@ export const DetailFilterPets: React.FC = () => {
                 <Button
                   isSmall={true}
                   isDefault={"male" !== filters.male}
-                  name="male"
+                  name="age"
                   value="male"
                   onClick={handleFilter}
                 >
@@ -156,7 +126,7 @@ export const DetailFilterPets: React.FC = () => {
                 <Button
                   isSmall={true}
                   isDefault={"female" !== filters.male}
-                  name="male"
+                  name="age"
                   value="female"
                   onClick={handleFilter}
                 >
@@ -167,7 +137,7 @@ export const DetailFilterPets: React.FC = () => {
                 <Button
                   isSmall={true}
                   isDefault={"female" !== filters.male}
-                  name="male"
+                  name="age"
                   value="female"
                   onClick={handleFilter}
                 >
@@ -178,7 +148,7 @@ export const DetailFilterPets: React.FC = () => {
                 <Button
                   isSmall={true}
                   isDefault={"female" !== filters.male}
-                  name="male"
+                  name="age"
                   value="female"
                   onClick={handleFilter}
                 >
@@ -195,12 +165,12 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"male" !== filters.male}
+                  isDefault={"female" !== filters.male}
                   name="male"
-                  value="male"
+                  value="female"
                   onClick={handleFilter}
                 >
-                  Стерелизация
+                  Здоровый
                 </Button>
               </div>
               <div className={styles.filter__button}>
@@ -214,11 +184,95 @@ export const DetailFilterPets: React.FC = () => {
                   Прививки
                 </Button>
               </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"male" !== filters.male}
+                  name="male"
+                  value="male"
+                  onClick={handleFilter}
+                >
+                  Стерелизация
+                </Button>
+              </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"male" !== filters.male}
+                  name="male"
+                  value="male"
+                  onClick={handleFilter}
+                >
+                  Нуждается в лечении
+                </Button>
+              </div>
             </div>
           </div>
           <div className={styles.filter__item}>
             <Text myClass="label" color="gray">
-              Характер
+              Тип шерсти
+            </Text>
+            <div className={styles.filter__buttons}>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"female" !== filters.male}
+                  name="male"
+                  value="female"
+                  onClick={handleFilter}
+                >
+                  Длинная
+                </Button>
+              </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"female" !== filters.male}
+                  name="male"
+                  value="female"
+                  onClick={handleFilter}
+                >
+                  Короткая
+                </Button>
+              </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"male" !== filters.male}
+                  name="male"
+                  value="male"
+                  onClick={handleFilter}
+                >
+                  Пушистая
+                </Button>
+              </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"male" !== filters.male}
+                  name="male"
+                  value="male"
+                  onClick={handleFilter}
+                >
+                  Жесткая
+                </Button>
+              </div>
+              <div className={styles.filter__button}>
+                <Button
+                  isSmall={true}
+                  isDefault={"male" !== filters.male}
+                  name="male"
+                  value="male"
+                  onClick={handleFilter}
+                >
+                  Бесшерстная
+                </Button>
+              </div>
+            </div>
+          </div>
+          <div className={styles.filter__item}>
+            <Text myClass="label" color="gray">
+              Алергенность
             </Text>
             <div className={styles.filter__buttons}>
               <div className={styles.filter__button}>
@@ -229,7 +283,7 @@ export const DetailFilterPets: React.FC = () => {
                   value="male"
                   onClick={handleFilter}
                 >
-                  Активный
+                  Есть
                 </Button>
               </div>
               <div className={styles.filter__button}>
@@ -240,34 +294,13 @@ export const DetailFilterPets: React.FC = () => {
                   value="female"
                   onClick={handleFilter}
                 >
-                  Спокойный
-                </Button>
-              </div>
-              <div className={styles.filter__button}>
-                <Button
-                  isSmall={true}
-                  isDefault={"female" !== filters.male}
-                  name="male"
-                  value="female"
-                  onClick={handleFilter}
-                >
-                  Добрый
-                </Button>
-              </div>
-              <div className={styles.filter__button}>
-                <Button
-                  isSmall={true}
-                  isDefault={"female" !== filters.male}
-                  name="male"
-                  value="female"
-                  onClick={handleFilter}
-                >
-                  Независимый
+                  Нет
                 </Button>
               </div>
             </div>
           </div>
         </div>
+
         <div className={styles.container}>
           <div className={styles.search__btn}>
             <Button onClick={handleCloseFilters}>
