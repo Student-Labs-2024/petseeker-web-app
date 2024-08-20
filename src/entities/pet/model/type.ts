@@ -60,3 +60,26 @@ export type UploadImageRequest = {
   id: string;
   formData: FormData;
 };
+
+export type FormDataType = {
+  pet_type: string;
+  name: string;
+  gender: string;
+  allergenicity: string;
+  fatness: string;
+  weight: string;
+  breed: string;
+  age: string;
+  wool_type: string;
+  sterilization: string;
+  vaccinations: string;
+  address: string;
+  description: string;
+  status: string;
+  dimmensions: string;
+  weigth: string;
+  contacts: string;
+  color: string;
+  state: string;
+  health_issues: string;
+};

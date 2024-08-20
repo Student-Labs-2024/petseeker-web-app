@@ -35,7 +35,7 @@ export const PetCardForm: React.FC = () => {
     petModel.api.useUploadImageMutation();
   const formData = useAppSelector((state) => state.pets.data);
   const { control, handleSubmit, register, getValues, setValue, watch } =
-    useForm({
+    useForm<petModel.type.FormDataType>({
       defaultValues: {
         pet_type: formData.pet_type,
         name: formData.name,
@@ -78,7 +78,7 @@ export const PetCardForm: React.FC = () => {
   const handleNext = () => {
     dispatch(petModel.slice.nextStep());
   };
-  const onChangeForm = (data: any) => {
+  const onChangeForm: SubmitHandler<petModel.type.FormDataType> = (data) => {
     dispatch(petModel.slice.setFormData(data));
 
     handleNext();

@@ -27,7 +27,6 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
     const filesArray = Array.from(data.imageFiles);
     dispatch(petModel.slice.addImages(filesArray));
     setPreviewUrl(URL.createObjectURL(filesArray[0]));
-    console.log(filesArray);
     handleNext();
   };
 
