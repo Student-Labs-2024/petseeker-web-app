@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import * as petModel from "@entities/pet/index";
 
@@ -21,19 +21,20 @@ import { CharacteristicForm4 } from "./CharacteristicForm4";
 import { DescriptionForm } from "./DescriptionForm";
 import { ImagesForm } from "./ImagesForm";
 import { AddressForm } from "./AddressForm";
+
 export const PetCardForm: React.FC = () => {
   const { t } = useTranslation("petCardForm");
   const step = useAppSelector((state) => state.pets.step);
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
   const [addPetCard, { isLoading, error: errorMessage }] =
     petModel.api.useAddPetCardMutation();
   // const { data: petTypes = [], isLoading: petTypesLoading } =
   //   petModel.api.useGetPetTypesQuery();
 
   const formData = useAppSelector((state) => state.pets.data);
-  const { control, handleSubmit, register, getValues, setValue, watch } =
+
+  const { control, handleSubmit, register, getValues, setValue, watch, reset } =
     useForm({
       defaultValues: {
         pet_type: formData.pet_type,
@@ -49,6 +50,7 @@ export const PetCardForm: React.FC = () => {
         health_issues: formData.health_issues,
         vaccinations: formData.vaccinations,
         address: formData.address,
+
         description: formData.description,
         //временно
         status: "Нашел",
@@ -58,7 +60,15 @@ export const PetCardForm: React.FC = () => {
         color: "0",
       },
     });
-
+  useEffect(() => {
+    const savedAnnouncmentFormData = JSON.parse(
+      localStorage.getItem("announcmentFormData") || "{}"
+    );
+    dispatch(petModel.slice.setFormData(savedAnnouncmentFormData));
+  }, []);
+  useEffect(() => {
+    reset(formData);
+  }, [formData]);
   const handleBack = () => {
     if (step === 1) {
       navigate(MAIN_ROUTE);

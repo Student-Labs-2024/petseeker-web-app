@@ -3,13 +3,13 @@ import * as petModel from "../index";
 import { AnnouncmentType } from "./type"; // Импортируем тип
 
 const initialFilterState: petModel.type.FilterState = {
-  pet_type: "",
-  male: "",
-  age: "",
-  fatness: "",
-  health__issues: "",
-  wool_type: "",
-  allergenicity: "",
+  pet_type: undefined,
+  male: undefined,
+  age: undefined,
+  fatness: undefined,
+  health__issues: undefined,
+  wool_type: undefined,
+  allergenicity: undefined,
 };
 const initialState: petModel.type.PetState = {
   pets: [],
@@ -18,11 +18,11 @@ const initialState: petModel.type.PetState = {
   activeButton: "1",
   openFilters: false,
   filters: initialFilterState,
-  historySearch: JSON.parse(localStorage.getItem("historySearch")) || [],
+  historySearch: [],
   searchOnFocus: false,
   step: 1,
   announcmentType: "private",
-  data: JSON.parse(localStorage.getItem("announcmentFormData")) || {},
+  data: {},
 };
 const petsSlice = createSlice({
   name: "pets",
@@ -37,14 +37,20 @@ const petsSlice = createSlice({
     setSearchOnFocus(state, action: PayloadAction<boolean>) {
       state.searchOnFocus = action.payload;
     },
-    setFilters(state, action: PayloadAction<Partial<FilterState>>) {
+    setFilters(
+      state,
+      action: PayloadAction<Partial<petModel.type.FilterState>>
+    ) {
       state.filters = {
         ...state.filters,
         ...action.payload,
       };
     },
     setHistorySearch(state, action: PayloadAction<string>) {
-      if (!state.historySearch.includes(action.payload)) {
+      if (
+        !state.historySearch.includes(action.payload) &&
+        action.payload !== ""
+      ) {
         state.historySearch.push(action.payload);
       }
 
@@ -52,6 +58,9 @@ const petsSlice = createSlice({
         "historySearch",
         JSON.stringify(state.historySearch)
       );
+    },
+    loadHistoryFromStorage(state, action: PayloadAction<string[]>) {
+      state.historySearch = action.payload;
     },
     resetFilters(state) {
       state.filters = initialState.filters;
@@ -108,5 +117,6 @@ export const {
   setAnnouncmentType,
   setHistorySearch,
   setSearchOnFocus,
+  loadHistoryFromStorage,
 } = petsSlice.actions;
 export default petsSlice.reducer;

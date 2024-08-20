@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import * as petModel from "@entities/pet/index";
 
@@ -25,12 +25,18 @@ export const SearchPet: React.FC = () => {
         pet_type: "",
       },
     });
-  watch("pet_type");
+  const petTypeData = watch("pet_type");
   const history = useAppSelector((state) => state.pets.historySearch);
   const filters = useAppSelector((state) => state.pets.filters);
   petModel.api.useGetPetsQuery(filters);
-
   const searchValue = getValues("pet_type");
+
+  useEffect(() => {
+    const savedHistory = JSON.parse(
+      localStorage.getItem("historySearch") || "[]"
+    );
+    dispatch(petModel.slice.loadHistoryFromStorage(savedHistory));
+  }, []);
   const handleOpenFilters = () => {
     dispatch(petModel.slice.setOpenFilters(true));
   };
@@ -38,6 +44,7 @@ export const SearchPet: React.FC = () => {
   const onSubmit = (data: FormValues) => {
     dispatch(petModel.slice.setFilters({ pet_type: data.pet_type }));
     dispatch(petModel.slice.setHistorySearch(data.pet_type));
+
     dispatch(petModel.slice.setSearchOnFocus(false));
   };
 
@@ -51,7 +58,7 @@ export const SearchPet: React.FC = () => {
     dispatch(petModel.slice.setFilters({ pet_type: "" }));
   };
   const filteredHistory = history.filter((option) =>
-    option.toLowerCase().includes(searchValue?.toLowerCase())
+    option?.toLowerCase().includes(searchValue?.toLowerCase())
   );
 
   const handleOptionClick = async (option: string) => {
@@ -110,7 +117,7 @@ export const SearchPet: React.FC = () => {
         </div>
         {isSearchOnFocus && (
           <div className={styles.option__list}>
-            {filteredHistory.map((option) => (
+            {filteredHistory?.map((option) => (
               <button
                 key={option}
                 className={classNames(styles.option, {
