@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import * as petModel from "@entities/pet";
+import { petModel, PetCard } from "@entities/pet";
 import styles from "./favorite.module.scss";
 import { match } from "ts-pattern";
 import { Text } from "@shared/ui/text";
@@ -18,7 +18,7 @@ export const FavoriteList: React.FC = () => {
     data: pets,
     isLoading,
     isError,
-  } = petModel.api.useGetFavoritesQuery(filters);
+  } = petModel.useGetFavoritesQuery(filters);
 
   const handleBack = () => {
     navigate(MAIN_ROUTE);
@@ -46,8 +46,8 @@ export const FavoriteList: React.FC = () => {
         .with({ pets: { length: 0 } }, () => <p>No favorites available.</p>)
         .otherwise(() => (
           <div className={styles.card__list_container}>
-            {pets?.map((pet: petModel.type.Pet) => (
-              <petModel.PetCard
+            {pets?.map((pet: petModel.Pet) => (
+              <PetCard
                 key={pet.id}
                 description={pet}
                 isSaved={true}

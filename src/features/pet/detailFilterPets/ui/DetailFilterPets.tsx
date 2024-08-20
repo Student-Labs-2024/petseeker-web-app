@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/shared/hooks"; // Хуки для работы с Redux
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/index";
 import { Button } from "@shared/ui/button";
 import styles from "./detailFilterPets.module.scss";
 import { Text } from "@shared/ui/text";
@@ -11,19 +11,19 @@ export const DetailFilterPets: React.FC = () => {
   const dispatch = useAppDispatch();
   const filters = useAppSelector((state) => state.pets.filters);
 
-  const { data: animals } = petModel.api.useGetPetsQuery(filters);
+  const { data: animals } = petModel.useGetPetsQuery(filters);
 
   const handleFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
-    dispatch(petModel.slice.setFilters({ [target.name]: target.value }));
+    dispatch(petModel.setFilters({ [target.name]: target.value }));
   };
 
   const handleCloseFilters = () => {
-    dispatch(petModel.slice.setOpenFilters(false));
+    dispatch(petModel.setOpenFilters(false));
   };
 
   const handleResetFilters = () => {
-    dispatch(petModel.slice.resetFilters());
+    dispatch(petModel.resetFilters());
   };
 
   const getDeclinedAnnouncementWord = (number: number) => {

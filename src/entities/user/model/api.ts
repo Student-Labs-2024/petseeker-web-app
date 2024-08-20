@@ -1,7 +1,5 @@
 import { baseApi } from "@shared/api";
 import { userModel } from "../index";
-
-import * as userModel from "../index";
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<userModel.LoginResponse, userModel.LoginRequest>({
@@ -34,18 +32,12 @@ export const userApi = baseApi.injectEndpoints({
       query: () => "/api/user/me/",
       providesTags: ["UserInfo"],
     }),
-    uploadProfileImage: builder.mutation<
-      string,
-      userModel.type.UploadImageRequest
-    >({
+    uploadProfileImage: builder.mutation<string, userModel.UploadImageRequest>({
       query: ({ formData }) => ({
         url: `/api/image-loader/load/profile/`,
         method: "POST",
         body: formData,
       }),
-    }),
-    getMe: builder.query<type.ConfirmResponse, void>({
-      query: () => "/api/user/me/",
     }),
   }),
 });

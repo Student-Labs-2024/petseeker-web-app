@@ -1,5 +1,5 @@
-import React from "react";
-import { petModel } from "@entities/pet/index";
+import React, { useEffect, useState } from "react";
+import * as petModel from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -30,23 +30,13 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
   });
   const dispatch = useAppDispatch();
 
-  const handleImageSave = (files: FileList) => {
-    const filesArray = Array.from(files);
-    dispatch(petModel.addImages(filesArray));
-    if (filesArray.length > 0) {
-      const preview = URL.createObjectURL(filesArray[0]);
-      dispatch(petModel.setPreviewUrl(preview));
-    }
+  const handleImageSave = (data: FormData) => {
+    const filesArray = Array.from(data.imageFiles);
+    dispatch(petModel.slice.addImages(filesArray));
+    setPreviewUrl(URL.createObjectURL(filesArray[0]));
+    handleNext();
   };
-  const handleFileChange = (
-    e: React.ChangeEvent<HTMLInputElement>,
-    onChange: (files: FileList | null) => void
-  ) => {
-    if (e.target.files && e.target.files.length > 0) {
-      handleImageSave(e.target.files);
-      onChange(e.target.files);
-    }
-  };
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>

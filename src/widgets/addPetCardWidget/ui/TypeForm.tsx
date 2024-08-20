@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -19,11 +19,9 @@ export const TypeForm: React.FC = () => {
   ) => {
     const target = event.target as HTMLButtonElement;
     dispatch(
-      petModel.slice.setAnnouncmentType(
-        target.value as petModel.type.AnnouncmentType
-      )
+      petModel.setAnnouncmentType(target.value as petModel.AnnouncmentType)
     );
-    dispatch(petModel.slice.nextStep());
+    dispatch(petModel.nextStep());
   };
 
   return (
@@ -34,7 +32,7 @@ export const TypeForm: React.FC = () => {
       </div>
       {/* замапить кнопки? */}
       <button
-        value={petModel.type?.announcmentValues?.shelter}
+        value={petModel?.announcmentValues?.shelter}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >
@@ -53,7 +51,7 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
-        value={petModel.type?.announcmentValues?.private}
+        value={petModel?.announcmentValues?.private}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >
@@ -72,7 +70,7 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
-        value={petModel.type?.announcmentValues?.message}
+        value={petModel?.announcmentValues?.message}
         onClick={handleSetAnnouncmentType}
         className={darkCardStyle}
       >
