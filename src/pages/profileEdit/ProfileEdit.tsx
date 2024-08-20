@@ -4,13 +4,13 @@ import { Navbar } from "@/widgets/navbar";
 import { AddShelter } from "@widgets/addShelter/index.ts";
 import * as petModel from "@entities/pet/index.ts";
 import { ProfileInfo } from "@/widgets/profileInfo/index";
-export const Profile: React.FC = () => {
+import { EditUser } from "@/widgets/editUser";
+export const ProfileEdit: React.FC = () => {
   return (
     <>
       <MainContainer>
-        <ProfileInfo></ProfileInfo>
+        <EditUser></EditUser>
       </MainContainer>
-      <Navbar />
     </>
   );
 };

@@ -9,6 +9,8 @@ export const initialState: UserState = {
   code: undefined,
   isConfirm: false,
   auth: null,
+  profile_image: null,
+  profileData: {},
 };
 
 const userSlice = createSlice({
@@ -30,6 +32,13 @@ const userSlice = createSlice({
     setIsConfirm(state, action: PayloadAction<boolean>) {
       state.isConfirm = action.payload;
     },
+
+    setProfileImage: (state, action: PayloadAction<File>) => {
+      state.profile_image = action.payload;
+    },
+    setProfileData(state, action: PayloadAction<Record<string, any>>) {
+      state.profileData = { ...state.profileData, ...action.payload };
+    },
   },
 });
 
@@ -39,6 +48,8 @@ export const {
   setCode,
   setIsConfirm,
   setAuthenticated,
+  setProfileImage,
+  setProfileData,
 } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;

@@ -1,6 +1,7 @@
 import { baseApi } from "@shared/api";
 import { userModel } from "../index";
 
+import * as userModel from "../index";
 export const userApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     login: builder.mutation<userModel.LoginResponse, userModel.LoginRequest>({
@@ -20,11 +21,27 @@ export const userApi = baseApi.injectEndpoints({
         body,
       }),
     }),
-    editUser: builder.mutation<void, FormData>({
+    editUser: builder.mutation<void, Record<string, any>>({
       query: (body) => ({
         url: "/api/user/user_info/",
         method: "PUT",
         body,
+      }),
+      invalidatesTags: ["UserInfo"],
+    }),
+
+    getMe: builder.query<Record<string, any>, void>({
+      query: () => "/api/user/me/",
+      providesTags: ["UserInfo"],
+    }),
+    uploadProfileImage: builder.mutation<
+      string,
+      userModel.type.UploadImageRequest
+    >({
+      query: ({ formData }) => ({
+        url: `/api/image-loader/load/profile/`,
+        method: "POST",
+        body: formData,
       }),
     }),
     getMe: builder.query<type.ConfirmResponse, void>({
@@ -38,4 +55,5 @@ export const {
   useConfirmMutation,
   useEditUserMutation,
   useGetMeQuery,
+  useUploadProfileImageMutation,
 } = userApi;
