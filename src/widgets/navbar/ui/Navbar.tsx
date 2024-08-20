@@ -6,6 +6,7 @@ import {
   ADD_PET_CARD,
   FAVORITE_ROUTE,
   PROFILE,
+  FAVORITES,
 } from "@app/router/consts";
 import { ReactComponent as MainIcon } from "@shared/assets/main_icon.svg";
 import { ReactComponent as ProfileIcon } from "@shared/assets/profile_icon.svg";
@@ -42,7 +43,7 @@ const Navbar: React.FC = () => {
           </div>
           <span className={activeAddText}> Объявления</span>
         </Link>
-        <Link className={styles.navbar__item} to={FAVORITE_ROUTE}>
+        <Link className={styles.navbar__item} to={FAVORITES}>
           <div className={styles.navbar__icon_container}>
             <FavoriteIcon />
           </div>

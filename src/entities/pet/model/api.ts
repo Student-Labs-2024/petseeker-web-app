@@ -1,25 +1,18 @@
 import { Pet, PetDetail } from "./type";
 import { baseApi } from "@shared/api";
+import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
+
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPets: builder.query<Pet[], { pet_type?: string; male?: string }>({
-      query: (params) => {
-        let queryString = "/api/search-announcement/";
-        if (params) {
-          const queryParts = [];
-          if (params.pet_type) queryParts.push(`pet_type=${params.pet_type}`);
-          if (params.male) queryParts.push(`male=${params.male}`);
-          if (queryParts.length) queryString += `?${queryParts.join("&")}`;
-        }
-
-        return queryString;
-      },
+    getPets: builder.query<
+      petModel.type.Pet[],
+      { pet_type?: string; male?: string }
+    >({
+      query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
-    getPetDetail: builder.query<PetDetail, { id: string }>({
-      query: (params) => {
-        const queryString = `/api/shelter-announcement/detail/${params.id}/`;
-        return queryString;
-      },
+    getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
+      query: (params) =>
+        buildQueryString(`/api/shelter-announcement/detail/${params.id}/`),
     }),
     addPetCard: builder.mutation<void, Record<string, any>>({
       query: (newPetCard) => ({
@@ -31,16 +24,24 @@ export const petsApi = baseApi.injectEndpoints({
     getPetTypes: builder.query<string[], void>({
       query: () => "/petTypes",
     }),
-    saveFavorite: builder.mutation<void, string>({
+    saveFavorite: builder.mutation<void, number>({
       query: (id) => ({
-        url: `favorites`,
+        url: `/api/favourites/private-announcement/${id}/`,
         method: "POST",
         body: { id },
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<Pet[], void>({
-      query: () => "favorites",
+    deleteFavorite: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/api/favourites/private-announcement/${id}/`,
+        method: "DELETE",
+        body: { id },
+      }),
+      invalidatesTags: ["Favorites"],
+    }),
+    getFavorites: builder.query<petModel.type.Pet[], { pet_type?: string }>({
+      query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),
     uploadImage: builder.mutation<string, petModel.type.UploadImageRequest>({
@@ -62,4 +63,5 @@ export const {
   useGetFavoritesQuery,
   useLazyGetPetsQuery,
   useUploadImageMutation,
+  useDeleteFavoriteMutation,
 } = petsApi;

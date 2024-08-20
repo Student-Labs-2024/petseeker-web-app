@@ -7,6 +7,7 @@ import {
   PET_CARD,
   FAVORITE_ROUTE,
   PROFILE_EDIT,
+  FAVORITES,
 } from "./consts";
 import { Main } from "@/pages/main";
 import { Auth } from "@pages/auth";
@@ -15,6 +16,7 @@ import { AddPetCard } from "@pages/addPetCard";
 import { PetCardPage } from "@pages/petCardPage";
 import { ProfileEdit } from "@pages/profileEdit";
 import { Favorite } from "@pages/favorite";
+import { Favorites } from "@pages/favorites";
 export const authRoutes = [
   {
     path: ADD_PET_CARD,
@@ -25,8 +27,8 @@ export const authRoutes = [
     Component: Profile,
   },
   {
-    path: FAVORITE_ROUTE,
-    Component: Favorite,
+    path: FAVORITES,
+    Component: Favorites,
   },
   {
     path: PROFILE_EDIT,

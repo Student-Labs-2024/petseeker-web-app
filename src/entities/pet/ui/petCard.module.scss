@@ -15,6 +15,12 @@
   overflow: hidden;
   width: 100%;
 }
+.favorite {
+  flex-direction: row;
+  > * {
+    flex: 1 1 50%;
+  }
+}
 .card__image_container {
   position: relative;
   width: 100%;
@@ -58,7 +64,7 @@
   }
 }
 
-.card__like {
-  width: 16px;
-  height: 15px;
+.card__content {
+  display: flex;
+  flex-direction: column;
 }

@@ -49,6 +49,8 @@ export type PetState = {
   filters: Record<string, any>;
   announcmentType: AnnouncmentType;
   images: File[];
+  ids: number[];
+  favoriteFilters: Record<string, any>;
 };
 export const announcmentValues = {
   private: "private",
@@ -88,11 +90,11 @@ export type FormDataType = {
 };
 
 export type FilterState = {
-  pet_type: "";
-  male: "";
-  age: "";
-  fatness: "";
-  health__issues: "";
-  wool_type: "";
-  allergenicity: "";
+  pet_type: string;
+  male: string;
+  age: string;
+  fatness: string;
+  health__issues: string;
+  wool_type: string;
+  allergenicity: string;
 };

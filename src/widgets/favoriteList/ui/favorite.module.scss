@@ -1,0 +1,38 @@
+.container {
+  position: relative;
+  margin-top: 24px;
+}
+.card__list_container {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--navbar-height);
+  gap: 10px;
+  > * {
+    gap: 4px;
+  }
+}
+
+.card__item {
+  width: 100%;
+}
+.form__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.form__back {
+  width: 24px;
+  height: 24px;
+}
+.text_center {
+  left: 50%;
+  transform: translateX(-50%);
+  position: absolute;
+}
+
+.sort {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}

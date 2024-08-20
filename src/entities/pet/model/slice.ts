@@ -23,6 +23,8 @@ const initialState: petModel.PetState = {
   step: 1,
   announcmentType: "private",
   data: {},
+  favoriteFilters: {},
+  ids: [],
 };
 
 const petsSlice = createSlice({
@@ -41,6 +43,12 @@ const petsSlice = createSlice({
     setFilters(state, action: PayloadAction<Partial<petModel.FilterState>>) {
       state.filters = {
         ...state.filters,
+        ...action.payload,
+      };
+    },
+    setFavoriteFilters(state, action: PayloadAction<Record<string, any>>) {
+      state.favoriteFilters = {
+        ...state.favoriteFilters,
         ...action.payload,
       };
     },
@@ -81,6 +89,16 @@ const petsSlice = createSlice({
     },
     clearImages: (state) => {
       state.images = [];
+    },
+    addFavorites: (state, action: PayloadAction<number | number[]>) => {
+      const idsToAdd = Array.isArray(action.payload)
+        ? action.payload
+        : [action.payload];
+      const uniqueIds = new Set([...state.ids, ...idsToAdd]);
+      state.ids = Array.from(uniqueIds);
+    },
+    removeFavorite: (state, action: PayloadAction<number>) => {
+      state.ids = state.ids.filter((id) => id !== action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -124,6 +142,9 @@ export const {
   setHistorySearch,
   setSearchOnFocus,
   loadHistoryFromStorage,
+  setFavoriteFilters,
+  removeFavorite,
+  addFavorites,
 } = petsSlice.actions;
 
 export const petsReducer = petsSlice.reducer;
