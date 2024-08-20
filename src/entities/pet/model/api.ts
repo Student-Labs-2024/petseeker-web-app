@@ -43,6 +43,13 @@ export const petsApi = baseApi.injectEndpoints({
       query: () => "favorites",
       providesTags: ["Favorites"],
     }),
+    uploadImage: builder.mutation<string, petModel.type.UploadImageRequest>({
+      query: ({ id, formData }) => ({
+        url: `/api/image-loader/load/private-announcement/${id}/`,
+        method: "POST",
+        body: formData,
+      }),
+    }),
   }),
 });
 
@@ -54,4 +61,5 @@ export const {
   useSaveFavoriteMutation,
   useGetFavoritesQuery,
   useLazyGetPetsQuery,
+  useUploadImageMutation,
 } = petsApi;

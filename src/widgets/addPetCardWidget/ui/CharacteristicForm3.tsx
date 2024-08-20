@@ -14,12 +14,7 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
 import { Toggle } from "@/shared/ui/toggle";
-interface InfoFormProps {
-  onChangeForm: (data: any) => void;
-  handleNext: (data: any) => void;
-  control: any;
-  register: UseFormRegister<any>;
-}
+import { InfoFormProps } from "../model/type";
 export const CharacteristicForm3: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,

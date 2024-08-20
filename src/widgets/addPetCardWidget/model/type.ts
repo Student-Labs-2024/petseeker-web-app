@@ -1,3 +1,10 @@
+import {
+  Control,
+  UseFormRegister,
+  UseFormGetValues,
+  UseFormWatch,
+  UseFormSetValue,
+} from "react-hook-form";
 export type PetCardFormType = {
   name: string;
   images: FileList;
@@ -11,5 +18,16 @@ export type PetCardFormType = {
   dimmensions: number;
   health_issues: string;
   contacts: string;
-  weigth:number;
+  weigth: number;
+};
+
+export type InfoFormProps = {
+  onChangeForm?: (data: any) => void;
+  handleNext?: () => void;
+  control?: Control<any>;
+  register?: UseFormRegister<any>;
+  getValues?: UseFormGetValues<any>;
+  watch?: UseFormWatch<any>;
+  setValue?: UseFormSetValue<any>;
+  onSubmitForm?: (data: any) => void;
 };
