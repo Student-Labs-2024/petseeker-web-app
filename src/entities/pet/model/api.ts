@@ -9,7 +9,7 @@ export const petsApi = baseApi.injectEndpoints({
     }),
     getPetDetail: builder.query<PetDetail, { id: string }>({
       query: (params) =>
-        buildQueryString(`/api/shelter-announcement/detail/${params.id}/`),
+        buildQueryString(`/api/private-announcement/detail/${params.id}/`),
     }),
     addPetCard: builder.mutation<void, Record<string, any>>({
       query: (newPetCard) => ({

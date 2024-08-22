@@ -8,6 +8,8 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";
+import { Button } from "@shared/ui/button";
+
 import { ReactComponent as GenderFemale } from "@shared/assets/gender_female_icon.svg";
 import { ReactComponent as GenderMale } from "@shared/assets/gender_male_icon.svg";
 import { ReactComponent as Like } from "@shared/assets/like.svg";
@@ -16,7 +18,7 @@ import { ReactComponent as Birthday } from "@shared/assets/birthday.svg";
 import { ReactComponent as Home } from "@shared/assets/home.svg";
 import { ReactComponent as ShelterArrow } from "@shared/assets/shelter_link_arrow.svg";
 import { petModel } from "@entities/pet/";
-import test from "@shared/assets/add_icon.svg";
+import test from "@shared/assets/cat.png";
 import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
 export const PetCardDetail: React.FC = () => {
@@ -170,7 +172,7 @@ export const PetCardDetail: React.FC = () => {
                 </Text>
               </button>
               <div className={styles.m_top}>
-                <SaveCard id={id}></SaveCard>
+                <Button>Забрать в семью</Button>
               </div>
             </div>
           </div>
