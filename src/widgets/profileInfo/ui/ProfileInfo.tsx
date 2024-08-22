@@ -15,19 +15,21 @@ import { ReactComponent as EditIcon } from "@shared/assets/edit_profile_icon.svg
 import { ReactComponent as CatImage } from "@shared/assets/cat_empty_profile.svg";
 import { Button } from "@shared/ui/button";
 import { NavLink } from "react-router-dom";
-import { PROFILE_EDIT } from "@/app/router/consts";
-
+import { PROFILE_EDIT, SETTINGS } from "@/app/router/consts";
+import { useNavigate } from "react-router-dom";
 export const ProfileInfo: React.FC = () => {
   const totalStars = 5;
   const stars = 4;
-
+  const navigate = useNavigate();
   const {
     data: userInfo,
     isLoading,
     isError,
     error,
   } = userModel.useGetMeQuery();
-
+  const handleNavigateSettings = () => {
+    navigate(SETTINGS);
+  };
   return (
     <>
       <div className={styles.profile}>
@@ -42,7 +44,10 @@ export const ProfileInfo: React.FC = () => {
             <button className={styles.profile__top_btn}>
               <NotificationsDefaultIcon />
             </button>
-            <button className={styles.profile__top_btn}>
+            <button
+              onClick={handleNavigateSettings}
+              className={styles.profile__top_btn}
+            >
               <SettingsIcon />
             </button>
           </div>

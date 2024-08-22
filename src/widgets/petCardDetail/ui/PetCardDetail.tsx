@@ -25,7 +25,9 @@ export const PetCardDetail: React.FC = () => {
     data: pet,
     isLoading,
     isError,
+    error,
   } = petModel.useGetPetDetailQuery({ id });
+
   const navigate = useNavigate();
   return (
     <>
