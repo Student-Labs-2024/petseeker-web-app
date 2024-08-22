@@ -48,7 +48,8 @@ export const AddShelterForm: React.FC = () => {
       inn: formData.inn,
       name: formData.name,
       ogrn: formData.ogrn,
-      telegram: formData.telegram,
+      social_network_1: formData.social_network_1,
+      social_network_2: formData.social_network_2,
       telephone_number: formData.telephone_number,
     },
   });
@@ -72,7 +73,7 @@ export const AddShelterForm: React.FC = () => {
   const onSubmitForm = async () => {
     try {
       const response = await addShelter(getValues()).unwrap();
-
+      console.log(response);
       handleUploadStoredImages(response?.id);
       navigate(PROFILE);
     } catch (error) {
@@ -122,15 +123,6 @@ export const AddShelterForm: React.FC = () => {
             />
           ))
           .with(2, () => (
-            <DocumentsForm
-              control={control}
-              register={register}
-              handleNext={handleNext}
-              onChangeForm={handleSubmit(onChangeForm)}
-              handleFieldChange={handleFieldChange}
-            />
-          ))
-          .with(3, () => (
             <NameForm
               control={control}
               register={register}
@@ -138,7 +130,7 @@ export const AddShelterForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(6, () => (
+          .with(3, () => (
             <ContactsForm
               getValues={getValues}
               control={control}
@@ -147,7 +139,7 @@ export const AddShelterForm: React.FC = () => {
               handleFieldChange={handleFieldChange}
             />
           ))
-          .with(5, () => (
+          .with(4, () => (
             <AddressForm
               control={control}
               register={register}

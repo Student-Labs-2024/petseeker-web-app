@@ -56,7 +56,7 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
             <Text myClass="medium_big">Ссылка на соцсети</Text>
 
             <Controller
-              name="telegram"
+              name="social_network_1"
               control={control}
               defaultValue=""
               rules={{
@@ -79,7 +79,7 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
             <Text myClass="medium_big">Ссылка на соцсети</Text>
 
             <Controller
-              name="contacts"
+              name="social_network_2"
               control={control}
               defaultValue=""
               rules={{ required: true }}
