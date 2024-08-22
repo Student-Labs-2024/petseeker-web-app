@@ -73,7 +73,7 @@ export const AddShelterForm: React.FC = () => {
   const onSubmitForm = async () => {
     try {
       const response = await addShelter(getValues()).unwrap();
-      console.log(response);
+
       handleUploadStoredImages(response?.id);
       navigate(PROFILE);
     } catch (error) {

@@ -68,9 +68,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"cat" !== filters.pet_type}
+                  isDefault={"Кошка" !== filters.pet_type}
                   name="pet_type"
-                  value="cat"
+                  value="Кошка"
                   onClick={handleFilter}
                 >
                   Кошка
@@ -79,9 +79,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"dog" !== filters.pet_type}
+                  isDefault={"Собака" !== filters.pet_type}
                   name="pet_type"
-                  value="dog"
+                  value="Собака"
                   onClick={handleFilter}
                 >
                   Собака
@@ -188,7 +188,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={filtersToggle.vaccinations}
+                  isDefault={!filtersToggle.vaccinations}
                   name="vaccinations"
                   value={filtersToggle.vaccinations}
                   onClick={handleToggleFilter}
@@ -199,7 +199,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={filtersToggle.sterilization}
+                  isDefault={!filtersToggle.sterilization}
                   name="sterilization"
                   value={filtersToggle.sterilization}
                   onClick={handleToggleFilter}

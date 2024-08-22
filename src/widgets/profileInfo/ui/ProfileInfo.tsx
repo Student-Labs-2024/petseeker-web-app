@@ -74,7 +74,7 @@ export const ProfileInfo: React.FC = () => {
           </div>
         </div>
         {userInfo && !userInfo.name ? (
-          <Modal>
+          <Modal isOpen={true}>
             <div className={styles.modal__content}>
               <div className={styles.modal__image}></div>
               <Button isAuthButton={true}>

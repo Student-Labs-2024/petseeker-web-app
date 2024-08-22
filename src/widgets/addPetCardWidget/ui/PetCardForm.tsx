@@ -97,6 +97,7 @@ export const PetCardForm: React.FC = () => {
   };
   const onSubmitForm = async () => {
     try {
+      // временно
       const newPetCard = {
         contacts: "0",
         dimmensions: "0",
@@ -104,6 +105,7 @@ export const PetCardForm: React.FC = () => {
         state: "Активный",
         status: "Нашел",
         weigth: "0",
+        breed: "Бигль",
         ...getValues(),
       };
 
