@@ -11,7 +11,7 @@ import { useAppDispatch } from "@/shared/hooks";
 import { useAppSelector } from "@/shared/hooks";
 import classNames from "classnames";
 type FormValues = {
-  pet_type: string;
+  name: string;
 };
 
 export const SearchPet: React.FC = () => {
@@ -22,14 +22,14 @@ export const SearchPet: React.FC = () => {
   const { control, handleSubmit, reset, getValues, setValue, watch, trigger } =
     useForm<FormValues>({
       defaultValues: {
-        pet_type: "",
+        name: "",
       },
     });
-  const petTypeData = watch("pet_type");
+  const petTypeData = watch("name");
   const history = useAppSelector((state) => state.pets.historySearch);
   const filters = useAppSelector((state) => state.pets.filters);
   petModel.useGetPetsQuery(filters);
-  const searchValue = getValues("pet_type");
+  const searchValue = getValues("name");
 
   useEffect(() => {
     const savedHistory = JSON.parse(
@@ -42,8 +42,8 @@ export const SearchPet: React.FC = () => {
   };
 
   const onSubmit = (data: FormValues) => {
-    dispatch(petModel.setFilters({ pet_type: data.pet_type }));
-    dispatch(petModel.setHistorySearch(data.pet_type));
+    dispatch(petModel.setFilters({ name: data.name }));
+    dispatch(petModel.setHistorySearch(data.name));
 
     dispatch(petModel.setSearchOnFocus(false));
   };
@@ -54,15 +54,15 @@ export const SearchPet: React.FC = () => {
 
   const handleResetSearch = () => {
     dispatch(petModel.setSearchOnFocus(false));
-    reset({ pet_type: "" });
-    dispatch(petModel.setFilters({ pet_type: "" }));
+    reset({ name: "" });
+    dispatch(petModel.setFilters({ name: "" }));
   };
   const filteredHistory = history.filter((option) =>
     option?.toLowerCase().includes(searchValue?.toLowerCase())
   );
 
   const handleOptionClick = async (option: string) => {
-    setValue("pet_type", option);
+    setValue("name", option);
     const isValid = await trigger();
     if (isValid) {
       handleSubmit(onSubmit)();
@@ -81,7 +81,7 @@ export const SearchPet: React.FC = () => {
           >
             <button type="submit" className={styles.search_btn}></button>
             <Controller
-              name="pet_type"
+              name="name"
               control={control}
               render={({ field }) => (
                 <input

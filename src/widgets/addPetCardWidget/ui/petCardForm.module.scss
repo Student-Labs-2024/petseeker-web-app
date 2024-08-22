@@ -103,18 +103,7 @@
   margin-top: 0px;
   padding: 0px;
 }
-.text_container {
-  z-index: 5;
-  position: absolute;
-  top: 6px;
-  left: 6px;
-  border-radius: 8px;
-  background-color: var(--button-dark-defoult);
-  padding: 2px 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
+
 .form__label_toggle {
   display: flex;
   justify-content: space-between;
@@ -131,24 +120,7 @@
   flex-direction: column;
   gap: 35px;
 }
-.preview_image {
-  z-index: 4;
-  position: absolute;
-  width: 100%;
-  aspect-ratio: 1;
-}
-.edit_btn {
-  z-index: 5;
-  position: absolute;
-  bottom: 6px;
-  right: 6px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 50%;
-  background-color: var(--button-dark-defoult);
-  padding: 3px;
-}
+
 .form {
   display: flex;
   flex-direction: column;

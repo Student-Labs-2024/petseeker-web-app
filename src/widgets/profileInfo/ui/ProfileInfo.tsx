@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { userModel } from "@entities/user";
 import styles from "./profileInfo.module.scss";
 import { match } from "ts-pattern";
@@ -15,7 +15,10 @@ import { ReactComponent as EditIcon } from "@shared/assets/edit_profile_icon.svg
 import { ReactComponent as CatImage } from "@shared/assets/cat_empty_profile.svg";
 import { Button } from "@shared/ui/button";
 import { NavLink } from "react-router-dom";
-import { PROFILE_EDIT, SETTINGS } from "@/app/router/consts";
+import { PROFILE_EDIT, SETTINGS, ADD_SHELTER } from "@/app/router/consts";
+
+import { Modal } from "@/shared/ui/modal";
+import { ShelterModal } from "./ShelterModal";
 import { useNavigate } from "react-router-dom";
 export const ProfileInfo: React.FC = () => {
   const totalStars = 5;
@@ -30,8 +33,26 @@ export const ProfileInfo: React.FC = () => {
   const handleNavigateSettings = () => {
     navigate(SETTINGS);
   };
+  const handleNavigateShelterPage = () => {
+    navigate(ADD_SHELTER);
+  };
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
+  const handleOpenShelterModal = () => {
+    setIsOpenModal(true);
+  };
+  const handleCloseShelterModal = () => {
+    setIsOpenModal(false);
+  };
+
   return (
     <>
+      {" "}
+      <ShelterModal
+        isOpen={isOpenModal}
+        onClose={handleCloseShelterModal}
+        onClick={handleNavigateShelterPage}
+      ></ShelterModal>
       <div className={styles.profile}>
         <div className={styles.profile__top}>
           <button className={styles.profile__top_btn}>
@@ -53,22 +74,21 @@ export const ProfileInfo: React.FC = () => {
           </div>
         </div>
         {userInfo && !userInfo.name ? (
-          <div className={styles.modal}>
-            <div className={styles.modal__container}>
-              <div className={styles.modal__content}>
-                <div className={styles.modal__image}></div>
-
-                <Button isAuthButton={true}>
-                  <NavLink to={PROFILE_EDIT}>Заполнить профиль</NavLink>
-                </Button>
-              </div>
+          <Modal>
+            <div className={styles.modal__content}>
+              <div className={styles.modal__image}></div>
+              <Button isAuthButton={true}>
+                <NavLink to={PROFILE_EDIT}>Заполнить профиль</NavLink>
+              </Button>
             </div>
-          </div>
+          </Modal>
         ) : (
           <div className={styles.profile__content}>
             <div className={styles.profile__avatars}>
               <div className={styles.profile__avatar}></div>
-              <div className={styles.profile__shelter}></div>
+              <button onClick={handleOpenShelterModal}>
+                <div className={styles.profile__shelter}></div>
+              </button>
             </div>
             <div className={styles.profile__info}>
               <Text myClass="bold_medium_big">

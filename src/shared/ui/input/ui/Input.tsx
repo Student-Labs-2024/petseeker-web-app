@@ -1,4 +1,4 @@
-import React from "react";
+import React, { forwardRef, Ref } from "react";
 import styles from "./input.module.scss";
 import { UseFormRegisterReturn } from "react-hook-form";
 
@@ -18,10 +18,10 @@ type InputProps = {
   myClass?: string;
 };
 
-export const Input: React.FC<InputProps> = ({
-  myClass = "default",
-  register,
-  ...rest
-}) => {
-  return <input className={styles[myClass]} {...register} {...rest} />;
-};
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+  ({ myClass = "default", register, ...rest }, ref: Ref<HTMLInputElement>) => {
+    return (
+      <input className={styles[myClass]} ref={ref} {...register} {...rest} />
+    );
+  }
+);
