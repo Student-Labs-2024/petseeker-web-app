@@ -1,4 +1,4 @@
-import { Pet, PetDetail, UploadImageRequest } from "./type";
+import { Pet, PetDetail } from "./type";
 import { baseApi } from "@shared/api";
 import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
 
@@ -12,8 +12,8 @@ export const petsApi = baseApi.injectEndpoints({
         buildQueryString(`/api/private-announcement/detail/${params.id}/`),
     }),
     addPetCard: builder.mutation<void, Record<string, any>>({
-      query: (newPetCard) => ({
-        url: "/api/private-announcement/create/",
+      query: ({ newPetCard, url }) => ({
+        url,
         method: "POST",
         body: newPetCard,
       }),

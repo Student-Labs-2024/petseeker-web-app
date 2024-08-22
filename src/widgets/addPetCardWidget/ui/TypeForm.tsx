@@ -18,9 +18,8 @@ export const TypeForm: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     const target = event.target as HTMLButtonElement;
-    dispatch(
-      petModel.setAnnouncmentType(target.value as petModel.AnnouncmentType)
-    );
+
+    dispatch(petModel.setAddPetUrl(target.name as petModel.AnnouncmentType));
     dispatch(petModel.nextStep());
   };
 
@@ -32,7 +31,7 @@ export const TypeForm: React.FC = () => {
       </div>
       {/* замапить кнопки? */}
       <button
-        value={petModel?.announcmentValues?.shelter}
+        name={petModel?.announcmentValues?.shelter}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >
@@ -51,7 +50,7 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
-        value={petModel?.announcmentValues?.private}
+        name={petModel?.announcmentValues?.private}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >

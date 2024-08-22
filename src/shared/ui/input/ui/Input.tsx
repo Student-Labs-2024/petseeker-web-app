@@ -4,7 +4,8 @@ import { UseFormRegisterReturn } from "react-hook-form";
 
 type InputProps = {
   onChange?: React.ChangeEventHandler<HTMLInputElement>;
-  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>; // Добавляем обработчик onKeyDown
+  onKeyDown?: React.KeyboardEventHandler<HTMLInputElement>;
+  onFocus?: React.FocusEventHandler<HTMLInputElement>; // Добавл
   placeholder?: string;
   value?: string;
   name?: string;

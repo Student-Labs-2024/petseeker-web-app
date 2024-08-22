@@ -52,10 +52,11 @@ export type PetState = {
   ids: number[];
   favoriteFilters: Record<string, any>;
   previewUrl: string;
+  addPetUrl: string;
 };
 export const announcmentValues = {
-  private: "private",
-  shelter: "shelter",
+  private: "/api/private-announcement/create/",
+  shelter: "/api/shelter-announcement/create/",
   message: "message",
 } as const;
 
