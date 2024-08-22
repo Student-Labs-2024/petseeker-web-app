@@ -1,20 +1,46 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { jwtDecode } from "jwt-decode";
-import { type } from "../index";
 
-export const initialState: type.ShelterState = {
-  name: "",
+import { ShelterState } from "./type";
+
+export const initialState: ShelterState = {
+  step: 1,
+  images: [],
+  previewUrl: "",
+  data: {},
 };
 
 const shelterSlice = createSlice({
   name: "shelter",
   initialState,
   reducers: {
-    setName(state, action: PayloadAction<string>) {
-      state.name = action.payload;
+    nextStep(state) {
+      state.step += 1;
+    },
+    prevStep(state) {
+      state.step -= 1;
+    },
+    setFormData(state, action: PayloadAction<Record<string, any>>) {
+      state.data = { ...state.data, ...action.payload };
+    },
+    addImages: (state, action: PayloadAction<File[]>) => {
+      state.images = action.payload;
+    },
+
+    setPreviewUrl: (state, action: PayloadAction<string>) => {
+      state.previewUrl = action.payload;
+    },
+    clearImages: (state) => {
+      state.images = [];
     },
   },
 });
 
-export const { setName } = shelterSlice.actions;
+export const {
+  nextStep,
+  prevStep,
+  setFormData,
+  addImages,
+  clearImages,
+  setPreviewUrl,
+} = shelterSlice.actions;
 export const shelterReducer = shelterSlice.reducer;

@@ -1,1 +1,1 @@
-export { AddShelter } from "./ui/AddShelter";
+export { AddShelterForm } from "./ui/AddShelterForm";

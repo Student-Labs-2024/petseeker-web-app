@@ -8,6 +8,7 @@ import {
   FAVORITE_ROUTE,
   PROFILE_EDIT,
   FAVORITES,
+  ADD_SHELTER,
 } from "./consts";
 import { Main } from "@/pages/main";
 import { Auth } from "@pages/auth";
@@ -15,7 +16,7 @@ import { Profile } from "@pages/profile";
 import { AddPetCard } from "@pages/addPetCard";
 import { PetCardPage } from "@pages/petCardPage";
 import { ProfileEdit } from "@pages/profileEdit";
-import { Favorite } from "@pages/favorite";
+import { AddShelter } from "@/pages/addShelter";
 import { Favorites } from "@pages/favorites";
 export const authRoutes = [
   {
@@ -33,6 +34,10 @@ export const authRoutes = [
   {
     path: PROFILE_EDIT,
     Component: ProfileEdit,
+  },
+  {
+    path: ADD_SHELTER,
+    Component: AddShelter,
   },
 ];
 

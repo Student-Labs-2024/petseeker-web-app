@@ -2,15 +2,12 @@ import React from "react";
 import { petModel } from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
-import styles from "./petCardForm.module.scss";
+import styles from "./AddShelter.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { Button } from "@shared/ui/button";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
-import { TextArea } from "@/shared/ui/textArea";
-import { ReactComponent as ImageIcon } from "@shared/assets/image_icon.svg";
 import { InfoFormProps } from "../model/type";
-import editIcon from "@shared/assets/edit_icon.svg";
 import { ImageForm } from "@entities/imageForm";
 type FormData = {
   imageFiles: FileList | null;
@@ -50,7 +47,7 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Text myClass="bold_big">Добавьте фотографии</Text>
+        <Text myClass="btn">Добавьте фотографии</Text>
       </div>
       <Text color="dark" myClass="btn">
         не более 10 изображений
@@ -62,7 +59,9 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
           control={control}
         />
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button isAuthButton={true} type="submit">
+            Далее
+          </Button>
         </div>
       </form>
     </div>

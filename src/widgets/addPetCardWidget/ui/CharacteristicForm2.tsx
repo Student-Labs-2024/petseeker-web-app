@@ -14,6 +14,7 @@ import { useForm } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister, Controller } from "react-hook-form";
 import { InfoFormProps } from "../model/type";
+import { Modal } from "@shared/ui/modal";
 export const CharacteristicForm2: React.FC<InfoFormProps> = ({
   onChangeForm,
   register,
@@ -57,47 +58,45 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
       {" "}
       <div className={styles.container}>
         {isOpenModal && (
-          <div className={styles.modal}>
-            <div className={styles.modal__container}>
-              <div className={styles.modal__top}>
-                <button
-                  className={styles.modal__close}
-                  onClick={handleCloseModal}
-                ></button>
-                <div className={styles.modal__title}>
-                  <Text myClass="bold_medium_big">Порода</Text>
-                </div>
-              </div>
-              <div className={styles.modal__input}>
-                <Input
-                  onKeyDown={handleInputKeyDown}
-                  placeholder="Искать"
-                  myClass="form_input"
-                  register={register("breed", {
-                    required: true,
-                    validate: (value) => options.includes(value) || "",
-                    onBlur: (e) => handleBlur(e.target.value),
-                  })}
-                />{" "}
-              </div>
-              <div className={styles.option__list}>
-                {filteredOptions.map((option) => (
-                  <button
-                    key={option}
-                    className={classNames(styles.option, {
-                      [styles.active]: breedValue === option,
-                    })}
-                    onClick={() => handleOptionClick(option)}
-                  >
-                    <Text color="dark" myClass="medium_big">
-                      {" "}
-                      {option}
-                    </Text>
-                  </button>
-                ))}
+          <Modal isFullScreen={true}>
+            <div className={styles.modal__top}>
+              <button
+                className={styles.modal__close}
+                onClick={handleCloseModal}
+              ></button>
+              <div className={styles.modal__title}>
+                <Text myClass="bold_medium_big">Порода</Text>
               </div>
             </div>
-          </div>
+            <div className={styles.modal__input}>
+              <Input
+                onKeyDown={handleInputKeyDown}
+                placeholder="Искать"
+                myClass="form_input"
+                register={register("breed", {
+                  required: true,
+                  validate: (value) => options.includes(value) || "",
+                  onBlur: (e) => handleBlur(e.target.value),
+                })}
+              />{" "}
+            </div>
+            <div className={styles.option__list}>
+              {filteredOptions.map((option) => (
+                <button
+                  key={option}
+                  className={classNames(styles.option, {
+                    [styles.active]: breedValue === option,
+                  })}
+                  onClick={() => handleOptionClick(option)}
+                >
+                  <Text color="dark" myClass="medium_big">
+                    {" "}
+                    {option}
+                  </Text>
+                </button>
+              ))}
+            </div>
+          </Modal>
         )}
 
         <div className={styles.top}>
