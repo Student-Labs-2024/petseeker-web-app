@@ -19,6 +19,16 @@ export const userApi = baseApi.injectEndpoints({
         body,
       }),
     }),
+    getFeedbacks: builder.query<any, { id?: string }>({
+      query: (params) => `/api/feedbacks/${params.id}`,
+    }),
+    addFeedback: builder.mutation<void, Record<string, any>>({
+      query: (body) => ({
+        url: "/api/feedback/create/",
+        method: "POST",
+        body: body,
+      }),
+    }),
     editUser: builder.mutation<void, Record<string, any>>({
       query: (body) => ({
         url: "/api/user/user_info/",
@@ -48,4 +58,6 @@ export const {
   useEditUserMutation,
   useGetMeQuery,
   useUploadProfileImageMutation,
+  useGetFeedbacksQuery,
+  useAddFeedbackMutation,
 } = userApi;
