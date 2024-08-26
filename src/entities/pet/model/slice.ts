@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { petModel } from "../index";
-import { AnnouncmentType } from "./type"; // Импортируем тип
 
 const initialFilterState: petModel.FilterState = {
   pet_type: undefined,
@@ -21,13 +20,12 @@ const initialState: petModel.PetState = {
   historySearch: [],
   searchOnFocus: false,
   step: 1,
-  announcmentType: "private",
   data: {},
-  favoriteFilters: {},
+  favoriteFilters: undefined,
   ids: [],
   images: [],
   previewUrl: "",
-  addPetUrl: "/api/private-announcement/create/",
+  addPetUrl: undefined,
 };
 
 const petsSlice = createSlice({
@@ -54,6 +52,9 @@ const petsSlice = createSlice({
         ...state.favoriteFilters,
         ...action.payload,
       };
+    },
+    resetFavoriteFilters(state, action: PayloadAction<any>) {
+      state.favoriteFilters = action.payload;
     },
     setHistorySearch(state, action: PayloadAction<string>) {
       if (
@@ -84,9 +85,7 @@ const petsSlice = createSlice({
     setFormData(state, action: PayloadAction<Record<string, any>>) {
       state.data = { ...state.data, ...action.payload };
     },
-    setAnnouncmentType(state, action: PayloadAction<petModel.AnnouncmentType>) {
-      state.announcmentType = action.payload;
-    },
+
     addImages: (state, action: PayloadAction<File[]>) => {
       state.images = action.payload;
     },
@@ -146,13 +145,13 @@ export const {
   setFormData,
   setFilters,
   resetFilters,
-  setAnnouncmentType,
   addImages,
   clearImages,
   setHistorySearch,
   setSearchOnFocus,
   loadHistoryFromStorage,
   setFavoriteFilters,
+  resetFavoriteFilters,
   removeFavorite,
   addFavorites,
   setPreviewUrl,

@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import {
   MAIN_ROUTE,
-  REGISTRATION_ROUTE,
+  AUTH_ROUTE,
   ADD_PET_CARD,
   FAVORITE_ROUTE,
   PROFILE,
@@ -16,16 +16,22 @@ import { useAppSelector } from "@shared/hooks/useAppSelector";
 import styles from "./navbar.module.scss";
 const Navbar: React.FC = () => {
   const token = useAppSelector((state) => state.user.auth);
+  const profileRoute = token ? PROFILE : AUTH_ROUTE;
+  const favoriteRoute = token ? FAVORITES : AUTH_ROUTE;
+  const addPetCardRoute = token ? ADD_PET_CARD : AUTH_ROUTE;
   const activeMainIcon =
     location.pathname === MAIN_ROUTE ? styles.active_icon : "";
   const activeMainText =
     location.pathname === MAIN_ROUTE ? styles.active_text : "";
-  const activeAddIcon =
-    location.pathname === ADD_PET_CARD ? styles.active_icon : "";
-  const activeAddText =
-    location.pathname === ADD_PET_CARD ? styles.active_text : "";
+  const activeFavoriteIcon =
+    location.pathname === favoriteRoute ? styles.active_fill_icon : "";
+  const activeFavoriteText =
+    location.pathname === favoriteRoute ? styles.active_text : "";
+  const activeProfileIcon =
+    location.pathname === PROFILE ? styles.active_icon : "";
+  const activeProfileText =
+    location.pathname === PROFILE ? styles.active_text : "";
 
-  const profileRoute = token ? PROFILE : REGISTRATION_ROUTE;
   return (
     <nav className={styles.navbar__container}>
       <div className={styles.navbar__list}>
@@ -36,24 +42,24 @@ const Navbar: React.FC = () => {
           <span className={activeMainText}> Главная</span>
         </Link>
 
-        <Link className={styles.navbar__item} to={ADD_PET_CARD}>
+        <Link className={styles.navbar__item} to={addPetCardRoute}>
           <div className={styles.navbar__icon_container}>
             {" "}
-            <AddIcon className={activeAddIcon} />
+            <AddIcon />
           </div>
-          <span className={activeAddText}> Объявления</span>
+          Объявления
         </Link>
-        <Link className={styles.navbar__item} to={FAVORITES}>
+        <Link className={styles.navbar__item} to={favoriteRoute}>
           <div className={styles.navbar__icon_container}>
-            <FavoriteIcon />
+            <FavoriteIcon className={activeFavoriteIcon} />
           </div>
-          Избранное
+          <span className={activeFavoriteText}>Избранное</span>
         </Link>
         <Link className={styles.navbar__item} to={profileRoute}>
           <div className={styles.navbar__icon_container}>
-            <ProfileIcon />
+            <ProfileIcon className={activeProfileIcon} />
           </div>
-          <span> Профиль</span>
+          <span className={activeProfileText}> Профиль</span>
         </Link>
       </div>
     </nav>

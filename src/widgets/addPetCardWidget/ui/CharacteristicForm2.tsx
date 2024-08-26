@@ -41,14 +41,17 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
   };
 
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter" && filteredOptions[0].length) {
+    if (e.key === "Enter") {
       e.preventDefault();
-
-      handleOptionClick(filteredOptions[0]);
+      if (filteredOptions[0]?.length) {
+        handleOptionClick(filteredOptions[0]);
+      } else {
+        handleOptionClick("");
+      }
     }
   };
   const handleBlur = (value: string) => {
-    if (!options.includes(value)) {
+    if (!options.some((v) => v?.toLowerCase().includes(value?.toLowerCase()))) {
       setValue("breed", "");
     }
   };
@@ -58,7 +61,11 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
       {" "}
       <div className={styles.container}>
         {isOpenModal && (
-          <Modal isFullScreen={true}>
+          <Modal
+            onClose={handleCloseModal}
+            isOpen={isOpenModal}
+            isFullScreen={true}
+          >
             <div className={styles.modal__top}>
               <button
                 className={styles.modal__close}
@@ -82,13 +89,7 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
             </div>
             <div className={styles.option__list}>
               {filteredOptions.map((option) => (
-                <button
-                  key={option}
-                  className={classNames(styles.option, {
-                    [styles.active]: breedValue === option,
-                  })}
-                  onClick={() => handleOptionClick(option)}
-                >
+                <button key={option} onClick={() => handleOptionClick(option)}>
                   <Text color="dark" myClass="medium_big">
                     {" "}
                     {option}

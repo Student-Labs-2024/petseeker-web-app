@@ -25,7 +25,7 @@ export const AddressForm: React.FC<InfoFormProps> = ({
         <Star />
         <Text myClass="bold_big">Адрес</Text>
       </div>
-      <form onSubmit={onChangeForm} className={styles.form}>
+      <form onSubmit={onSubmitForm} className={styles.form}>
         <div className={styles.form__item}>
           <Label>
             <Input
@@ -36,9 +36,7 @@ export const AddressForm: React.FC<InfoFormProps> = ({
           </Label>
         </div>
         <div className={styles.bottom}>
-          <Button onClick={onSubmitForm} type="submit">
-            Далее
-          </Button>
+          <Button type="submit">Далее</Button>
         </div>
       </form>
     </div>

@@ -10,7 +10,7 @@ import { tgConsts, phoneConsts } from "@shared/constants";
 import { Controller } from "react-hook-form";
 import InputMask from "react-input-mask-next";
 import { InfoFormProps } from "../model/type";
-import { validateMask } from "@shared/hooks/idValidMask";
+import { validateMask } from "@/shared/hooks/isValidMask";
 
 export const ContactsForm: React.FC<InfoFormProps> = ({
   onChangeForm,

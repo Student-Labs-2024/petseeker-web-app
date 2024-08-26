@@ -176,7 +176,7 @@
   position: fixed;
   bottom: 20px;
   width: calc(100% - var(--container-padding) * 2);
-  max-width: 100%;
+  max-width: calc(var(--container-max-width) - var(--container-padding) * 2);
   flex-direction: column;
   display: flex;
   justify-content: center;

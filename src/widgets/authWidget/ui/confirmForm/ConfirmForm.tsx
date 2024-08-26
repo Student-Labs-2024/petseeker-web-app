@@ -1,4 +1,5 @@
 import React from "react";
+import { Controller } from "react-hook-form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import styles from "./confirmForm.module.scss";
@@ -7,49 +8,58 @@ import { codeConsts } from "@shared/constants";
 import { useTranslation } from "react-i18next";
 import { Form } from "@shared/ui/form";
 import { Text } from "@shared/ui/text";
+import { validateMask } from "@/shared/hooks/isValidMask";
 type ConfirmFormProps = {
-  handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleChangeCode?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  code?: string;
+  control: any;
+  handleChangeCode?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: any
+  ) => void;
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isSendingConfirm?: boolean;
   isSendingLogin?: boolean;
 };
+
 export const ConfirmForm: React.FC<ConfirmFormProps> = ({
-  handleClickSubmit,
-  handleClickConfirm,
+  control,
+  handleSubmit,
   handleChangeCode,
-  code,
   isSendingConfirm,
   isSendingLogin,
 }) => {
   const { t } = useTranslation("confirmForm");
+
   return (
     <div className={styles.confirm}>
-      <Form>
+      <Form onSubmit={handleSubmit}>
         <div className={styles.code_mask}>
-          <InputMask
-            mask={codeConsts.mask}
-            value={code}
-            onChange={handleChangeCode}
-            placeholder={codeConsts.placeholder}
-          >
-            <Input />
-          </InputMask>
+          <Controller
+            name="code"
+            control={control}
+            rules={{
+              required: true,
+              validate: (value) => validateMask(value, codeConsts.mask),
+            }}
+            defaultValue=""
+            render={({ field }) => (
+              <InputMask
+                value={field.value}
+                mask={codeConsts.mask}
+                placeholder={codeConsts.placeholder}
+                onChange={(e) => handleChangeCode(e, field)}
+              >
+                <Input ref={field.ref} />
+              </InputMask>
+            )}
+          />
         </div>
-        <Button
-          isAuthButton={true}
-          type="button"
-          onClick={handleClickConfirm}
-          disabled={isSendingConfirm}
-        >
+        <Button type="submit" isAuthButton={true} disabled={isSendingConfirm}>
           {t("next")}
         </Button>
         <Button
           isAuthButton={true}
           isDefault={true}
           type="button"
-          onClick={handleClickSubmit}
           disabled={isSendingConfirm || isSendingLogin}
         >
           {t("sendCodeAgain")}

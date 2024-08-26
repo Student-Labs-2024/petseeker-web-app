@@ -1,4 +1,5 @@
 import React from "react";
+import { Controller } from "react-hook-form";
 import { Input } from "@/shared/ui/input";
 import { Button } from "@shared/ui/button";
 import InputMask from "react-input-mask-next";
@@ -8,61 +9,58 @@ import { Form } from "@shared/ui/form";
 import { Text } from "@shared/ui/text";
 import { Label } from "@shared/ui/label";
 import styles from "./authForm.module.scss";
+import { validateMask } from "@/shared/hooks/isValidMask";
 type AuthFormProps = {
   handleClickSubmit?: (event: React.MouseEvent<HTMLButtonElement>) => void;
   handleClickConfirm?: (event: React.MouseEvent<HTMLButtonElement>) => void;
-  handleChangePhone?: (event: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChangePhone?: (
+    event: React.ChangeEvent<HTMLInputElement>,
+    field: any
+  ) => void;
   handleChangeName?: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  phoneNumber?: string;
-  name?: string;
+  control: any;
+
+  handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isSendingLogin?: boolean;
-  isAuth?: boolean;
 };
 
 export const AuthForm: React.FC<AuthFormProps> = ({
-  handleClickSubmit,
   handleChangePhone,
-  handleChangeName,
-  isAuth,
-  phoneNumber,
-  name,
+  control,
+  handleSubmit,
+
   isSendingLogin,
 }) => {
   const { t } = useTranslation("authForm");
-  const textAuthButton = isAuth ? t("enter") : t("registration");
+
   return (
-    <Form>
+    <Form onSubmit={handleSubmit}>
       <div className={styles.input_container}>
         <Label>
           <Text myClass="label">{t("number")}</Text>
-          <InputMask
-            onChange={handleChangePhone}
-            value={phoneNumber}
-            mask={phoneConsts.mask}
-            placeholder={phoneConsts.placeholder}
-          >
-            <Input />
-          </InputMask>
+          <Controller
+            name="phoneNumber"
+            control={control}
+            rules={{
+              required: true,
+              validate: (value) => validateMask(value, phoneConsts.mask),
+            }}
+            defaultValue=""
+            render={({ field }) => (
+              <InputMask
+                value={field.value}
+                mask={phoneConsts.mask}
+                placeholder={phoneConsts.placeholder}
+                onChange={(e) => handleChangePhone(e, field)}
+              >
+                <Input ref={field.ref} />
+              </InputMask>
+            )}
+          />
         </Label>
-
-        {!isAuth && (
-          <Label>
-            <Text myClass="label">{t("name")}</Text>
-            <Input
-              value={name}
-              onChange={handleChangeName}
-              placeholder={nameConsts.placeholder}
-            />
-          </Label>
-        )}
       </div>
-      <Button
-        type="button"
-        onClick={handleClickSubmit}
-        disabled={isSendingLogin}
-        isAuthButton={true}
-      >
-        {textAuthButton}
+      <Button type="submit" disabled={isSendingLogin} isAuthButton={true}>
+        {t("registration")}
       </Button>
     </Form>
   );

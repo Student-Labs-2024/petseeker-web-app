@@ -10,7 +10,7 @@ import { innConsts, ogrnConsts } from "@shared/constants";
 import { Controller } from "react-hook-form";
 import InputMask from "react-input-mask-next";
 import { AddShelterFormType, InfoFormProps } from "../model/type";
-import { validateMask } from "@shared/hooks/idValidMask";
+import { validateMask } from "@/shared/hooks/isValidMask";
 export const DocumentsForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   onSubmitForm,

@@ -67,9 +67,10 @@ export const EditUser: React.FC = () => {
   const handleSubmitImage = async () => {
     if (storedProfileImage !== null) {
       const formData = new FormData();
-      formData.append("profile_image", storedProfileImage);
+      formData.append("image", storedProfileImage);
       try {
         const response = await uploadImage({ formData }).unwrap();
+
         dispatch(userModel.setProfileImage(null));
       } catch (error) {
         console.error("Ошибка загрузки изображения:", error);

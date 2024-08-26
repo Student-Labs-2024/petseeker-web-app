@@ -47,7 +47,7 @@ export type PetState = {
   historySearch: string[];
   searchOnFocus: boolean;
   filters: Record<string, any>;
-  announcmentType: AnnouncmentType;
+
   images: File[];
   ids: number[];
   favoriteFilters: Record<string, any>;

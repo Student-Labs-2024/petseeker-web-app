@@ -40,6 +40,9 @@
 .active_icon * {
   stroke: var(--button-dark-defoult);
 }
+.active_fill_icon * {
+  fill: var(--button-dark-defoult);
+}
 .active_text {
   color: var(--button-dark-defoult);
 }
