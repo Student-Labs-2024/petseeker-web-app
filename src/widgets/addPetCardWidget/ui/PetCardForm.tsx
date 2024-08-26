@@ -32,13 +32,14 @@ export const PetCardForm: React.FC = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const storedImages = useAppSelector((state) => state.pets.images);
+  const addPetCardUrl = useAppSelector((state) => state.pets.addPetUrl);
   const [addPetCard, { isLoading, error: errorMessage }] =
     petModel.useAddPetCardMutation();
   const { data: petTypes = [], isLoading: petTypesLoading } =
     petModel.useGetPetTypesQuery();
   const textSubmitButton = isLoading ? t("loading") : t("create");
   const onSubmit = async (data) => {};
-  petModel.useAddPetCardMutation();
+
   // const { data: petTypes = [], isLoading: petTypesLoading } =
   //   petModel.useGetPetTypesQuery();
   const [uploadImage, { isLoading: isUploadImageLoading }] =
@@ -61,16 +62,7 @@ export const PetCardForm: React.FC = () => {
         // health_issues: formData.health_issues,
         vaccinations: formData.vaccinations,
         address: formData.address,
-
         description: formData.description,
-        //временно
-        status: "Нашел",
-        dimmensions: "0",
-        weigth: "0",
-        contacts: "0",
-        color: "0",
-        state: "string",
-        health_issues: "string",
       },
     });
   useEffect(() => {
@@ -105,7 +97,22 @@ export const PetCardForm: React.FC = () => {
   };
   const onSubmitForm = async () => {
     try {
-      const response = await addPetCard(getValues()).unwrap();
+      // временно
+      const newPetCard = {
+        contacts: "0",
+        dimmensions: "0",
+        health_issues: "string",
+        state: "Активный",
+        status: "Нашел",
+        weigth: "0",
+        breed: "Бигль",
+        ...getValues(),
+      };
+
+      const response = await addPetCard({
+        newPetCard,
+        url: addPetCardUrl,
+      }).unwrap();
 
       handleUploadStoredImages(response?.id);
       navigate(MAIN_ROUTE);

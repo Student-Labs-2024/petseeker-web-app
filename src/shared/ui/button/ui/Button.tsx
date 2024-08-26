@@ -11,7 +11,7 @@ export type ButtonProps = {
   isAuthButton?: boolean;
   isSmall?: boolean;
   name?: string;
-  value?: string;
+  value?: string | boolean;
 };
 
 export const Button: React.FC<ButtonProps> = ({

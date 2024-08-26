@@ -47,6 +47,13 @@
   aspect-ratio: 1;
 }
 .profile__shelter {
+  cursor: pointer;
+  width: 74px;
+  aspect-ratio: 1;
+  background-image: url("../../../shared/assets/add_shelter_icon.svg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
 }
 .profile__info {
   display: flex;
@@ -123,8 +130,9 @@
   background-color: var(--white---primary);
 }
 .modal__content {
+  flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: end;
   align-items: center;
   flex-direction: column;
   gap: 10vh;
@@ -141,4 +149,27 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
+}
+
+//shelterModal
+.shelter__content {
+  flex: 1;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
+}
+.shelter__items {
+  display: flex;
+  flex-direction: column;
+  margin: 40px 0 48px 0;
+  gap: 30px;
+}
+
+.shelter__item {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.shelter__icon {
+  min-width: 18px;
 }
