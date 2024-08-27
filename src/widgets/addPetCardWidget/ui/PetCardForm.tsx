@@ -126,11 +126,14 @@ export const PetCardForm: React.FC = () => {
   };
 
   const handleUploadStoredImages = async (id: string) => {
+
     if (storedImages.length !== 0) {
       const formData = new FormData();
       storedImages.forEach((file) => formData.append("images", file));
+ 
       try {
         const response = await uploadImage({ id: id, formData }).unwrap();
+    
         dispatch(petModel.clearImages());
       } catch (error) {
         console.error("Ошибка загрузки изображения:", error);

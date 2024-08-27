@@ -8,7 +8,7 @@ import useFormattedDate from "@shared/hooks/useFormattedDate/useFormattedDate";
 import { SaveCard } from "@/features/pet/savePet";
 import classNames from "classnames";
 import cat from "@shared/assets/cat.png";
-
+const apiUrl = import.meta.env.VITE_APP_URL;
 type PetProps = {
   description: petModel.Pet;
   actionSlots?: React.ReactNode;
@@ -26,9 +26,10 @@ export const PetCard: FC<PetProps> = ({
   const petCardStyle = classNames(styles.card__container, {
     [styles.favorite]: isFavoritePage,
   });
+
   return (
     <>
-      <NavLink className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
+      <NavLink   className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
         <div className={styles.card__image_container}>
           <span className={styles.status}>
             <Text myClass="small" color="white">
@@ -36,8 +37,7 @@ export const PetCard: FC<PetProps> = ({
             </Text>
           </span>
           <img
-            // src={description.images?.length ? description.images[0] : ""}
-            src={cat}
+            src={description.images?.length ?apiUrl+ description.images[0] : cat}
             alt=""
           />
         </div>
@@ -46,7 +46,7 @@ export const PetCard: FC<PetProps> = ({
             <Text myClass={"subtitle"}>{description.name}</Text>
             <SaveCard id={description.id} isSaved={isSaved}></SaveCard>
           </div>
-          <Text myClass="subtitle">{description.user}</Text>
+          <Text >{description.user}</Text>
           <Text color={"gray"}>{description.address}</Text>
           <Text color={"gray"}>{formattedDate}</Text>{" "}
         </div>

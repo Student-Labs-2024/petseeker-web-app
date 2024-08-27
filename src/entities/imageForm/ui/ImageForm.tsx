@@ -54,7 +54,7 @@ export const ImageForm: React.FC<InfoFormProps> = ({
             render={({ field: { onChange, ref, disabled } }) => (
               <input
                 type="file"
-                accept="image/*"
+                accept="image/png, image/jpeg"
                 multiple
                 disabled={disabled}
                 ref={ref}

@@ -28,8 +28,9 @@ export const SaveCard: React.FC<SaveButtonProps> = ({ id, isSaved }) => {
       console.error(error);
     }
   };
+
   return (
-    <button onClick={handleSave}>
+    <button className={styles.btn} onClick={handleSave}>
       {isSaved ? (
         <LikeActiveIcon className={styles.card__like}></LikeActiveIcon>
       ) : (

@@ -82,6 +82,8 @@ scale: 1.2;
 }
 
 .slide_container {
+  border-radius: 8px;
+  overflow: hidden;
   position: relative;
   > img {
     width: 100%;
