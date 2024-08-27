@@ -1,3 +1,5 @@
+import { UUID } from "crypto";
+
 export type Pet = {
   id: number;
   name: string;
@@ -8,6 +10,13 @@ export type Pet = {
   images?: string[];
 };
 
+
+export type PetApiResponse = {
+  results: Pet[]; 
+  next: string | null; 
+  previous: string | null; 
+  count: number; 
+};
 export type PetDetail = {
   id: number;
   lattitude_longitude?: string;
@@ -48,8 +57,8 @@ export type PetState = {
   searchOnFocus: boolean;
   filters: Record<string, any>;
   announcmentType: AnnouncmentType;
-  ids: number[];
-  favoriteFilters: Record<string, any>;
+  favorites: FavoritesState; 
+
 };
 export const announcmentValues = {
   private: "private",
@@ -67,4 +76,9 @@ export type FilterState = {
   health__issues: "";
   wool_type: "";
   allergenicity: "";
+};
+export type FavoriteId = number | UUID; 
+export type FavoritesState = {
+  favoriteIds: FavoriteId[];
+  favoriteFilters: Record<string, any>; 
 };

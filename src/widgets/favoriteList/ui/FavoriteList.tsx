@@ -13,7 +13,7 @@ import { Button } from "@/shared/ui/button";
 import { FilterPetType } from "@/features/pet/filterPetType";
 export const FavoriteList: React.FC = () => {
   const navigate = useNavigate();
-  const filters = useAppSelector((state) => state.pets.favoriteFilters);
+  const filters = useAppSelector((state) => state.pets.favorites.favoriteFilters);
   const {
     data: pets,
     isLoading,

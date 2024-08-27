@@ -14,14 +14,15 @@ import { useAppSelector, useAppDispatch } from "@/shared/hooks/index";
 export const PetList: React.FC = () => {
   const columnCount = 2;
   const dispatch = useAppDispatch();
-  const filters = useAppSelector((state) => state.pets.filters);
+  const filters = useAppSelector((state) => state.pets.filters); 
   const isOpenFilters = useAppSelector((state) => state.pets.openFilters);
   const isSearchOnFocus = useAppSelector((state) => state.pets.searchOnFocus);
-  const favorites = useAppSelector((state) => state.pets.ids);
+  const favorites = useAppSelector((state) => state.pets.favorites.favoriteIds);
   const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
   const [page, setPage] = useState(1);
   const [allPets, setAllPets] = useState<petModel.type.Pet[]>([]);
   const [rowHeight, setRowHeight] = useState(300);
+  const [hasMoreData, setHasMoreData] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const petItemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const params = { ...filters, page, page_size: 10 };
@@ -42,14 +43,12 @@ export const PetList: React.FC = () => {
 
   useEffect(() => {
     if (pets?.results) {
-      const newPets = pets.results;
       setAllPets((prevPets) => {
-        const existingIds = new Set(prevPets.map((pet) => pet.id));
-        const filteredNewPets = newPets.filter(
-          (pet) => !existingIds.has(pet.id)
-        );
-        return [...prevPets, ...filteredNewPets];
+        return [...prevPets, ...pets.results];
       });
+      if (!pets.next) {
+        setHasMoreData(false); 
+      }
     }
   }, [pets]);
 
@@ -79,10 +78,10 @@ export const PetList: React.FC = () => {
   }, []);
 
   const loadMoreItems = useCallback(() => {
-    if (pets?.next !== null && !isFetching) {
-      setPage((prevPage) => prevPage + 1);
+    if (hasMoreData && !isFetching) { 
+      setPage((prevPage) => prevPage + 2); 
     }
-  }, [pets, isFetching]);
+  }, [hasMoreData, isFetching]);
 
   const cellRenderer = ({ columnIndex, rowIndex, style }) => {
     const index = rowIndex * columnCount + columnIndex;
@@ -122,7 +121,7 @@ export const PetList: React.FC = () => {
         match({ isLoading, isError, pets })
           .with({ isLoading: true }, () => <div>Loading...</div>)
           .with({ isError: true }, () => <div>Error: </div>)
-          .with({ pets: { length: 0 } }, () => <p>No pets available.</p>)
+          .with({ pets: { results: [] } }, () => <p>No pets available.</p>)
           .otherwise(() => (
             <AutoSizer>
               {({ height, width }) => (
@@ -140,9 +139,10 @@ export const PetList: React.FC = () => {
               )}
             </AutoSizer>
           ))}
-      {isFetching && (
+      {(isFetching && !isLoading) && (
         <div className={styles.isFetching}>Loading more pets...</div>
       )}
+     
     </div>
   );
 };

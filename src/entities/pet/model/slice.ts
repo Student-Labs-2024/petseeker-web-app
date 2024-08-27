@@ -1,8 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import * as petModel from "../index";
-import { AnnouncmentType } from "./type"; // Импортируем тип
+import { AnnouncmentType,FavoritesState,FilterState,PetState } from "./type"; 
 
-const initialFilterState: petModel.type.FilterState = {
+const initialFilterState: FilterState = {
   pet_type: "",
   male: "",
   age: "",
@@ -11,21 +10,27 @@ const initialFilterState: petModel.type.FilterState = {
   wool_type: "",
   allergenicity: "",
 };
-const initialState: petModel.type.PetState = {
+
+const initialFavoritesState : FavoritesState= {
+  favoriteIds: [],
+  favoriteFilters: {},
+};
+
+const initialState: PetState = {
   pets: [],
   loading: false,
   error: null,
   activeButton: "1",
   openFilters: false,
   filters: initialFilterState,
-  favoriteFilters: {},
   historySearch: JSON.parse(localStorage.getItem("historySearch")) || [],
   searchOnFocus: false,
   step: 1,
   announcmentType: "private",
   data: JSON.parse(localStorage.getItem("announcmentFormData")) || {},
-  ids: [],
+  favorites: initialFavoritesState,
 };
+
 const petsSlice = createSlice({
   name: "pets",
   initialState,
@@ -41,7 +46,7 @@ const petsSlice = createSlice({
     },
     setFilters(
       state,
-      action: PayloadAction<Partial<petModel.type.FilterState>>
+      action: PayloadAction<Partial<FilterState>>
     ) {
       state.filters = {
         ...state.filters,
@@ -49,8 +54,8 @@ const petsSlice = createSlice({
       };
     },
     setFavoriteFilters(state, action: PayloadAction<Record<string, any>>) {
-      state.favoriteFilters = {
-        ...state.favoriteFilters,
+      state.favorites.favoriteFilters = {
+        ...state.favorites.favoriteFilters,
         ...action.payload,
       };
     },
@@ -67,7 +72,6 @@ const petsSlice = createSlice({
     resetFilters(state) {
       state.filters = initialState.filters;
     },
-
     nextStep(state) {
       state.step += 1;
     },
@@ -80,44 +84,20 @@ const petsSlice = createSlice({
     setAnnouncmentType(state, action: PayloadAction<AnnouncmentType>) {
       state.announcmentType = action.payload;
     },
-    addFavorites: (state, action: PayloadAction<number | number[]>) => {
-      const idsToAdd = Array.isArray(action.payload)
+
+    addFavorites(state, action: PayloadAction<number | number[]>) {
+      const favoriteIdsToAdd = Array.isArray(action.payload)
         ? action.payload
         : [action.payload];
-      const uniqueIds = new Set([...state.ids, ...idsToAdd]);
-      state.ids = Array.from(uniqueIds);
+      const uniqueFavoriteIds = new Set([...state.favorites.favoriteIds, ...favoriteIdsToAdd]);
+      state.favorites.favoriteIds = Array.from(uniqueFavoriteIds);
     },
-    removeFavorite: (state, action: PayloadAction<number>) => {
-      state.ids = state.ids.filter((id) => id !== action.payload);
+    removeFavorite(state, action: PayloadAction<number>) {
+      state.favorites.favoriteIds = state.favorites.favoriteIds.filter((id) => id !== action.payload);
     },
-  },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchPending,
-      (state) => ({
-        ...state,
-        loading: true,
-        error: null,
-      })
-    );
-    builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchFulfilled,
-      (state, action: PayloadAction<petModel.type.Pet[]>) => ({
-        ...state,
-        pets: action.payload,
-        loading: false,
-      })
-    );
-    builder.addMatcher(
-      petModel.api.petsApi.endpoints.getPets.matchRejected,
-      (state, action) => ({
-        ...state,
-        error: action.error.message || "Failed to fetch cards",
-        loading: false,
-      })
-    );
   },
 });
+
 export const {
   setActiveButton,
   setOpenFilters,
@@ -130,7 +110,8 @@ export const {
   setHistorySearch,
   setSearchOnFocus,
   setFavoriteFilters,
-  removeFavorite,
   addFavorites,
+  removeFavorite,
 } = petsSlice.actions;
+
 export default petsSlice.reducer;

@@ -1,16 +1,17 @@
-import * as petModel from "../index";
+
 import { baseApi } from "@shared/api";
 import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
+import { PetApiResponse,PetDetail } from "../model/type";
 
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getPets: builder.query<
-      petModel.type.Pet[],
+      PetApiResponse,
       { page?: number; per_page?: number; pet_type?: string; male?: string }
     >({
       query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
-    getPetDetail: builder.query<petModel.type.PetDetail, { id: string }>({
+    getPetDetail: builder.query<PetDetail, { id: string }>({
       query: (params) =>
         buildQueryString(`/api/shelter-announcement/detail/${params.id}/`),
     }),
@@ -40,7 +41,7 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<petModel.type.Pet[], { pet_type?: string }>({
+    getFavorites: builder.query<Pet[], { pet_type?: string }| void>({
       query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),
