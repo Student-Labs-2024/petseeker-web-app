@@ -23,7 +23,6 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
   setValue,
 }) => {
   const breedValue = watch("breed");
-
   const [isOpenModal, setIsOpenModal] = useState(false);
   const options = ["Бенгальская", "Европейская", "Бигль"];
   const handleOpenModal = () => {
@@ -32,9 +31,12 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
   const handleCloseModal = () => {
     setIsOpenModal(false);
   };
-  const filteredOptions = options.filter((option) =>
-    option.toLowerCase().includes(getValues("breed")?.toLowerCase())
+  const filteredOptions = options.filter(
+    (option) =>
+      option.toLowerCase().includes(breedValue?.toLowerCase()) ||
+      breedValue === undefined
   );
+
   const handleOptionClick = (option: string) => {
     setValue("breed", option);
     setIsOpenModal(false);

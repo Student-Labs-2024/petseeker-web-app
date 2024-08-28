@@ -53,6 +53,7 @@ export const EditUser: React.FC = () => {
     try {
       dispatch(userModel.setProfileData(data));
       const response = await editUser(data).unwrap();
+
       navigate(PROFILE);
     } catch (error) {
       console.error(error);

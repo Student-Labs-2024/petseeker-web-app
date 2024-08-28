@@ -51,3 +51,7 @@
   border: 1px solid var(--button-border-color-auth);
   background-color: var(--button-background-color-auth);
 }
+.active_loading {
+  border: 1px solid var(--button-border-color-loading);
+  background-color: var(--button-background-color-loading);
+}

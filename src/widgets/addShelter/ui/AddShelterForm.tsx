@@ -38,7 +38,7 @@ export const AddShelterForm: React.FC = () => {
     handleSubmit,
     register,
     getValues,
-
+    setValue,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -115,6 +115,8 @@ export const AddShelterForm: React.FC = () => {
         {match(step)
           .with(1, () => (
             <DocumentsForm
+              t={t}
+              errors={errors}
               control={control}
               register={register}
               handleNext={handleNext}
@@ -124,6 +126,8 @@ export const AddShelterForm: React.FC = () => {
           ))
           .with(2, () => (
             <NameForm
+              t={t}
+              errors={errors}
               control={control}
               register={register}
               handleNext={handleNext}
@@ -132,6 +136,9 @@ export const AddShelterForm: React.FC = () => {
           ))
           .with(3, () => (
             <ContactsForm
+              setValue={setValue}
+              t={t}
+              errors={errors}
               getValues={getValues}
               control={control}
               handleNext={handleNext}
@@ -141,6 +148,8 @@ export const AddShelterForm: React.FC = () => {
           ))
           .with(4, () => (
             <AddressForm
+              t={t}
+              errors={errors}
               control={control}
               register={register}
               handleNext={handleNext}
@@ -155,6 +164,8 @@ export const AddShelterForm: React.FC = () => {
           ))
           .with(6, () => (
             <DescriptionForm
+              t={t}
+              errors={errors}
               control={control}
               register={register}
               handleNext={handleNext}

@@ -31,6 +31,7 @@
   --primary-green: #45d954;
   --secondary-gray: #d1d3d9;
   --primary-red: #dd2323;
+  --red: #e25757;
   --primary-40: rgba(108, 84, 246, 0.4);
   --male: #6f93f6;
   --female: #efb8c8;
@@ -52,6 +53,8 @@ html[data-theme="dark"] {
   --button-text-color: #ffffff;
   --button-background-color: #6c54f6;
   --button-border-color: #6c54f6;
+  --button-background-color-loading: #503bc9;
+  --button-border-color-loading: #503bc9;
   --button-background-color-auth: #6c54f6;
   --button-border-color-auth: #6c54f6;
   --button-text-color-default: #ffffff;
@@ -71,7 +74,8 @@ html[data-theme="light"] {
   --button-text-color: #ffffff;
   --button-background-color: #6c54f6;
   --button-border-color: #6c54f6;
-
+  --button-background-color-loading: #503bc9;
+  --button-border-color-loading: #503bc9;
   --button-text-color-default: #585858;
   --button-background-color-default: #f1f1f1;
   --button-border-color-default: #f1f1f1;

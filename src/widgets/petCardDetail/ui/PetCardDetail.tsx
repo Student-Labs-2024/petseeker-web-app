@@ -2,13 +2,13 @@ import React from "react";
 import styles from "./petCardDetail.module.scss";
 import "swiper/css";
 import "swiper/css/pagination";
-import { NavLink ,useLocation,useParams} from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";
 import { Button } from "@shared/ui/button";
-import { useAppSelector} from "@/shared/hooks/index";
+import { useAppSelector } from "@/shared/hooks/index";
 import { ReactComponent as GenderFemale } from "@shared/assets/gender_female_icon.svg";
 import { ReactComponent as GenderMale } from "@shared/assets/gender_male_icon.svg";
 import { ReactComponent as Back } from "@shared/assets/back_arrow_icon.svg";
@@ -21,7 +21,7 @@ import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
 const apiUrl = import.meta.env.VITE_APP_URL;
 export const PetCardDetail: React.FC = () => {
-  const { id} = useParams();
+  const { id } = useParams();
   const favorites = useAppSelector((state) => state.pets.ids);
   const {
     data: pet,
@@ -56,7 +56,10 @@ export const PetCardDetail: React.FC = () => {
                   {pet.gender ? <GenderMale /> : <GenderFemale />}
                 </span>
                 <span className={styles.icon}>
-                <SaveCard id={pet.id} isSaved={favorites.includes(pet.id)}></SaveCard>
+                  <SaveCard
+                    id={pet.id}
+                    isSaved={favorites.includes(pet.id)}
+                  ></SaveCard>
                 </span>
               </div>
             </div>
@@ -71,14 +74,16 @@ export const PetCardDetail: React.FC = () => {
                 modules={[Pagination]}
                 pagination={{ clickable: true }}
               >
-                {pet.images?.map((image,index) => (
+                {pet.images?.map((image, index) => (
                   <SwiperSlide key={index}>
                     <div className={styles.slide_container}>
-                      <img src={image?apiUrl+image?.url:test} alt={image} />
+                      <img
+                        src={image ? apiUrl + image?.url : test}
+                        alt={image}
+                      />
                     </div>
                   </SwiperSlide>
                 ))}
-
               </Swiper>
             </div>
             <div className={styles.info}>

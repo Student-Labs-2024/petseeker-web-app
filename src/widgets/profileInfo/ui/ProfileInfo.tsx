@@ -16,7 +16,8 @@ import { ReactComponent as CatImage } from "@shared/assets/cat_empty_profile.svg
 import { Button } from "@shared/ui/button";
 import { NavLink } from "react-router-dom";
 import { PROFILE_EDIT, SETTINGS, ADD_SHELTER } from "@/app/router/consts";
-
+import { tgConsts, phoneConsts } from "@shared/constants";
+import InputMask from "react-input-mask-next";
 import { Modal } from "@/shared/ui/modal";
 import { ShelterModal } from "./ShelterModal";
 import { useNavigate } from "react-router-dom";
@@ -117,9 +118,9 @@ export const ProfileInfo: React.FC = () => {
             </button>
             <div className={styles.profile__phone}>
               <PhoneIcon />
-              <Text myClass="medium_big" color="dark">
-                8 800 555
-              </Text>
+              <InputMask mask={phoneConsts.mask} value={userInfo?.phone_number}>
+                <input className={styles.medium_big} />
+              </InputMask>
             </div>
             <div className={styles.profile__tg}>
               <TgIcon />

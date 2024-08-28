@@ -8,6 +8,8 @@ import { codeConsts } from "@shared/constants";
 import { useTranslation } from "react-i18next";
 import { Form } from "@shared/ui/form";
 import { Text } from "@shared/ui/text";
+import { Label } from "@shared/ui/label";
+
 import { validateMask } from "@/shared/hooks/isValidMask";
 type ConfirmFormProps = {
   control: any;
@@ -32,27 +34,34 @@ export const ConfirmForm: React.FC<ConfirmFormProps> = ({
   return (
     <div className={styles.confirm}>
       <Form onSubmit={handleSubmit}>
-        <div className={styles.code_mask}>
-          <Controller
-            name="code"
-            control={control}
-            rules={{
-              required: true,
-              validate: (value) => validateMask(value, codeConsts.mask),
-            }}
-            defaultValue=""
-            render={({ field }) => (
-              <InputMask
-                value={field.value}
-                mask={codeConsts.mask}
-                placeholder={codeConsts.placeholder}
-                onChange={(e) => handleChangeCode(e, field)}
-              >
-                <Input ref={field.ref} />
-              </InputMask>
-            )}
-          />
-        </div>
+        <Label>
+          <div className={styles.code_mask}>
+            <Controller
+              name="code"
+              control={control}
+              rules={{
+                required: t("fillInTheField"),
+                validate: (value) => validateMask(value, codeConsts.mask),
+              }}
+              defaultValue=""
+              render={({ field, fieldState }) => (
+                <InputMask
+                  value={field.value}
+                  mask={codeConsts.mask}
+                  placeholder={codeConsts.placeholder}
+                  onChange={(e) => handleChangeCode(e, field)}
+                >
+                  <Input
+                    errorMessage={
+                      fieldState.invalid ? t("fillInTheField") : false
+                    }
+                    ref={field.ref}
+                  />
+                </InputMask>
+              )}
+            />
+          </div>
+        </Label>
         <Button type="submit" isAuthButton={true} disabled={isSendingConfirm}>
           {t("next")}
         </Button>

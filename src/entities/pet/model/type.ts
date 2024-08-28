@@ -57,7 +57,17 @@ export type PetState = {
 export const announcmentValues = {
   private: "/api/private-announcement/create/",
   shelter: "/api/shelter-announcement/create/",
-  message: "message",
+} as const;
+export const announcmentState = {
+  active: "Активный",
+  in_process: "В процессе усыновления",
+  inactive: "Неактивный",
+} as const;
+export const announcmentStatus = {
+  find: "Нашел ",
+  lost: "Потерял",
+  looking_home: "Ищет дом",
+  give: " Отдаю",
 } as const;
 
 export type AnnouncmentType =
@@ -73,8 +83,8 @@ export type FormDataType = {
   name: string;
   gender: string;
   allergenicity: string;
-  fatness: string;
-  weight: string;
+  dimensions: string;
+  weigth: string;
   breed: string;
   age: string;
   wool_type: string;
@@ -84,7 +94,7 @@ export type FormDataType = {
   description: string;
   status: string;
   dimmensions: string;
-  weigth: string;
+
   contacts: string;
   color: string;
   state: string;
@@ -95,7 +105,7 @@ export type FilterState = {
   pet_type: string;
   male: string;
   age: string;
-  fatness: string;
+  dimensions: string;
   health__issues: string;
   wool_type: string;
   allergenicity: string;

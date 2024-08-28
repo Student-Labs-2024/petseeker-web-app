@@ -12,7 +12,7 @@ import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
 import { useForm } from "react-hook-form";
 import classNames from "classnames";
-import { UseFormRegister } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { TextArea } from "@/shared/ui/textArea";
 import { InfoFormProps } from "../model/type";
 export const DescriptionForm: React.FC<InfoFormProps> = ({
@@ -20,9 +20,9 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
   handleNext,
   control,
   register,
+  errors,
+  t,
 }) => {
-  const dispatch = useAppDispatch();
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -32,10 +32,23 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
       <form onSubmit={onChangeForm} className={styles.form}>
         <div className={styles.form__item}>
           <Label>
-            <TextArea
-              placeholder="Введите описание"
-              myClass="form_textArea"
-              register={register("description", { required: true })}
+            <Controller
+              name="description"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: t("fillInTheField"),
+              }}
+              render={({ field }) => (
+                <TextArea
+                  ref={field.ref}
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Введите описание"
+                  myClass="form_textArea"
+                  errorMessage={errors.description?.message}
+                />
+              )}
             />
           </Label>
         </div>

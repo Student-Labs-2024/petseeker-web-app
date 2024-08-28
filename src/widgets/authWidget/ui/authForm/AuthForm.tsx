@@ -19,7 +19,6 @@ type AuthFormProps = {
   ) => void;
   handleChangeName?: (event: React.ChangeEvent<HTMLInputElement>) => void;
   control: any;
-
   handleSubmit: (event: React.FormEvent<HTMLFormElement>) => void;
   isSendingLogin?: boolean;
 };
@@ -42,18 +41,23 @@ export const AuthForm: React.FC<AuthFormProps> = ({
             name="phoneNumber"
             control={control}
             rules={{
-              required: true,
+              required: t("fillInTheField"),
               validate: (value) => validateMask(value, phoneConsts.mask),
             }}
             defaultValue=""
-            render={({ field }) => (
+            render={({ field, fieldState }) => (
               <InputMask
                 value={field.value}
                 mask={phoneConsts.mask}
                 placeholder={phoneConsts.placeholder}
                 onChange={(e) => handleChangePhone(e, field)}
               >
-                <Input ref={field.ref} />
+                <Input
+                  errorMessage={
+                    fieldState.invalid ? t("fillInTheField") : false
+                  }
+                  ref={field.ref}
+                />
               </InputMask>
             )}
           />

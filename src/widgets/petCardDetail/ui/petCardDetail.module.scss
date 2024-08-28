@@ -17,22 +17,17 @@
     cursor: pointer;
   }
   .title {
+    text-align: center;
     display: flex;
     align-items: center;
     justify-content: center;
-    max-height: 24px;
+
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
     border-radius: 20px;
     padding: 3px 25px;
     background-color: var(--button-dark-defoult);
-    @media (min-width: 360px) {
-      max-height: 27px;
-    }
-    @media (min-width: 412px) {
-      max-height: 31px;
-    }
   }
   .icons {
     display: flex;
@@ -46,7 +41,7 @@
     justify-content: right;
   }
   .like {
-scale: 1.2;
+    scale: 1.2;
   }
 }
 

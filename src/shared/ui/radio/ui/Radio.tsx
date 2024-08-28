@@ -8,6 +8,7 @@ type RadioButtonProps = {
   control?: Control<any>;
   value?: string;
   onChange?: (value: any) => void;
+  required?: boolean;
 };
 
 export const Radio: React.FC<RadioButtonProps> = ({
@@ -15,12 +16,15 @@ export const Radio: React.FC<RadioButtonProps> = ({
   control,
   value,
   onChange: propsOnChange,
+  required,
 }) => {
   const {
     field: { onChange, onBlur, ref, value: fieldValue },
+    fieldState: { error },
   } = useController({
     name,
     control,
+    rules: { required: required },
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -33,6 +37,7 @@ export const Radio: React.FC<RadioButtonProps> = ({
   const checked = fieldValue === value;
   const radioClass = classNames(styles.custom, {
     [styles.active]: checked,
+    [styles.error]: error,
   });
 
   return (

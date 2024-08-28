@@ -37,8 +37,6 @@ export const PetCardForm: React.FC = () => {
     petModel.useAddPetCardMutation();
   const { data: petTypes = [], isLoading: petTypesLoading } =
     petModel.useGetPetTypesQuery();
-  const textSubmitButton = isLoading ? t("loading") : t("create");
-  const onSubmit = async (data) => {};
 
   // const { data: petTypes = [], isLoading: petTypesLoading } =
   //   petModel.useGetPetTypesQuery();
@@ -46,25 +44,33 @@ export const PetCardForm: React.FC = () => {
     petModel.useUploadImageMutation();
   const formData = useAppSelector((state) => state.pets.data);
 
-  const { control, handleSubmit, register, getValues, setValue, watch, reset } =
-    useForm({
-      defaultValues: {
-        pet_type: formData.pet_type,
-        name: formData.name,
-        gender: formData.gender,
-        allergenicity: formData.allergenicity,
-        fatness: formData.fatness,
-        weight: formData.weight,
-        breed: formData.breed,
-        age: formData.age,
-        wool_type: formData.wool_type,
-        sterilization: formData.sterilization,
-        // health_issues: formData.health_issues,
-        vaccinations: formData.vaccinations,
-        address: formData.address,
-        description: formData.description,
-      },
-    });
+  const {
+    control,
+    handleSubmit,
+    register,
+    getValues,
+    setValue,
+    watch,
+    reset,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      pet_type: formData.pet_type,
+      name: formData.name,
+      gender: formData.gender,
+      allergenicity: formData.allergenicity,
+      dimensions: formData.dimensions,
+      weigth: formData.weigth,
+      breed: formData.breed,
+      age: formData.age,
+      wool_type: formData.wool_type,
+      sterilization: formData.sterilization,
+      // health_issues: formData.health_issues,
+      vaccinations: formData.vaccinations,
+      address: formData.address,
+      description: formData.description,
+    },
+  });
   useEffect(() => {
     const savedAnnouncmentFormData = JSON.parse(
       localStorage.getItem("announcmentFormData") || "{}"
@@ -101,12 +107,8 @@ export const PetCardForm: React.FC = () => {
       // временно
       const newPetCard = {
         contacts: "0",
-        dimmensions: "0",
-        health_issues: "Здоровый",
-        state: "Активный",
-        status: "Нашел",
-        weigth: "0",
 
+        state: petModel.announcmentState.active,
         ...getValues(),
       };
       newPetCard.health_issues = "string";
@@ -117,23 +119,22 @@ export const PetCardForm: React.FC = () => {
       }).unwrap();
 
       handleUploadStoredImages(response?.id);
-      dispatch(petModel.setFormData({}));
-      localStorage.removeItem("announcmentFormData");
-      navigate(MAIN_ROUTE);
     } catch (error) {
       console.error(errorMessage);
     }
   };
 
   const handleUploadStoredImages = async (id: string) => {
-
     if (storedImages.length !== 0) {
       const formData = new FormData();
       storedImages.forEach((file) => formData.append("images", file));
- 
       try {
         const response = await uploadImage({ id: id, formData }).unwrap();
-    
+
+        dispatch(petModel.setFormData({}));
+        localStorage.removeItem("announcmentFormData");
+        reset();
+        navigate(MAIN_ROUTE);
         dispatch(petModel.clearImages());
       } catch (error) {
         console.error("Ошибка загрузки изображения:", error);
@@ -154,9 +155,11 @@ export const PetCardForm: React.FC = () => {
           </button>
         </div>
         {match(step)
-          .with(1, () => <TypeForm />)
+          .with(1, () => <TypeForm setValue={setValue} />)
           .with(2, () => (
             <InfoForm
+              t={t}
+              errors={errors}
               control={control}
               register={register}
               handleNext={handleNext}
@@ -165,8 +168,10 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(3, () => (
             <CharacteristicForm1
+              t={t}
               getValues={getValues}
               control={control}
+              errors={errors}
               register={register}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
@@ -174,16 +179,20 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(4, () => (
             <CharacteristicForm2
+              t={t}
               watch={watch}
               getValues={getValues}
               register={register}
               onChangeForm={handleSubmit(onChangeForm)}
               setValue={setValue}
+              errors={errors}
             />
           ))
           .with(5, () => (
             <CharacteristicForm3
+              t={t}
               control={control}
+              errors={errors}
               register={register}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
@@ -191,7 +200,9 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(6, () => (
             <CharacteristicForm4
+              t={t}
               control={control}
+              errors={errors}
               register={register}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
@@ -199,7 +210,9 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(7, () => (
             <DescriptionForm
+              t={t}
               control={control}
+              errors={errors}
               register={register}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
@@ -207,17 +220,20 @@ export const PetCardForm: React.FC = () => {
           ))
           .with(8, () => (
             <ImagesForm
+              t={t}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
           .with(9, () => (
             <AddressForm
+              t={t}
               control={control}
+              errors={errors}
               register={register}
               handleNext={handleNext}
               onSubmitForm={handleSubmit(onSubmitForm)}
-              onChangeForm={handleSubmit(onChangeForm)}
+              isLoading={isUploadImageLoading}
             />
           ))
           .otherwise(() => null)}

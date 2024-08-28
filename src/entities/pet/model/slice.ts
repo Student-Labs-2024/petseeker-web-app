@@ -5,7 +5,7 @@ const initialFilterState: petModel.FilterState = {
   pet_type: undefined,
   male: undefined,
   age: undefined,
-  fatness: undefined,
+  dimensions: undefined,
   health__issues: undefined,
   wool_type: undefined,
   allergenicity: undefined,

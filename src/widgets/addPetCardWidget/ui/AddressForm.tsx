@@ -1,24 +1,22 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
 import { Label } from "@shared/ui/label";
-import { Radio } from "@shared/ui/radio";
 import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
-import { useForm } from "react-hook-form";
-import classNames from "classnames";
-import { UseFormRegister } from "react-hook-form";
-import { TextArea } from "@/shared/ui/textArea";
+import { Controller } from "react-hook-form";
 import { InfoFormProps } from "../model/type";
 export const AddressForm: React.FC<InfoFormProps> = ({
-  onChangeForm,
   onSubmitForm,
-  control,
   register,
+  isLoading,
+  errors,
+  control,
+  t,
 }) => {
+  const textSubmitButton = isLoading ? "Загрузка" : "Далее";
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -28,15 +26,30 @@ export const AddressForm: React.FC<InfoFormProps> = ({
       <form onSubmit={onSubmitForm} className={styles.form}>
         <div className={styles.form__item}>
           <Label>
-            <Input
-              placeholder="Укажите место"
-              myClass="form_input"
-              register={register("address", { required: true })}
+            <Controller
+              name="address"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: t("fillInTheField"),
+              }}
+              render={({ field }) => (
+                <Input
+                  ref={field.ref}
+                  value={field.value}
+                  onChange={field.onChange}
+                  placeholder="Укажите место"
+                  myClass="form_input"
+                  errorMessage={errors.address?.message}
+                />
+              )}
             />
           </Label>
         </div>
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button isLoading={isLoading} type="submit">
+            {textSubmitButton}
+          </Button>
         </div>
       </form>
     </div>

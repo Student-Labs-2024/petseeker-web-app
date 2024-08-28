@@ -10,7 +10,8 @@ import { ReactComponent as Message } from "@shared/assets/message_icon.svg";
 import { useAppDispatch } from "@/shared/hooks";
 import { useAppSelector } from "@/shared/hooks";
 import classNames from "classnames";
-export const TypeForm: React.FC = () => {
+import { InfoFormProps } from "../model/type";
+export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
   const darkCardStyle = classNames(styles.card, styles.dark);
   const dispatch = useAppDispatch();
 
@@ -18,7 +19,7 @@ export const TypeForm: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     const target = event.target as HTMLButtonElement;
-
+    setValue("status", target.value);
     dispatch(petModel.setAddPetUrl(target.name as petModel.AnnouncmentType));
     dispatch(petModel.nextStep());
   };
@@ -31,6 +32,7 @@ export const TypeForm: React.FC = () => {
       </div>
       {/* замапить кнопки? */}
       <button
+        value={petModel?.announcmentStatus.looking_home}
         name={petModel?.announcmentValues?.shelter}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
@@ -50,6 +52,7 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
+        value={petModel?.announcmentStatus.give}
         name={petModel?.announcmentValues?.private}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
@@ -69,7 +72,7 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
-        value={petModel?.announcmentValues?.message}
+        value={petModel?.announcmentStatus.lost}
         onClick={handleSetAnnouncmentType}
         className={darkCardStyle}
       >
