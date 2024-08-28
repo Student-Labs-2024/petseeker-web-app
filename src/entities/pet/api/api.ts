@@ -1,7 +1,6 @@
-
 import { baseApi } from "@shared/api";
 import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
-import { PetApiResponse,PetDetail } from "../model/type";
+import { PetApiResponse, PetDetail } from "../model/type";
 
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
@@ -41,7 +40,7 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<Pet[], { pet_type?: string }| void>({
+    getFavorites: builder.query<Pet[], { pet_type?: string } | void>({
       query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),

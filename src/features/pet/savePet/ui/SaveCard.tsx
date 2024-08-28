@@ -21,7 +21,7 @@ export const SaveCard: React.FC<SaveButtonProps> = ({ id, isSaved }) => {
         dispatch(petModel.slice.removeFavorite(id));
       } else {
         const response = await saveFavorite(id).unwrap();
-        dispatch(petModel.slice.addFavorites(id));
+        dispatch(petModel.slice.addFavorites({ id: id }));
       }
     } catch (error) {
       console.error(error);

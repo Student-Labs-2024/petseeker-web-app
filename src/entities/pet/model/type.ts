@@ -1,4 +1,4 @@
-import { UUID } from "crypto";
+import { EntityState } from "@reduxjs/toolkit";
 
 export type Pet = {
   id: number;
@@ -10,13 +10,13 @@ export type Pet = {
   images?: string[];
 };
 
-
 export type PetApiResponse = {
-  results: Pet[]; 
-  next: string | null; 
-  previous: string | null; 
-  count: number; 
+  results: Pet[];
+  next: string | null;
+  previous: string | null;
+  count: number;
 };
+
 export type PetDetail = {
   id: number;
   lattitude_longitude?: string;
@@ -38,28 +38,31 @@ export type PetDetail = {
   allergenicity?: null;
   health_issues?: string;
   vaccinations?: true;
-  weigth?: number;
-  dimmensions?: number;
+  weight?: number;
+  dimensions?: number;
   temperament?: string;
   shelter?: number;
   images?: string[];
 };
 
-export type PetState = {
-  pets: Pet[];
-  loading: boolean;
-  error: string | null;
-  activeButton?: string | null;
-  openFilters: boolean;
-  step: number;
-  data: Record<string, any>;
-  historySearch: string[];
-  searchOnFocus: boolean;
-  filters: Record<string, any>;
-  announcmentType: AnnouncmentType;
-  favorites: FavoritesState; 
-
+export type FilterState = {
+  pet_type: string;
+  male: string;
+  age: string;
+  fatness: string;
+  health__issues: string;
+  wool_type: string;
+  allergenicity: string;
 };
+
+export type Favorite = {
+  id: number;
+};
+
+export type FavoritesState = EntityState<Favorite, number> & {
+  filters: Record<string, any>;
+};
+
 export const announcmentValues = {
   private: "private",
   shelter: "shelter",
@@ -68,17 +71,18 @@ export const announcmentValues = {
 
 export type AnnouncmentType =
   (typeof announcmentValues)[keyof typeof announcmentValues];
-export type FilterState = {
-  pet_type: "";
-  male: "";
-  age: "";
-  fatness: "";
-  health__issues: "";
-  wool_type: "";
-  allergenicity: "";
-};
-export type FavoriteId = number | UUID; 
-export type FavoritesState = {
-  favoriteIds: FavoriteId[];
-  favoriteFilters: Record<string, any>; 
+
+// Состояние для Pet
+export type PetState = EntityState<Pet, number> & {
+  loading: boolean;
+  error: string | null;
+  activeButton?: string | null;
+  openFilters: boolean;
+  step: number;
+  data: Record<string, any>;
+  historySearch: string[];
+  searchOnFocus: boolean;
+  filters: FilterState;
+  announcmentType: AnnouncmentType;
+  favorites: FavoritesState;
 };

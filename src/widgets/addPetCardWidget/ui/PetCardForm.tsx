@@ -124,7 +124,7 @@ export const PetCardForm: React.FC = () => {
             <CharacteristicForm2
               watch={watch}
               getValues={getValues}
-              register={register}
+              register={register}   
               onChangeForm={handleSubmit(onChangeForm)}
               setValue={setValue}
             />

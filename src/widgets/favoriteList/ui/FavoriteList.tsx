@@ -3,17 +3,15 @@ import * as petModel from "@entities/pet";
 import styles from "./favorite.module.scss";
 import { match } from "ts-pattern";
 import { Text } from "@shared/ui/text";
-
 import { ReactComponent as Back } from "@shared/assets/back_arrow_icon.svg";
 import { useAppSelector } from "@/shared/hooks/index";
 import { ReactComponent as SortIcon } from "@shared/assets/sort_icon.svg";
 import { useNavigate } from "react-router-dom";
 import { MAIN_ROUTE } from "@/app/router/consts";
-import { Button } from "@/shared/ui/button";
 import { FilterPetType } from "@/features/pet/filterPetType";
 export const FavoriteList: React.FC = () => {
   const navigate = useNavigate();
-  const filters = useAppSelector((state) => state.pets.favorites.favoriteFilters);
+  const filters = useAppSelector((state) => state.pets.favorites.filters);
   const {
     data: pets,
     isLoading,

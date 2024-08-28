@@ -10,22 +10,25 @@ import { AutoSizer, Grid } from "react-virtualized";
 import styles from "./card.module.scss";
 import { match } from "ts-pattern";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks/index";
+import { selectAllPets } from "@/entities/pet/model/slice";
+import { petListConsts } from "@shared/constants";
+import PetCell from "./PetCell";
 
 export const PetList: React.FC = () => {
-  const columnCount = 2;
+  const columnCount = petListConsts.columnCount;
   const dispatch = useAppDispatch();
-  const filters = useAppSelector((state) => state.pets.filters); 
+  const filters = useAppSelector((state) => state.pets.filters);
   const isOpenFilters = useAppSelector((state) => state.pets.openFilters);
   const isSearchOnFocus = useAppSelector((state) => state.pets.searchOnFocus);
-  const favorites = useAppSelector((state) => state.pets.favorites.favoriteIds);
+  const favorites = useAppSelector((state) => state.pets.favorites.ids);
+  const allPets = useAppSelector(selectAllPets);
   const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
-  const [page, setPage] = useState(1);
-  const [allPets, setAllPets] = useState<petModel.type.Pet[]>([]);
-  const [rowHeight, setRowHeight] = useState(300);
+  const [page, setPage] = useState(petListConsts.initialPage);
+  const [rowHeight, setRowHeight] = useState(petListConsts.initialRowHeight);
   const [hasMoreData, setHasMoreData] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const petItemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const params = { ...filters, page, page_size: 10 };
+  const params = { ...filters, page, page_size: petListConsts.initialPage };
   const isShowList = !isSearchOnFocus && !isOpenFilters;
   const {
     data: pets,
@@ -36,21 +39,19 @@ export const PetList: React.FC = () => {
 
   useEffect(() => {
     if (favoriteIds.length > 0) {
-      const ids = favoriteIds.map((i) => i.id);
-      dispatch(petModel.slice.addFavorites(ids));
+      const favorites = favoriteIds.map((i) => ({ id: i.id }));
+      dispatch(petModel.slice.addFavorites(favorites));
     }
   }, [favoriteIds]);
 
   useEffect(() => {
     if (pets?.results) {
-      setAllPets((prevPets) => {
-        return [...prevPets, ...pets.results];
-      });
+      dispatch(petModel.slice.addPets(pets.results));
       if (!pets.next) {
-        setHasMoreData(false); 
+        setHasMoreData(false);
       }
     }
-  }, [pets]);
+  }, [pets, dispatch]);
 
   const updateRowHeight = () => {
     const visibleItems = petItemRefs.current.filter(Boolean);
@@ -78,31 +79,10 @@ export const PetList: React.FC = () => {
   }, []);
 
   const loadMoreItems = useCallback(() => {
-    if (hasMoreData && !isFetching) { 
-      setPage((prevPage) => prevPage + 2); 
+    if (hasMoreData && !isFetching) {
+      setPage((prevPage) => prevPage + petListConsts.nextPage);
     }
   }, [hasMoreData, isFetching]);
-
-  const cellRenderer = ({ columnIndex, rowIndex, style }) => {
-    const index = rowIndex * columnCount + columnIndex;
-    const pet = allPets[index];
-    if (!pet) return null;
-    return (
-      <div
-        key={pet.id}
-        style={style}
-        className={styles.petItem}
-        ref={(el) => (petItemRefs.current[index] = el)}
-      >
-        <petModel.PetCard
-          key={pet.id}
-          description={pet}
-          isSaved={favorites.includes(pet.id)}
-          isFavoritePage={false}
-        />
-      </div>
-    );
-  };
 
   const handleSectionRendered = ({ rowStopIndex }) => {
     if (rowStopIndex === Math.ceil(allPets.length / columnCount) - 1) {
@@ -127,7 +107,14 @@ export const PetList: React.FC = () => {
               {({ height, width }) => (
                 <Grid
                   className={styles.grid}
-                  cellRenderer={cellRenderer}
+                  cellRenderer={(props) => (
+                    <PetCell
+                      {...props}
+                      allPets={allPets}
+                      favorites={favorites}
+                      petItemRefs={petItemRefs}
+                    />
+                  )}
                   columnCount={columnCount}
                   columnWidth={gridStyle.columnWidth(width)}
                   height={height}
@@ -139,10 +126,9 @@ export const PetList: React.FC = () => {
               )}
             </AutoSizer>
           ))}
-      {(isFetching && !isLoading) && (
+      {isFetching && !isLoading && (
         <div className={styles.isFetching}>Loading more pets...</div>
       )}
-     
     </div>
   );
 };
