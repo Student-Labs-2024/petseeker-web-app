@@ -29,15 +29,17 @@ export const PetCard: FC<PetProps> = ({
 
   return (
     <>
-      <NavLink   className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
+      <NavLink className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
         <div className={styles.card__image_container}>
           <span className={styles.status}>
             <Text myClass="small" color="white">
-              {description.status}
+              {petModel.announcmentStatus[description.status]}
             </Text>
           </span>
           <img
-            src={description.images?.length ?apiUrl+ description.images[0] : cat}
+            src={
+              description.images?.length ? apiUrl + description.images[0] : cat
+            }
             alt=""
           />
         </div>
@@ -46,7 +48,7 @@ export const PetCard: FC<PetProps> = ({
             <Text myClass={"subtitle"}>{description.name}</Text>
             <SaveCard id={description.id} isSaved={isSaved}></SaveCard>
           </div>
-          <Text >{description.user}</Text>
+          <Text>{description.user}</Text>
           <Text color={"gray"}>{description.address}</Text>
           <Text color={"gray"}>{formattedDate}</Text>{" "}
         </div>

@@ -65,7 +65,9 @@ export const PetCardDetail: React.FC = () => {
             </div>
             <div className={styles.imageContainer}>
               <span className={styles.status}>
-                <Text color="white">{pet.status}</Text>
+                <Text color="white">
+                  {petModel.announcmentStatus[pet.status]}
+                </Text>
               </span>
 
               <Swiper
@@ -78,7 +80,7 @@ export const PetCardDetail: React.FC = () => {
                   <SwiperSlide key={index}>
                     <div className={styles.slide_container}>
                       <img
-                        src={image ? apiUrl + image?.url : test}
+                        src={image.length ? `${apiUrl}${image}` : test}
                         alt={image}
                       />
                     </div>

@@ -19,7 +19,6 @@ export const EditUser: React.FC = () => {
   const { t } = useTranslation("editUser");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const [phone, setPhone] = useState("");
   const storedProfileImage = useAppSelector(
     (state) => state.user.profile_image
   );
@@ -28,8 +27,8 @@ export const EditUser: React.FC = () => {
     name: profileData?.name,
     surname: profileData?.surname,
     phone_number: profileData?.phone_number,
-    tg: profileData?.tg,
-    patr: profileData?.patr,
+    telegram: profileData?.telegram,
+    patronymic: profileData?.patronymic,
     male: profileData?.male,
   };
   const [editUser, { isLoading: isDataLoading }] =
@@ -53,8 +52,11 @@ export const EditUser: React.FC = () => {
     try {
       dispatch(userModel.setProfileData(data));
       const response = await editUser(data).unwrap();
-
-      navigate(PROFILE);
+      if (storedProfileImage) {
+        handleSubmitImage();
+      } else {
+        navigate(PROFILE);
+      }
     } catch (error) {
       console.error(error);
     }
@@ -72,6 +74,7 @@ export const EditUser: React.FC = () => {
       try {
         const response = await uploadImage({ formData }).unwrap();
 
+        navigate(PROFILE);
         dispatch(userModel.setProfileImage(null));
       } catch (error) {
         console.error("Ошибка загрузки изображения:", error);
@@ -151,7 +154,7 @@ export const EditUser: React.FC = () => {
             placeholder="Отчество"
             myClass="form_input"
             id="phone_number"
-            register={register("patr")}
+            register={register("patronymic")}
           />
         </Label>
         <Label>
@@ -201,7 +204,7 @@ export const EditUser: React.FC = () => {
         <Label>
           <Text myClass="medium_big"> Никнейм</Text>
           <Controller
-            name="tg"
+            name="telegram"
             control={control}
             defaultValue=""
             rules={{
@@ -225,7 +228,7 @@ export const EditUser: React.FC = () => {
           />
         </Label>
         <div className={styles.bottom}>
-          <Button onClick={handleSubmitImage} type="submit">
+          <Button isLoading={isLoading} type="submit">
             {textSubmitButton}
           </Button>
         </div>

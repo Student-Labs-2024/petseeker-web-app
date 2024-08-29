@@ -13,6 +13,7 @@ import { useForm, Controller } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
 import { InfoFormProps } from "../model/type";
+import { petModel } from "@entities/pet";
 export const InfoForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
@@ -38,7 +39,7 @@ export const InfoForm: React.FC<InfoFormProps> = ({
               required={true}
               name="pet_type"
               control={control}
-              value={"Кошка"}
+              value={petModel.announcmentPetType.cat}
             ></Radio>
           </label>
           <label className={styles.form__label}>
@@ -49,7 +50,7 @@ export const InfoForm: React.FC<InfoFormProps> = ({
               required={true}
               name="pet_type"
               control={control}
-              value={"Собака"}
+              value={petModel.announcmentPetType.dog}
             ></Radio>
           </label>
         </div>

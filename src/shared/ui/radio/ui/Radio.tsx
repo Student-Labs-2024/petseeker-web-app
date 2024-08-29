@@ -2,7 +2,7 @@ import React from "react";
 import { useController, Control } from "react-hook-form";
 import styles from "./radio.module.scss";
 import classNames from "classnames";
-
+import { ReactComponent as radioIcon } from "@shared/assets/error_radio.svg";
 type RadioButtonProps = {
   name?: string;
   control?: Control<any>;

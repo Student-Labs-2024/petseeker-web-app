@@ -59,17 +59,44 @@ export const announcmentValues = {
   shelter: "/api/shelter-announcement/create/",
 } as const;
 export const announcmentState = {
-  active: "Активный",
-  in_process: "В процессе усыновления",
-  inactive: "Неактивный",
+  active: "active",
+  in_process: "in_process",
+  inactive: "inactive",
 } as const;
 export const announcmentStatus = {
-  find: "Нашел ",
-  lost: "Потерял",
-  looking_home: "Ищет дом",
-  give: " Отдаю",
+  find: "find",
+  lost: "lost",
+  looking_home: "looking_home",
+  give: "give",
 } as const;
 
+export const announcmentAge = {
+  small: "small",
+  young: "young",
+  adult: "adult",
+  old: "old",
+  unknown: "unknown",
+} as const;
+export const announcmentWoolType = {
+  long: "long",
+  short: "short",
+  fluffy: "fluffy",
+  tough: "tough",
+  hairless: "hairless",
+} as const;
+
+export const announcmentDimensions = {
+  thin: "thin",
+  average: "average",
+  full: "full",
+} as const;
+
+export const announcmentPetType = {
+  cat: "cat",
+  dog: "dog",
+} as const;
+
+enum PetDimensions {}
 export type AnnouncmentType =
   (typeof announcmentValues)[keyof typeof announcmentValues];
 

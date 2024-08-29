@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -55,7 +55,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
                 required={true}
                 name="dimensions"
                 control={control}
-                value={"Худое"}
+                value={petModel.announcmentDimensions.thin}
               ></Radio>
             </label>
             <label className={styles.form__label_column}>
@@ -69,7 +69,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
                 required={true}
                 name="dimensions"
                 control={control}
-                value={"Среднее"}
+                value={petModel.announcmentDimensions.average}
               ></Radio>
             </label>
             <label className={styles.form__label_column}>
@@ -83,7 +83,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
                 required={true}
                 name="dimensions"
                 control={control}
-                value={"Полное"}
+                value={petModel.announcmentDimensions.full}
               ></Radio>
             </label>
           </div>
@@ -122,7 +122,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               required={true}
               name="age"
               control={control}
-              value={"1"}
+              value={petModel.announcmentAge.small}
             ></Radio>
           </label>
           <label className={styles.form__label}>
@@ -133,7 +133,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               required={true}
               name="age"
               control={control}
-              value={"3"}
+              value={petModel.announcmentAge.young}
             ></Radio>
           </label>
           <label className={styles.form__label}>
@@ -144,7 +144,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               required={true}
               name="age"
               control={control}
-              value={"7"}
+              value={petModel.announcmentAge.adult}
             ></Radio>
           </label>
           <label className={styles.form__label}>
@@ -155,7 +155,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               required={true}
               name="age"
               control={control}
-              value={"12"}
+              value={petModel.announcmentAge.old}
             ></Radio>
           </label>
           <label className={styles.form__label}>
@@ -166,7 +166,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               required={true}
               name="age"
               control={control}
-              value={"0"}
+              value={petModel.announcmentAge.unknown}
             ></Radio>
           </label>
         </div>

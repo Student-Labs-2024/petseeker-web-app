@@ -107,11 +107,9 @@ export const PetCardForm: React.FC = () => {
       // временно
       const newPetCard = {
         contacts: "0",
-
         state: petModel.announcmentState.active,
         ...getValues(),
       };
-      newPetCard.health_issues = "string";
 
       const response = await addPetCard({
         newPetCard,

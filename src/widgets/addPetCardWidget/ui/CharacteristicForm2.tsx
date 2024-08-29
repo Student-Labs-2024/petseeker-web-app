@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";

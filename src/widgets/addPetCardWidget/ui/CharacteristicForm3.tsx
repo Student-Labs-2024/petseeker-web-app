@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -52,7 +52,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               required={true}
               name="wool_type"
               control={control}
-              value={"string"}
+              value={petModel.announcmentWoolType.hairless}
             ></Radio>{" "}
             <Text myClass="medium_big">Бесшерстная</Text>
           </label>
@@ -61,7 +61,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               required={true}
               name="wool_type"
               control={control}
-              value={"string1"}
+              value={petModel.announcmentWoolType.fluffy}
             ></Radio>{" "}
             <Text myClass="medium_big">Пушистая</Text>
           </label>
@@ -70,7 +70,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               required={true}
               name="wool_type"
               control={control}
-              value={"string2"}
+              value={petModel.announcmentWoolType.tough}
             ></Radio>
             <Text myClass="medium_big">Жесткая</Text>
           </label>
@@ -79,7 +79,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               required={true}
               name="wool_type"
               control={control}
-              value={"string3"}
+              value={petModel.announcmentWoolType.long}
             ></Radio>{" "}
             <Text myClass="medium_big">Длинная</Text>
           </label>
@@ -88,7 +88,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               required={true}
               name="wool_type"
               control={control}
-              value={"string4"}
+              value={petModel.announcmentWoolType.short}
             ></Radio>{" "}
             <Text myClass="medium_big">Короткая</Text>
           </label>
