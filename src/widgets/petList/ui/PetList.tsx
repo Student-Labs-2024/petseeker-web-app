@@ -9,8 +9,7 @@ import * as petModel from "@entities/pet";
 import { AutoSizer, Grid } from "react-virtualized";
 import styles from "./card.module.scss";
 import { match } from "ts-pattern";
-import { useAppSelector, useAppDispatch } from "@/shared/hooks/index";
-import { selectAllPets } from "@/entities/pet/model/slice";
+import { useAppSelector, useAppDispatch } from "@/shared/hooks/";
 import { petListConsts } from "@shared/constants";
 import PetCell from "./PetCell";
 
@@ -20,15 +19,19 @@ export const PetList: React.FC = () => {
   const filters = useAppSelector((state) => state.pets.filters);
   const isOpenFilters = useAppSelector((state) => state.pets.openFilters);
   const isSearchOnFocus = useAppSelector((state) => state.pets.searchOnFocus);
-  const favorites = useAppSelector((state) => state.pets.favorites.ids);
-  const allPets = useAppSelector(selectAllPets);
+  const favorites = useAppSelector(petModel.slice.selectAllFavorites);
+  const allPets = useAppSelector(petModel.slice.selectAllPets);
   const { data: favoriteIds = [] } = petModel.api.useGetFavoritesQuery();
   const [page, setPage] = useState(petListConsts.initialPage);
   const [rowHeight, setRowHeight] = useState(petListConsts.initialRowHeight);
   const [hasMoreData, setHasMoreData] = useState(true);
   const containerRef = useRef<HTMLDivElement>(null);
   const petItemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const params = { ...filters, page, page_size: petListConsts.initialPage };
+  const params = {
+    ...filters,
+    page,
+    page_size: petListConsts.initialPageSize,
+  };
   const isShowList = !isSearchOnFocus && !isOpenFilters;
   const {
     data: pets,

@@ -25,9 +25,7 @@ const initialFilterState: FilterState = {
   allergenicity: "",
 };
 
-const favoritesAdapter = createEntityAdapter<Favorite>({
-  selectId: (favorite) => favorite.id,
-});
+const favoritesAdapter = createEntityAdapter<Favorite>();
 
 const initialFavoritesState: FavoritesState = {
   ...favoritesAdapter.getInitialState(),
