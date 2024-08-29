@@ -107,7 +107,7 @@ export const EditUser: React.FC = () => {
   return (
     <div className={styles.auth}>
       <div className={styles.top}>
-        <button onClick={handleNavigateBack}>
+        <button className={styles.back} onClick={handleNavigateBack}>
           <BackIcon />
         </button>
       </div>

@@ -63,11 +63,18 @@ export const announcmentState = {
   in_process: "in_process",
   inactive: "inactive",
 } as const;
+
 export const announcmentStatus = {
   find: "find",
   lost: "lost",
   looking_home: "looking_home",
   give: "give",
+} as const;
+export const announcmentStatusTranslate = {
+  find: "Нашел",
+  lost: "Потерялась",
+  looking_home: "В приюте",
+  give: "Отдаю",
 } as const;
 
 export const announcmentAge = {

@@ -66,7 +66,7 @@ export const PetCardDetail: React.FC = () => {
             <div className={styles.imageContainer}>
               <span className={styles.status}>
                 <Text color="white">
-                  {petModel.announcmentStatus[pet.status]}
+                  {petModel.announcmentStatusTranslate[pet.status]}
                 </Text>
               </span>
 

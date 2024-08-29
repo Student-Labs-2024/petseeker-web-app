@@ -26,14 +26,16 @@ export const PetCard: FC<PetProps> = ({
   const petCardStyle = classNames(styles.card__container, {
     [styles.favorite]: isFavoritePage,
   });
-
+  const statusStyle = classNames(styles.status, {
+    [styles.status_red]: description.status === "lost",
+  });
   return (
     <>
       <NavLink className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
         <div className={styles.card__image_container}>
-          <span className={styles.status}>
-            <Text myClass="small" color="white">
-              {petModel.announcmentStatus[description.status]}
+          <span className={statusStyle}>
+            <Text myClass="small">
+              {petModel.announcmentStatusTranslate[description.status]}
             </Text>
           </span>
           <img
