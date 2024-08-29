@@ -15,6 +15,9 @@
     border: none;
     font-size: 24px;
     cursor: pointer;
+    > * > * {
+      stroke: var(--dark-theme-background);
+    }
   }
   .title {
     text-align: center;

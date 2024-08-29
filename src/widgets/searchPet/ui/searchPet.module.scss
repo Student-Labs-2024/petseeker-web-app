@@ -1,4 +1,3 @@
-$search-icon: url("@shared/assets/search_icon.svg");
 $filter-icon: url("@shared/assets/filter_icon.svg");
 .search_input {
   padding: 14px 48px 14px 60px;
@@ -22,7 +21,8 @@ $filter-icon: url("@shared/assets/filter_icon.svg");
 }
 
 .search_container {
-  background-color: var(--white---primary);
+  border-radius: 8px;
+  background-color: var(--dark-theme-element);
   z-index: 10;
   position: sticky;
   top: 28px;
@@ -34,12 +34,24 @@ $filter-icon: url("@shared/assets/filter_icon.svg");
   top: 50%;
   transform: translateY(-50%);
   left: 16px;
-  background-image: $search-icon;
+
   width: 28px;
   height: 28px;
   background-size: cover;
   background-position: center;
 }
+html[data-theme="dark"] {
+  .search_btn {
+    background-image: url("../../../shared/assets/search_icon_dark.svg");
+  }
+}
+
+html[data-theme="light"] {
+  .search_btn {
+    background-image: url("../../../shared/assets/search_icon.svg");
+  }
+}
+
 .search_filter {
   cursor: pointer;
   position: absolute;
@@ -67,7 +79,7 @@ $filter-icon: url("@shared/assets/filter_icon.svg");
   position: absolute;
   width: 100vw;
   padding: var(--container-padding);
-  background-color: var(--white---primary);
+
   z-index: 20;
 }
 .option__list {

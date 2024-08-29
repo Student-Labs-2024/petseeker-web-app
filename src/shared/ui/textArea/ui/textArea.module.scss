@@ -13,15 +13,15 @@
 }
 
 .form_textArea {
-  border: 1px solid var(--def-sec-gray);
+  border: 1px solid var(--input-color);
   border-radius: 8px;
   padding: 10px 16px;
-  background: var(--def-sec-gray);
+  background: var(--input-color);
   font-family: var(--font-family);
   font-weight: 400;
   font-size: 12px;
   line-height: 236%;
-  color: var(--gray-backgr-element);
+  color: var(--input-text-color);
   &:focus {
     outline: none;
   }

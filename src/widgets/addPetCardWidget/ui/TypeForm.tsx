@@ -38,9 +38,7 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Формат приюта
-          </Text>
+          <Text myClass="bold_medium">Формат приюта</Text>
           <Private />
         </div>
         <div className={styles.card__text}>
@@ -58,9 +56,7 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Формат пользователя
-          </Text>
+          <Text myClass="bold_medium">Формат пользователя</Text>
           <Shelter />
         </div>
         <div className={styles.card__text}>
@@ -77,9 +73,7 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={darkCardStyle}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Сообщить о потере питомца
-          </Text>
+          <Text myClass="bold_medium">Сообщить о потере питомца</Text>
           <Message />
         </div>
         <div className={styles.card__text}>

@@ -103,7 +103,7 @@ export const ProfileInfo: React.FC = () => {
           <div className={styles.profile__content}>
             <div className={styles.profile__avatars}>
               <div className={styles.profile__avatar}>
-                {userInfo.profile_image && (
+                {userInfo?.profile_image && (
                   <img
                     className={styles.preview_image}
                     src={`${apiUrl}${userInfo.profile_image}`}

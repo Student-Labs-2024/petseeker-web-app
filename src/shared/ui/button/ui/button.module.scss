@@ -42,8 +42,8 @@
   @extend .default;
 }
 .auth_default {
-  color: var(--button-text-color-default-auth);
-  border: 1px solid var(--button-border-color-default-auth);
+  color: var(--dark-theme-background);
+  border: 1px solid var(--dark-theme-background);
   background-color: var(--button-background-color-default-auth);
 }
 .auth_active {

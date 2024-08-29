@@ -92,7 +92,7 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
             <div className={styles.option__list}>
               {filteredOptions.map((option) => (
                 <button key={option} onClick={() => handleOptionClick(option)}>
-                  <Text color="dark" myClass="medium_big">
+                  <Text color="gray" myClass="medium_big">
                     {" "}
                     {option}
                   </Text>
