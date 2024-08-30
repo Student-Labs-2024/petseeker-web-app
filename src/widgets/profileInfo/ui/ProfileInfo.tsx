@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { userModel } from "@entities/user";
+import { shelterModel } from "@entities/shelter";
 import styles from "./profileInfo.module.scss";
 import { match } from "ts-pattern";
 import { Text } from "@shared/ui/text";
@@ -21,6 +22,8 @@ import {
   SETTINGS,
   ADD_SHELTER,
   MAIN_ROUTE,
+  PROFILE,
+  SHELTER,
 } from "@/app/router/consts";
 import { tgConsts, phoneConsts } from "@shared/constants";
 import InputMask from "react-input-mask-next";
@@ -30,29 +33,73 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/shared/hooks/index";
 const apiUrl = import.meta.env.VITE_APP_URL;
 export const ProfileInfo: React.FC = () => {
+  const isProfilePage = location.pathname === PROFILE;
   const totalStars = 5;
   const stars = 4;
   const dispatch = useAppDispatch();
-
   const navigate = useNavigate();
   const {
     data: userInfo,
     isLoading,
     isError,
     error,
+    isSuccess: isSuccessUser,
   } = userModel.useGetMeQuery();
-
+  const [data, setData] = useState(userInfo);
+  const { data: shelter, isSuccess: isSuccessShelter } =
+    shelterModel.useGetShelterQuery(userInfo?.id);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+  useEffect(() => {
+    if (!isProfilePage) {
+      setSheltetData();
+    }
+  }, [shelter]);
+  useEffect(() => {
+    if (isProfilePage) {
+      setUserData();
+    }
+  }, [userInfo]);
   const handleNavigateSettings = () => {
     navigate(SETTINGS);
   };
   const handleNavigateShelterPage = () => {
     navigate(ADD_SHELTER);
   };
-  const [isOpenModal, setIsOpenModal] = useState(false);
-
-  const handleOpenShelterModal = () => {
-    setIsOpenModal(true);
+  const handleOpenShelter = () => {
+    if (shelter?.length > 0) {
+      setSheltetData();
+      navigate(SHELTER);
+    } else {
+      setIsOpenModal(true);
+    }
   };
+  const handleOpenProfile = () => {
+    if (!isProfilePage) {
+      setUserData();
+      navigate(PROFILE);
+    }
+  };
+  const setUserData = () => {
+    setData({
+      name: userInfo?.name,
+      surname: userInfo?.surname,
+      phone: userInfo?.phone_number,
+      image: userInfo?.profile_image,
+      social: userInfo?.telegram,
+    });
+  };
+  const setSheltetData = () => {
+    if (shelter?.length > 0)
+      setData({
+        name: shelter[0]?.name,
+        surname: shelter[0]?.surname,
+        phone: shelter[0]?.telephone_number,
+        image: shelter[0]?.images[0],
+        address: shelter[0]?.address,
+        social: shelter[0]?.social_network_1,
+      });
+  };
+
   const handleCloseShelterModal = () => {
     setIsOpenModal(false);
   };
@@ -102,23 +149,26 @@ export const ProfileInfo: React.FC = () => {
         ) : (
           <div className={styles.profile__content}>
             <div className={styles.profile__avatars}>
-              <div className={styles.profile__avatar}>
-                {userInfo?.profile_image && (
+              <button
+                onClick={handleOpenProfile}
+                className={styles.profile__avatar}
+              >
+                {data?.image && (
                   <img
                     className={styles.preview_image}
-                    src={`${apiUrl}${userInfo.profile_image}`}
+                    src={`${apiUrl}${data?.image}`}
                     alt=""
                   />
                 )}
-              </div>
+              </button>
 
-              <button onClick={handleOpenShelterModal}>
+              <button onClick={handleOpenShelter}>
                 <div className={styles.profile__shelter}></div>
               </button>
             </div>
             <div className={styles.profile__info}>
               <Text myClass="bold_medium_big">
-                {userInfo?.name} {userInfo?.surname}
+                {data?.name} {data?.surname}
               </Text>
               <Text myClass="medium_big">Частное</Text>
               <Text myClass="medium_big">дата рег</Text>
@@ -143,14 +193,14 @@ export const ProfileInfo: React.FC = () => {
             </button>
             <div className={styles.profile__phone}>
               <PhoneIcon />
-              <InputMask mask={phoneConsts.mask} value={userInfo?.phone_number}>
+              <InputMask mask={phoneConsts.mask} value={data?.phone}>
                 <input className={styles.medium_big} />
               </InputMask>
             </div>
             <div className={styles.profile__tg}>
               <TgIcon />
               <Text myClass="medium_big" color="dark">
-                @qwe
+                {data?.social}
               </Text>
             </div>
             <div className={styles.line}></div>
@@ -158,7 +208,7 @@ export const ProfileInfo: React.FC = () => {
               <div className={styles.profile__address}>
                 <AddressIcon />
                 <Text myClass="medium_big" color="dark">
-                  Пушкина 55
+                  {data?.address}
                 </Text>
               </div>
               <div className={styles.line}></div>

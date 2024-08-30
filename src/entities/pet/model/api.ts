@@ -1,6 +1,6 @@
 import { Pet, PetDetail, UploadImageRequest } from "./type";
 import { baseApi } from "@shared/api";
-import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
+import { buildQueryString } from "@/shared/hooks/buildQueryString";
 
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({

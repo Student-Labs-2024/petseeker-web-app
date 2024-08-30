@@ -29,4 +29,5 @@ export type InfoFormProps = {
   ) => void;
   t?: any;
   errors?: any;
+  isLoading?: boolean;
 };

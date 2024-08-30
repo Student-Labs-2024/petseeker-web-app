@@ -130,32 +130,6 @@ const petsSlice = createSlice({
       state.addPetUrl = action.payload;
     },
   },
-  extraReducers: (builder) => {
-    builder.addMatcher(
-      petModel.petsApi.endpoints.getPets.matchPending,
-      (state) => ({
-        ...state,
-        loading: true,
-        error: null,
-      })
-    );
-    builder.addMatcher(
-      petModel.petsApi.endpoints.getPets.matchFulfilled,
-      (state, action: PayloadAction<petModel.Pet[]>) => ({
-        ...state,
-        pets: action.payload,
-        loading: false,
-      })
-    );
-    builder.addMatcher(
-      petModel.petsApi.endpoints.getPets.matchRejected,
-      (state, action) => ({
-        ...state,
-        error: action.error.message || "Failed to fetch cards",
-        loading: false,
-      })
-    );
-  },
 });
 export const {
   setActiveButton,

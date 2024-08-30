@@ -18,6 +18,7 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
   handleNext,
 }) => {
   const storedImages = useAppSelector((state) => state.shelter.images);
+
   const previewUrl = useAppSelector((state) => state.shelter.previewUrl);
   const { control, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {

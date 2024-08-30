@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   flex: 1;
+  margin-bottom: 60px;
 }
 .profile__top {
   position: relative;
@@ -93,6 +94,7 @@ html[data-theme="light"] {
 .profile__phone,
 .profile__tg,
 .profile__address {
+  pointer-events: none;
   display: flex;
   gap: 10px;
   margin-bottom: 14px;
@@ -159,17 +161,20 @@ html[data-theme="light"] {
 .modal__image {
   width: 75%;
   aspect-ratio: 1.5;
-
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
 }
 
 html[data-theme="dark"] {
-  background-image: url("../../../shared/assets/cat_empty_profile_dark.svg");
+  .modal__image {
+    background-image: url("../../../shared/assets/cat_empty_profile_dark.svg");
+  }
 }
 html[data-theme="light"] {
-  background-image: url("../../../shared/assets/cat_empty_profile.svg");
+  .modal__image {
+    background-image: url("../../../shared/assets/cat_empty_profile.svg");
+  }
 }
 
 //shelterModal

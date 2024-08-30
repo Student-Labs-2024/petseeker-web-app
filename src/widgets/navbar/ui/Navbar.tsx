@@ -6,6 +6,7 @@ import {
   ADD_PET_CARD,
   FAVORITE_ROUTE,
   PROFILE,
+  SHELTER,
   FAVORITES,
 } from "@app/router/consts";
 import { ReactComponent as MainIcon } from "@shared/assets/main_icon.svg";
@@ -28,9 +29,13 @@ const Navbar: React.FC = () => {
   const activeFavoriteText =
     location.pathname === favoriteRoute ? styles.active_text : "";
   const activeProfileIcon =
-    location.pathname === PROFILE ? styles.active_icon : "";
+    location.pathname === PROFILE || location.pathname === SHELTER
+      ? styles.active_icon
+      : "";
   const activeProfileText =
-    location.pathname === PROFILE ? styles.active_text : "";
+    location.pathname === PROFILE || location.pathname === SHELTER
+      ? styles.active_text
+      : "";
 
   return (
     <nav className={styles.navbar__container}>

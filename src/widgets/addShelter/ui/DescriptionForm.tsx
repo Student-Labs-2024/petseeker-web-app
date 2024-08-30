@@ -12,7 +12,9 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
   control,
   errors,
   t,
+  isLoading,
 }) => {
+  const textSubmitButton = isLoading ? "Загрузка" : "Далее";
   return (
     <div className={styles.container}>
       <div className={styles.top}>
@@ -46,7 +48,7 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
 
         <div className={styles.bottom}>
           <Button isAuthButton={true} type="submit">
-            Далее
+            {textSubmitButton}
           </Button>
         </div>
       </form>

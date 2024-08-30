@@ -10,3 +10,4 @@ export const FAVORITES = "/favorites";
 
 export const SETTINGS = "/settings";
 export const ADD_SHELTER = "/addshelter";
+export const SHELTER = "/shelter";

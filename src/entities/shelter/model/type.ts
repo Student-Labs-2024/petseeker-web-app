@@ -23,6 +23,7 @@ export type FormDataType = {
   inn: string;
   name: string;
   ogrn: string;
-  telegram: string;
+  social_network_1: string;
+  social_network_2: string;
   telephone_number: string;
 };

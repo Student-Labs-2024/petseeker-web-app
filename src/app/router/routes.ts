@@ -10,6 +10,7 @@ import {
   FAVORITES,
   SETTINGS,
   ADD_SHELTER,
+  SHELTER,
 } from "./consts";
 import { Main } from "@/pages/main";
 import { Auth } from "@pages/auth";
@@ -20,6 +21,7 @@ import { ProfileEdit } from "@pages/profileEdit";
 import { AddShelter } from "@/pages/addShelter";
 import { Favorites } from "@pages/favorites";
 import { SettingsPage } from "@pages/settingsPage";
+
 export const authRoutes = [
   {
     path: ADD_PET_CARD,
@@ -27,6 +29,10 @@ export const authRoutes = [
   },
   {
     path: PROFILE,
+    Component: Profile,
+  },
+  {
+    path: SHELTER,
     Component: Profile,
   },
   {
