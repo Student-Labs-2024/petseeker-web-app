@@ -31,6 +31,7 @@ export const AuthWidget: React.FC = () => {
     handleSubmit,
     setValue,
     formState: { errors },
+    reset,
   } = useForm({
     defaultValues: {
       phoneNumber: phoneNumber,
@@ -44,6 +45,7 @@ export const AuthWidget: React.FC = () => {
       const response = await login({ phone_number: phoneNumber }).unwrap();
       if (response.success) {
         dispatch(userModel.setIsConfirm(true));
+        reset();
       }
     } catch (err) {
       console.error("Failed to login", err);

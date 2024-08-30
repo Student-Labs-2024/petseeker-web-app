@@ -31,6 +31,7 @@ import { Modal } from "@/shared/ui/modal";
 import { ShelterModal } from "./ShelterModal";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/shared/hooks/index";
+import { RemoveAccountButton } from "@features/user/removeAccount";
 const apiUrl = import.meta.env.VITE_APP_URL;
 export const ProfileInfo: React.FC = () => {
   const isProfilePage = location.pathname === PROFILE;
@@ -221,9 +222,7 @@ export const ProfileInfo: React.FC = () => {
               <Button onClick={handleLogout} isAuthButton={true}>
                 Выйти
               </Button>
-              <Button isAuthButton={true} isDefault={true}>
-                Удалить профиль
-              </Button>
+              <RemoveAccountButton />
             </div>
           </div>
         )}

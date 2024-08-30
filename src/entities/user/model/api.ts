@@ -39,6 +39,12 @@ export const userApi = baseApi.injectEndpoints({
         body: formData,
       }),
     }),
+    deleteProfile: builder.mutation<void, number>({
+      query: (id) => ({
+        url: `/api/user/delete/${id}/`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -48,4 +54,5 @@ export const {
   useEditUserMutation,
   useGetMeQuery,
   useUploadProfileImageMutation,
+  useDeleteProfileMutation,
 } = userApi;
