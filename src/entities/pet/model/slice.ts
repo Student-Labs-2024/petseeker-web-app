@@ -27,6 +27,7 @@ const initialState: petModel.PetState = {
   ids: [],
   images: [],
   previewUrl: "",
+  addPetUrl: "/api/private-announcement/create/",
 };
 
 const petsSlice = createSlice({
@@ -106,6 +107,9 @@ const petsSlice = createSlice({
     removeFavorite: (state, action: PayloadAction<number>) => {
       state.ids = state.ids.filter((id) => id !== action.payload);
     },
+    setAddPetUrl(state, action: PayloadAction<string>) {
+      state.addPetUrl = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addMatcher(
@@ -152,6 +156,7 @@ export const {
   removeFavorite,
   addFavorites,
   setPreviewUrl,
+  setAddPetUrl,
 } = petsSlice.actions;
 
 export const petsReducer = petsSlice.reducer;
