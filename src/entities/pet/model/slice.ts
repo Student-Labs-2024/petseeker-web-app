@@ -32,7 +32,6 @@ const initialFavoritesState: FavoritesState = {
   filters: {},
 };
 
-// Начальное состояние сущности Pet
 const initialState: PetState = {
   ...petsAdapter.getInitialState(),
   loading: false,
@@ -146,7 +145,6 @@ export const {
   selectIds: selectPetIds,
 } = petsAdapter.getSelectors((state: RootState) => state.pets);
 
-// Селекторы для избранных
 export const {
   selectAll: selectAllFavorites,
   selectById: selectFavoriteById,

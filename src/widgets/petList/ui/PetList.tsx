@@ -101,23 +101,29 @@ export const PetList: React.FC = () => {
   return (
     <div className={styles.container} ref={containerRef}>
       {isShowList &&
-        match({ isLoading, isError, pets })
+        match({ isLoading, isError, pets, hasMoreData })
           .with({ isLoading: true }, () => <div>Loading...</div>)
-          .with({ isError: true }, () => <div>Error: </div>)
-          .with({ pets: { results: [] } }, () => <p>No pets available.</p>)
+          .with({ isError: true }, () => <div>Error: Could not load pets.</div>)
+          .with({ pets: { results: [] }, hasMoreData: false }, () => (
+            <p>No pets available.</p>
+          ))
           .otherwise(() => (
             <AutoSizer>
               {({ height, width }) => (
                 <Grid
                   className={styles.grid}
-                  cellRenderer={(props) => (
-                    <PetCell
-                      {...props}
-                      allPets={allPets}
-                      favorites={favorites}
-                      petItemRefs={petItemRefs}
-                    />
-                  )}
+                  cellRenderer={(props) => {
+                    const { key, ...restProps } = props;
+                    return (
+                      <PetCell
+                        key={key}
+                        {...restProps}
+                        allPets={allPets}
+                        favorites={favorites}
+                        petItemRefs={petItemRefs}
+                      />
+                    );
+                  }}
                   columnCount={columnCount}
                   columnWidth={gridStyle.columnWidth(width)}
                   height={height}
