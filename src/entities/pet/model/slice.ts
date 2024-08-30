@@ -10,6 +10,26 @@ const initialFilterState: petModel.FilterState = {
   wool_type: undefined,
   allergenicity: undefined,
 };
+const initialFormDataState: petModel.FormDataType = {
+  pet_type: undefined,
+  name: undefined,
+  gender: undefined,
+  allergenicity: undefined,
+  dimensions: undefined,
+  weigth: undefined,
+  breed: undefined,
+  age: undefined,
+  wool_type: undefined,
+  sterilization: undefined,
+  vaccinations: undefined,
+  address: undefined,
+  description: undefined,
+  status: undefined,
+  contacts: undefined,
+  color: undefined,
+  state: undefined,
+  health_issues: undefined,
+};
 const initialState: petModel.PetState = {
   pets: [],
   loading: false,
@@ -20,7 +40,7 @@ const initialState: petModel.PetState = {
   historySearch: [],
   searchOnFocus: false,
   step: 1,
-  data: {},
+  data: initialFormDataState,
   favoriteFilters: undefined,
   ids: [],
   images: [],
@@ -82,7 +102,7 @@ const petsSlice = createSlice({
     prevStep(state) {
       state.step -= 1;
     },
-    setFormData(state, action: PayloadAction<Record<string, any>>) {
+    setFormData(state, action: PayloadAction<petModel.FormDataType>) {
       state.data = { ...state.data, ...action.payload };
     },
 
