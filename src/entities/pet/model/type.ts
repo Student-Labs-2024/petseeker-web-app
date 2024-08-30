@@ -43,11 +43,10 @@ export type PetState = {
   activeButton?: string | null;
   openFilters: boolean;
   step: number;
-  data: Record<string, any>;
+  data: FormDataType;
   historySearch: string[];
   searchOnFocus: boolean;
   filters: Record<string, any>;
-  announcmentType: AnnouncmentType;
   images: File[];
   ids: number[];
   favoriteFilters: Record<string, any>;
@@ -57,45 +56,101 @@ export type PetState = {
 export const announcmentValues = {
   private: "/api/private-announcement/create/",
   shelter: "/api/shelter-announcement/create/",
-  message: "message",
+} as const;
+export const announcmentState = {
+  active: "active",
+  in_process: "in_process",
+  inactive: "inactive",
 } as const;
 
-export type AnnouncmentType =
-  (typeof announcmentValues)[keyof typeof announcmentValues];
+export const announcmentStatus = {
+  find: "find",
+  lost: "lost",
+  looking_home: "looking_home",
+  give: "give",
+} as const;
+export const announcmentStatusTranslate = {
+  find: "Нашел",
+  lost: "Потерялась",
+  looking_home: "В приюте",
+  give: "Отдаю",
+} as const;
+
+export const announcmentAge = {
+  small: "small",
+  young: "young",
+  adult: "adult",
+  old: "old",
+  unknown: "unknown",
+} as const;
+export const announcmentWoolType = {
+  long: "long",
+  short: "short",
+  fluffy: "fluffy",
+  tough: "tough",
+  hairless: "hairless",
+} as const;
+
+export const announcmentDimensions = {
+  thin: "thin",
+  average: "average",
+  full: "full",
+} as const;
+
+export const announcmentPetType = {
+  cat: "cat",
+  dog: "dog",
+} as const;
+
+export type AnnouncmentState =
+  (typeof announcmentState)[keyof typeof announcmentState];
+
+export type AnnouncmentDimensions =
+  (typeof announcmentDimensions)[keyof typeof announcmentDimensions];
+
+export type AnnouncmentPetType =
+  (typeof announcmentPetType)[keyof typeof announcmentPetType];
+
+export type AnnouncmentWoolType =
+  (typeof announcmentWoolType)[keyof typeof announcmentWoolType];
+
+export type AnnouncmentStatus =
+  (typeof announcmentStatus)[keyof typeof announcmentStatus];
 
 export type UploadImageRequest = {
   id: string;
   formData: FormData;
 };
 
+export type AnnouncmentType =
+  (typeof announcmentValues)[keyof typeof announcmentValues];
+
 export type FormDataType = {
-  pet_type: string;
+  pet_type: AnnouncmentPetType;
   name: string;
-  gender: string;
-  allergenicity: string;
-  fatness: string;
-  weight: string;
+  gender: boolean;
+  allergenicity: boolean;
+  dimensions: AnnouncmentDimensions;
+  weigth: string;
   breed: string;
   age: string;
-  wool_type: string;
-  sterilization: string;
-  vaccinations: string;
+  wool_type: AnnouncmentWoolType;
+  sterilization: boolean;
+  vaccinations: boolean;
   address: string;
   description: string;
-  status: string;
-  dimmensions: string;
-  weigth: string;
+  status: AnnouncmentStatus;
   contacts: string;
   color: string;
-  state: string;
-  health_issues: string;
+  state: AnnouncmentState;
+  health_issues: boolean;
 };
 
 export type FilterState = {
   pet_type: string;
   male: string;
   age: string;
-  fatness: string;
+  dimensions: string;
   health__issues: string;
   wool_type: string;
   allergenicity: string;

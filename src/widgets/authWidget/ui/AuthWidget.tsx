@@ -1,29 +1,23 @@
 import React, { ChangeEvent } from "react";
+import { useForm, Controller, ControllerRenderProps } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { userModel } from "@entities/user";
-
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-
 import { Button } from "@shared/ui/button";
-import {
-  AUTH_ROUTE,
-  MAIN_ROUTE,
-  REGISTRATION_ROUTE,
-  PROFILE,
-} from "@app/router/consts";
-import styles from "./auth.module.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";
 import { ConfirmForm } from "./confirmForm/ConfirmForm";
 import { AuthForm } from "./authForm/AuthForm";
 import { match } from "ts-pattern";
-
+import { phoneConsts, nameConsts, codeConsts } from "@shared/constants";
+import InputMask from "react-input-mask-next";
+import styles from "./auth.module.scss";
+import { AUTH_ROUTE, MAIN_ROUTE, PROFILE } from "@app/router/consts";
 export const AuthWidget: React.FC = () => {
   const { t } = useTranslation("authWidget");
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const phoneNumber = useAppSelector((state) => state.user.phoneNumber);
-  const name = useAppSelector((state) => state.user.name);
   const code = useAppSelector((state) => state.user.code);
   const isConfirm = useAppSelector((state) => state.user.isConfirm);
   const [login, { isLoading: isSendingLogin }] = userModel.useLoginMutation();
@@ -31,12 +25,23 @@ export const AuthWidget: React.FC = () => {
     confirm,
     { isLoading: isSendingConfirm, isSuccess: isConfirmSuccess, isError },
   ] = userModel.useConfirmMutation();
-  const isAuth = location.pathname === AUTH_ROUTE;
+
+  const {
+    control,
+    handleSubmit,
+    setValue,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      phoneNumber: phoneNumber,
+
+      code: code,
+    },
+  });
 
   const handleClickSubmit = async () => {
     try {
       const response = await login({ phone_number: phoneNumber }).unwrap();
-
       if (response.success) {
         dispatch(userModel.setIsConfirm(true));
       }
@@ -60,22 +65,35 @@ export const AuthWidget: React.FC = () => {
       console.error("Failed to confirm", err);
     }
   };
-  const handleChangePhone = (event: ChangeEvent<HTMLInputElement>) => {
+
+  const onSubmit = async (data: any) => {
+    if (isConfirm) {
+      await handleClickConfirm();
+    } else {
+      await handleClickSubmit();
+    }
+  };
+  const handleChangePhone = (
+    event: ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<any, string>
+  ) => {
     const value = event.target.value;
     const onlyNumbers = value.replace(/\D/g, "");
+    field.onChange(onlyNumbers);
     dispatch(userModel.setPhoneNumber(onlyNumbers));
   };
-
-  const handleChangeName = (event: ChangeEvent<HTMLInputElement>) => {
-    dispatch(userModel.setName(event.target.value));
-  };
-
-  const handleChangeCode = (event: ChangeEvent<HTMLInputElement>) => {
+  const handleChangeCode = (
+    event: ChangeEvent<HTMLInputElement>,
+    field: ControllerRenderProps<any, string>
+  ) => {
     const value = event.target.value;
-    const masked = value.replace(/\D/g, "");
-    dispatch(userModel.setCode(masked));
+    const onlyNumbers = value.replace(/\D/g, "");
+    field.onChange(onlyNumbers);
+    dispatch(userModel.setCode(onlyNumbers));
   };
-
+  const maskedNumber = (phoneNumber: string): string => {
+    return `+${phoneNumber[0]} ${phoneNumber.slice(1, 4)} ***-**-${phoneNumber.slice(9)}`;
+  };
   return (
     <div className={styles.auth}>
       <div className={styles.auth__container}>
@@ -86,53 +104,43 @@ export const AuthWidget: React.FC = () => {
             </Text>
           </NavLink>
         </div>
-        {isConfirm && (
-          <div className={styles.confirm__text}>
-            <Text myClass="subtitle">Введите код из смс</Text>
-            <Text myClass="medium">Отправили на +7 000 ***-**-00</Text>
-          </div>
-        )}
 
-        <div className={styles.auth__top}>
-          <Button
-            isAuthButton={true}
-            onClick={() => navigate(AUTH_ROUTE)}
-            isDefault={isAuth}
-          >
-            {t("Login")}
-          </Button>
-          <Button
-            isAuthButton={true}
-            onClick={() => navigate(REGISTRATION_ROUTE)}
-            isDefault={!isAuth}
-          >
-            {t("Register")}
-          </Button>
+        <div className={styles.confirm__text}>
+          {isConfirm ? (
+            <>
+              <Text myClass="btn">Введите код из смс</Text>
+              <Text myClass="medium">
+                Отправили на {maskedNumber(phoneNumber)}
+              </Text>
+            </>
+          ) : (
+            <>
+              {" "}
+              <Text myClass="btn">Введите номер телефона</Text>
+            </>
+          )}
         </div>
+
         {match(isConfirm)
           .with(false, () => (
             <AuthForm
-              handleClickSubmit={handleClickSubmit}
               handleChangePhone={handleChangePhone}
-              handleChangeName={handleChangeName}
-              phoneNumber={phoneNumber}
-              name={name}
-              isAuth={isAuth}
+              control={control}
+              handleSubmit={handleSubmit(onSubmit)}
               isSendingLogin={isSendingLogin}
-            ></AuthForm>
+            />
           ))
           .with(true, () => (
             <ConfirmForm
+              control={control}
+              handleChangeCode={handleChangeCode}
+              handleSubmit={handleSubmit(onSubmit)}
               isSendingConfirm={isSendingConfirm}
               isSendingLogin={isSendingLogin}
-              handleClickConfirm={handleClickConfirm}
-              handleClickSubmit={handleClickSubmit}
-              handleChangeCode={handleChangeCode}
-            ></ConfirmForm>
+            />
           ))
           .exhaustive()}
         <div className={styles.agree_message}>
-          {" "}
           <Text>{t("AgreeMessage")}</Text>
         </div>
       </div>

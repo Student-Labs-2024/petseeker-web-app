@@ -1,18 +1,16 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import styles from "./petCardDetail.module.scss";
 import "swiper/css";
 import "swiper/css/pagination";
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation, useParams } from "react-router-dom";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Pagination } from "swiper/modules";
 import { useNavigate } from "react-router-dom";
 import { Text } from "@shared/ui/text";
 import { Button } from "@shared/ui/button";
-
+import { useAppSelector } from "@/shared/hooks/index";
 import { ReactComponent as GenderFemale } from "@shared/assets/gender_female_icon.svg";
 import { ReactComponent as GenderMale } from "@shared/assets/gender_male_icon.svg";
-import { ReactComponent as Like } from "@shared/assets/like.svg";
 import { ReactComponent as Back } from "@shared/assets/back_arrow_icon.svg";
 import { ReactComponent as Birthday } from "@shared/assets/birthday.svg";
 import { ReactComponent as Home } from "@shared/assets/home.svg";
@@ -21,8 +19,10 @@ import { petModel } from "@entities/pet/";
 import test from "@shared/assets/cat.png";
 import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
+const apiUrl = import.meta.env.VITE_APP_URL;
 export const PetCardDetail: React.FC = () => {
   const { id } = useParams();
+  const favorites = useAppSelector((state) => state.pets.ids);
   const {
     data: pet,
     isLoading,
@@ -56,13 +56,18 @@ export const PetCardDetail: React.FC = () => {
                   {pet.gender ? <GenderMale /> : <GenderFemale />}
                 </span>
                 <span className={styles.icon}>
-                  <Like className={styles.like} />
+                  <SaveCard
+                    id={pet.id}
+                    isSaved={favorites.includes(pet.id)}
+                  ></SaveCard>
                 </span>
               </div>
             </div>
             <div className={styles.imageContainer}>
               <span className={styles.status}>
-                <Text color="white">{pet.status}</Text>
+                <Text color="white">
+                  {petModel.announcmentStatusTranslate[pet.status]}
+                </Text>
               </span>
 
               <Swiper
@@ -71,23 +76,16 @@ export const PetCardDetail: React.FC = () => {
                 modules={[Pagination]}
                 pagination={{ clickable: true }}
               >
-                {/* {pet.images?.map((image) => (
-                  <SwiperSlide>
+                {pet.images?.map((image, index) => (
+                  <SwiperSlide key={index}>
                     <div className={styles.slide_container}>
-                      <img src={image} alt={image} />
+                      <img
+                        src={image.length ? `${apiUrl}${image}` : test}
+                        alt={image}
+                      />
                     </div>
                   </SwiperSlide>
-                ))} */}
-                <SwiperSlide>
-                  <div className={styles.slide_container}>
-                    <img src={test} alt={test} />
-                  </div>
-                </SwiperSlide>
-                <SwiperSlide>
-                  <div className={styles.slide_container}>
-                    <img src={test} alt={test} />
-                  </div>
-                </SwiperSlide>
+                ))}
               </Swiper>
             </div>
             <div className={styles.info}>

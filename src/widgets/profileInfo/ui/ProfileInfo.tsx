@@ -14,15 +14,26 @@ import { ReactComponent as PhoneIcon } from "@shared/assets/phone_icon.svg";
 import { ReactComponent as EditIcon } from "@shared/assets/edit_profile_icon.svg";
 import { ReactComponent as CatImage } from "@shared/assets/cat_empty_profile.svg";
 import { Button } from "@shared/ui/button";
-import { NavLink } from "react-router-dom";
-import { PROFILE_EDIT, SETTINGS, ADD_SHELTER } from "@/app/router/consts";
 
+import { NavLink } from "react-router-dom";
+import {
+  PROFILE_EDIT,
+  SETTINGS,
+  ADD_SHELTER,
+  MAIN_ROUTE,
+} from "@/app/router/consts";
+import { tgConsts, phoneConsts } from "@shared/constants";
+import InputMask from "react-input-mask-next";
 import { Modal } from "@/shared/ui/modal";
 import { ShelterModal } from "./ShelterModal";
 import { useNavigate } from "react-router-dom";
+import { useAppDispatch } from "@/shared/hooks/index";
+const apiUrl = import.meta.env.VITE_APP_URL;
 export const ProfileInfo: React.FC = () => {
   const totalStars = 5;
   const stars = 4;
+  const dispatch = useAppDispatch();
+
   const navigate = useNavigate();
   const {
     data: userInfo,
@@ -30,6 +41,7 @@ export const ProfileInfo: React.FC = () => {
     isError,
     error,
   } = userModel.useGetMeQuery();
+
   const handleNavigateSettings = () => {
     navigate(SETTINGS);
   };
@@ -43,6 +55,11 @@ export const ProfileInfo: React.FC = () => {
   };
   const handleCloseShelterModal = () => {
     setIsOpenModal(false);
+  };
+
+  const handleLogout = () => {
+    dispatch(userModel.setAuthenticated(false));
+    navigate(MAIN_ROUTE);
   };
 
   return (
@@ -85,7 +102,16 @@ export const ProfileInfo: React.FC = () => {
         ) : (
           <div className={styles.profile__content}>
             <div className={styles.profile__avatars}>
-              <div className={styles.profile__avatar}></div>
+              <div className={styles.profile__avatar}>
+                {userInfo?.profile_image && (
+                  <img
+                    className={styles.preview_image}
+                    src={`${apiUrl}${userInfo.profile_image}`}
+                    alt=""
+                  />
+                )}
+              </div>
+
               <button onClick={handleOpenShelterModal}>
                 <div className={styles.profile__shelter}></div>
               </button>
@@ -117,9 +143,9 @@ export const ProfileInfo: React.FC = () => {
             </button>
             <div className={styles.profile__phone}>
               <PhoneIcon />
-              <Text myClass="medium_big" color="dark">
-                8 800 555
-              </Text>
+              <InputMask mask={phoneConsts.mask} value={userInfo?.phone_number}>
+                <input className={styles.medium_big} />
+              </InputMask>
             </div>
             <div className={styles.profile__tg}>
               <TgIcon />
@@ -142,7 +168,9 @@ export const ProfileInfo: React.FC = () => {
               <EditIcon />
             </NavLink>
             <div className={styles.profile__bottom}>
-              <Button isAuthButton={true}>Выйти</Button>
+              <Button onClick={handleLogout} isAuthButton={true}>
+                Выйти
+              </Button>
               <Button isAuthButton={true} isDefault={true}>
                 Удалить профиль
               </Button>

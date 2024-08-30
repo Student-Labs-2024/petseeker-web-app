@@ -10,7 +10,8 @@
       "age": "Age",
       "create": "Create",
       "loading": "Loading",
-      "description":"Description"
+      "description": "Description",
+      "fillInTheField": "fill in the field"
     },
     "ru": {
       "name": "Имя",
@@ -22,7 +23,8 @@
       "age": "Возраст",
       "create": "Создать",
       "loading": "Загрузка",
-      "description":"Описание"
+      "description": "Описание",
+      "fillInTheField": "Заполните поле"
     }
   }
 }

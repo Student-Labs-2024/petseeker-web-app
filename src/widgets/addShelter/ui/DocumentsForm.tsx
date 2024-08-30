@@ -10,13 +10,14 @@ import { innConsts, ogrnConsts } from "@shared/constants";
 import { Controller } from "react-hook-form";
 import InputMask from "react-input-mask-next";
 import { AddShelterFormType, InfoFormProps } from "../model/type";
-import { validateMask } from "@shared/hooks/idValidMask";
+import { validateMask } from "@/shared/hooks/isValidMask";
 export const DocumentsForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   onSubmitForm,
   control,
-
   handleFieldChange,
+  errors,
+  t,
 }) => {
   return (
     <div className={styles.container}>
@@ -33,10 +34,10 @@ export const DocumentsForm: React.FC<InfoFormProps> = ({
               control={control}
               defaultValue=""
               rules={{
-                required: true,
+                required: t("fillInTheField"),
                 validate: (value) => validateMask(value, innConsts.mask),
               }}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <InputMask
                   placeholder={innConsts.placeholder}
                   maskPlaceholder={innConsts.maskChar}
@@ -44,7 +45,13 @@ export const DocumentsForm: React.FC<InfoFormProps> = ({
                   value={field.value}
                   onChange={(e) => handleFieldChange(e, field)}
                 >
-                  <Input ref={field.ref} myClass="form_input" />
+                  <Input
+                    errorMessage={
+                      fieldState.invalid ? t("fillInTheField") : false
+                    }
+                    ref={field.ref}
+                    myClass="form_input"
+                  />
                 </InputMask>
               )}
             />
@@ -59,10 +66,10 @@ export const DocumentsForm: React.FC<InfoFormProps> = ({
               control={control}
               defaultValue=""
               rules={{
-                required: true,
+                required: t("fillInTheField"),
                 validate: (value) => validateMask(value, ogrnConsts.mask),
               }}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <InputMask
                   placeholder={ogrnConsts.placeholder}
                   maskPlaceholder={ogrnConsts.maskChar}
@@ -70,7 +77,13 @@ export const DocumentsForm: React.FC<InfoFormProps> = ({
                   value={field.value}
                   onChange={(e) => handleFieldChange(e, field)}
                 >
-                  <Input ref={field.ref} myClass="form_input" />
+                  <Input
+                    errorMessage={
+                      fieldState.invalid ? t("fillInTheField") : false
+                    }
+                    ref={field.ref}
+                    myClass="form_input"
+                  />
                 </InputMask>
               )}
             />

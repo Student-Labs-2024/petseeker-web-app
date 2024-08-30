@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet/";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -10,7 +10,7 @@ import { Label } from "@shared/ui/label";
 import { Radio } from "@shared/ui/radio";
 import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import classNames from "classnames";
 import { UseFormRegister } from "react-hook-form";
 import { InfoFormProps } from "../model/type";
@@ -26,6 +26,8 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
   control,
   register,
   getValues,
+  errors,
+  t,
 }) => {
   const dispatch = useAppDispatch();
   const isCatType = getValues("pet_type") === "Кошка";
@@ -49,7 +51,12 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               <Text myClass="btn" color="gray">
                 Худое
               </Text>
-              <Radio name="fatness" control={control} value={"small"}></Radio>
+              <Radio
+                required={true}
+                name="dimensions"
+                control={control}
+                value={petModel.announcmentDimensions.thin}
+              ></Radio>
             </label>
             <label className={styles.form__label_column}>
               <div className={styles.form__label_image}>
@@ -58,7 +65,12 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               <Text myClass="btn" color="gray">
                 Среднее
               </Text>
-              <Radio name="fatness" control={control} value={"medium"}></Radio>
+              <Radio
+                required={true}
+                name="dimensions"
+                control={control}
+                value={petModel.announcmentDimensions.average}
+              ></Radio>
             </label>
             <label className={styles.form__label_column}>
               <div className={styles.form__label_image}>
@@ -67,17 +79,36 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
               <Text myClass="btn" color="gray">
                 Полное
               </Text>
-              <Radio name="fatness" control={control} value={"big"}></Radio>
+              <Radio
+                required={true}
+                name="dimensions"
+                control={control}
+                value={petModel.announcmentDimensions.full}
+              ></Radio>
             </label>
           </div>
         </div>
         <div className={styles.form__item}>
           <Label>
             <Text myClass="btn">Вес</Text>
-            <Input
-              placeholder="Введите значение"
-              myClass="form_input"
-              register={register("weight", { required: true })}
+            <Controller
+              name="weigth"
+              control={control}
+              defaultValue=""
+              rules={{
+                required: t("fillInTheField"),
+              }}
+              render={({ field }) => (
+                <Input
+                  type="number"
+                  errorMessage={errors.weigth?.message}
+                  ref={field.ref}
+                  placeholder={"Введите значение"}
+                  value={field.value}
+                  onChange={field.onChange}
+                  myClass="form_input"
+                />
+              )}
             />
           </Label>
         </div>
@@ -87,31 +118,56 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
             <Text myClass="btn" color="gray">
               Маленький от 0 до 1 года
             </Text>
-            <Radio name="age" control={control} value={"1"}></Radio>
+            <Radio
+              required={true}
+              name="age"
+              control={control}
+              value={petModel.announcmentAge.small}
+            ></Radio>
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
               Молодой от 1 до 7 лет
             </Text>
-            <Radio name="age" control={control} value={"3"}></Radio>
+            <Radio
+              required={true}
+              name="age"
+              control={control}
+              value={petModel.announcmentAge.young}
+            ></Radio>
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
               Взрослый от 7 до 12 лет
             </Text>
-            <Radio name="age" control={control} value={"7"}></Radio>
+            <Radio
+              required={true}
+              name="age"
+              control={control}
+              value={petModel.announcmentAge.adult}
+            ></Radio>
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
               Старый 12 и более лет
             </Text>
-            <Radio name="age" control={control} value={"12"}></Radio>
+            <Radio
+              required={true}
+              name="age"
+              control={control}
+              value={petModel.announcmentAge.old}
+            ></Radio>
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
               Неизвестно
             </Text>
-            <Radio name="age" control={control} value={"0"}></Radio>
+            <Radio
+              required={true}
+              name="age"
+              control={control}
+              value={petModel.announcmentAge.unknown}
+            ></Radio>
           </label>
         </div>
         <div className={styles.bottom}>

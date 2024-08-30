@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import * as petModel from "@entities/pet/index";
+import { petModel } from "@entities/pet";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -20,6 +20,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
   handleNext,
   control,
   register,
+  errors,
 }) => {
   const dispatch = useAppDispatch();
 
@@ -47,23 +48,48 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
         <div className={styles.form__item}>
           <Text myClass="btn">Тип шерсти</Text>
           <label className={styles.form__label_default}>
-            <Radio name="wool_type" control={control} value={"string"}></Radio>{" "}
+            <Radio
+              required={true}
+              name="wool_type"
+              control={control}
+              value={petModel.announcmentWoolType.hairless}
+            ></Radio>{" "}
             <Text myClass="medium_big">Бесшерстная</Text>
           </label>
           <label className={styles.form__label_default}>
-            <Radio name="wool_type" control={control} value={"string1"}></Radio>{" "}
+            <Radio
+              required={true}
+              name="wool_type"
+              control={control}
+              value={petModel.announcmentWoolType.fluffy}
+            ></Radio>{" "}
             <Text myClass="medium_big">Пушистая</Text>
           </label>
           <label className={styles.form__label_default}>
-            <Radio name="wool_type" control={control} value={"string2"}></Radio>
+            <Radio
+              required={true}
+              name="wool_type"
+              control={control}
+              value={petModel.announcmentWoolType.tough}
+            ></Radio>
             <Text myClass="medium_big">Жесткая</Text>
           </label>
           <label className={styles.form__label_default}>
-            <Radio name="wool_type" control={control} value={"string3"}></Radio>{" "}
+            <Radio
+              required={true}
+              name="wool_type"
+              control={control}
+              value={petModel.announcmentWoolType.long}
+            ></Radio>{" "}
             <Text myClass="medium_big">Длинная</Text>
           </label>
           <label className={styles.form__label_default}>
-            <Radio name="wool_type" control={control} value={"string4"}></Radio>{" "}
+            <Radio
+              required={true}
+              name="wool_type"
+              control={control}
+              value={petModel.announcmentWoolType.short}
+            ></Radio>{" "}
             <Text myClass="medium_big">Короткая</Text>
           </label>
         </div>

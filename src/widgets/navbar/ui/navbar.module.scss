@@ -1,11 +1,12 @@
 .navbar__container {
+  border-radius: 8px;
   position: fixed;
   bottom: 4px;
   width: 100%;
   text-align: center;
   height: 60px;
   backdrop-filter: blur(7.5px);
-  background-color: var(--background-color);
+  background-color: var(--dark-theme-element);
   display: flex;
   justify-content: center;
   z-index: 10;
@@ -39,6 +40,9 @@
 }
 .active_icon * {
   stroke: var(--button-dark-defoult);
+}
+.active_fill_icon * {
+  fill: var(--button-dark-defoult);
 }
 .active_text {
   color: var(--button-dark-defoult);

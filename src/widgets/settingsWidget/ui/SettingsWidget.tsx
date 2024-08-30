@@ -64,7 +64,7 @@ export const SettingsWidget: React.FC = () => {
     value: string = defaultTheme
   ) => {
     if (isDefaultTheme || getValues("theme_default")) {
-      if (!getValues("theme_default")) {
+      if (!getValues("theme_default") && getValues("theme") !== undefined) {
         setTheme(getValues("theme"));
       } else {
         setTheme(defaultTheme);

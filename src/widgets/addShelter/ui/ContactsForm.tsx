@@ -10,7 +10,7 @@ import { tgConsts, phoneConsts } from "@shared/constants";
 import { Controller } from "react-hook-form";
 import InputMask from "react-input-mask-next";
 import { InfoFormProps } from "../model/type";
-import { validateMask } from "@shared/hooks/idValidMask";
+import { validateMask } from "@/shared/hooks/isValidMask";
 
 export const ContactsForm: React.FC<InfoFormProps> = ({
   onChangeForm,
@@ -18,6 +18,9 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
   control,
   register,
   handleFieldChange,
+  errors,
+  setValue,
+  t,
 }) => {
   return (
     <div className={styles.container}>
@@ -28,24 +31,32 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
         <div className={styles.form__item}>
           <Label>
             <Text myClass="medium_big">Номер</Text>
-
             <Controller
               name="telephone_number"
               control={control}
               defaultValue=""
               rules={{
-                required: true,
+                required: t("fillInTheField"),
                 validate: (value) => validateMask(value, phoneConsts.mask),
               }}
-              render={({ field }) => (
+              render={({ field, fieldState }) => (
                 <InputMask
                   placeholder={phoneConsts.placeholder}
                   maskPlaceholder={phoneConsts.maskChar}
                   mask={phoneConsts.mask}
                   value={field.value}
-                  onChange={(e) => handleFieldChange(e, field)}
+                  onChange={(e) => {
+                    field.onChange(e);
+                    handleFieldChange(e, field);
+                  }}
                 >
-                  <Input ref={field.ref} myClass="form_input" />
+                  <Input
+                    errorMessage={
+                      fieldState.invalid ? t("fillInTheField") : false
+                    }
+                    ref={field.ref}
+                    myClass="form_input"
+                  />
                 </InputMask>
               )}
             />
@@ -59,12 +70,8 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
               name="social_network_1"
               control={control}
               defaultValue=""
-              rules={{
-                required: true,
-              }}
               render={({ field }) => (
                 <Input
-                  ref={field.ref}
                   placeholder={tgConsts.placeholder}
                   value={field.value}
                   onChange={field.onChange}
@@ -82,10 +89,8 @@ export const ContactsForm: React.FC<InfoFormProps> = ({
               name="social_network_2"
               control={control}
               defaultValue=""
-              rules={{ required: true }}
               render={({ field }) => (
                 <Input
-                  ref={field.ref}
                   placeholder={tgConsts.placeholder}
                   value={field.value}
                   onChange={field.onChange}
