@@ -31,6 +31,7 @@
   --primary-green: #45d954;
   --secondary-gray: #d1d3d9;
   --primary-red: #dd2323;
+  --red: #e25757;
   --primary-40: rgba(108, 84, 246, 0.4);
   --male: #6f93f6;
   --female: #efb8c8;
@@ -39,39 +40,47 @@
   --accent-blue: #0a7aff;
 
   --navbar-height: 60px;
-
   --container-padding: 28px;
+  --container-max-width: 412px;
 }
 
 html[data-theme="dark"] {
+  --dark-color: #343434;
   --white---primary: #1b1b1b;
+  --dark-theme-element: #343434;
   --dark-theme-background: #fff;
   --input-border-color: #585858;
   --input-color: #343434;
+  --input-text-color: #d1d3d9;
   --text-color: #ffffff;
   --button-text-color: #ffffff;
   --button-background-color: #6c54f6;
   --button-border-color: #6c54f6;
+  --button-background-color-loading: #503bc9;
+  --button-border-color-loading: #503bc9;
   --button-background-color-auth: #6c54f6;
   --button-border-color-auth: #6c54f6;
   --button-text-color-default: #ffffff;
   --button-background-color-default: #404040;
   --button-border-color-default: #404040;
-
   --background-color: #1b1b1b;
 }
 
 html[data-theme="light"] {
+  --dark-color: #1b1b1b;
   --dark-theme-background: #1b1b1b;
   --white---primary: #fff;
+  --dark-theme-element: #fff;
   --input-border-color: #585858;
   --input-color: #f5f5f5;
+  --input-text-color: #828282;
   --text-color: #1b1b1b;
 
   --button-text-color: #ffffff;
   --button-background-color: #6c54f6;
   --button-border-color: #6c54f6;
-
+  --button-background-color-loading: #503bc9;
+  --button-border-color-loading: #503bc9;
   --button-text-color-default: #585858;
   --button-background-color-default: #f1f1f1;
   --button-border-color-default: #f1f1f1;

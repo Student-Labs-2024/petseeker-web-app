@@ -1,21 +1,19 @@
 import React, { useEffect, useState } from "react";
-
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./AddShelter.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
 import { Label } from "@shared/ui/label";
-
 import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
 import { shelterAddressConsts } from "@shared/constants";
-
 import { Controller } from "react-hook-form";
-
 import { InfoFormProps } from "../model/type";
 export const AddressForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   control,
+  errors,
+  t,
 }) => {
   return (
     <div className={styles.container}>
@@ -29,7 +27,9 @@ export const AddressForm: React.FC<InfoFormProps> = ({
               name="address"
               control={control}
               defaultValue=""
-              rules={{ required: true }}
+              rules={{
+                required: t("fillInTheField"),
+              }}
               render={({ field }) => (
                 <Input
                   ref={field.ref}
@@ -37,6 +37,7 @@ export const AddressForm: React.FC<InfoFormProps> = ({
                   value={field.value}
                   onChange={field.onChange}
                   myClass="form_input"
+                  errorMessage={errors.address?.message}
                 />
               )}
             />

@@ -13,6 +13,8 @@ export const NameForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   onSubmitForm,
   control,
+  errors,
+  t,
 }) => {
   return (
     <div className={styles.container}>
@@ -28,7 +30,7 @@ export const NameForm: React.FC<InfoFormProps> = ({
               name="name"
               control={control}
               defaultValue=""
-              rules={{ required: true }}
+              rules={{ required: t("fillInTheField") }}
               render={({ field: { ref, ...field } }) => (
                 <Input
                   ref={ref}
@@ -36,6 +38,7 @@ export const NameForm: React.FC<InfoFormProps> = ({
                   value={field.value}
                   onChange={field.onChange}
                   myClass="form_input"
+                  errorMessage={errors.name?.message}
                 />
               )}
             />

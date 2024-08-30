@@ -10,7 +10,8 @@ import { ReactComponent as Message } from "@shared/assets/message_icon.svg";
 import { useAppDispatch } from "@/shared/hooks";
 import { useAppSelector } from "@/shared/hooks";
 import classNames from "classnames";
-export const TypeForm: React.FC = () => {
+import { InfoFormProps } from "../model/type";
+export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
   const darkCardStyle = classNames(styles.card, styles.dark);
   const dispatch = useAppDispatch();
 
@@ -18,7 +19,7 @@ export const TypeForm: React.FC = () => {
     event: React.MouseEvent<HTMLButtonElement>
   ) => {
     const target = event.target as HTMLButtonElement;
-
+    setValue("status", target.value);
     dispatch(petModel.setAddPetUrl(target.name as petModel.AnnouncmentType));
     dispatch(petModel.nextStep());
   };
@@ -31,14 +32,13 @@ export const TypeForm: React.FC = () => {
       </div>
       {/* замапить кнопки? */}
       <button
+        value={petModel?.announcmentStatus.looking_home}
         name={petModel?.announcmentValues?.shelter}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Формат приюта
-          </Text>
+          <Text myClass="bold_medium">Формат приюта</Text>
           <Private />
         </div>
         <div className={styles.card__text}>
@@ -50,14 +50,13 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
+        value={petModel?.announcmentStatus.give}
         name={petModel?.announcmentValues?.private}
         onClick={handleSetAnnouncmentType}
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Формат пользователя
-          </Text>
+          <Text myClass="bold_medium">Формат пользователя</Text>
           <Shelter />
         </div>
         <div className={styles.card__text}>
@@ -69,14 +68,12 @@ export const TypeForm: React.FC = () => {
         </div>
       </button>
       <button
-        value={petModel?.announcmentValues?.message}
+        value={petModel?.announcmentStatus.lost}
         onClick={handleSetAnnouncmentType}
         className={darkCardStyle}
       >
         <div className={styles.card__top}>
-          <Text color="white" myClass="bold_medium">
-            Сообщить о потере питомца
-          </Text>
+          <Text myClass="bold_medium">Сообщить о потере питомца</Text>
           <Message />
         </div>
         <div className={styles.card__text}>

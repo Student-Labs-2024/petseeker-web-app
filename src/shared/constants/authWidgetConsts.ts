@@ -13,7 +13,7 @@ export const nameConsts = {
 };
 
 export const codeConsts = {
-  mask: "999999",
+  mask: "9999",
   maskChar: "_",
-  placeholder: "______",
+  placeholder: "____",
 };

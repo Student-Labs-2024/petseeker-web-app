@@ -30,4 +30,7 @@ export type InfoFormProps = {
   watch?: UseFormWatch<any>;
   setValue?: UseFormSetValue<any>;
   onSubmitForm?: (data: any) => void;
+  isLoading?: boolean;
+  errors?: any;
+  t?: any;
 };

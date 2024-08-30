@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import { petModel, PetCard } from "@entities/pet/";
 import styles from "./card.module.scss";
 import { match } from "ts-pattern";
-
 import { useAppSelector, useAppDispatch } from "@/shared/hooks/index";
 export const PetList: React.FC = () => {
   const dispatch = useAppDispatch();

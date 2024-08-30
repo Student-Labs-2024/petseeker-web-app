@@ -20,8 +20,7 @@
   padding-top: calc(20px + var(--container-padding));
   display: flex;
   flex-direction: column;
-
-  background-color: var(--white---primary);
+  background-color: var(--input-color);
 }
 .drag_icon {
   position: absolute;

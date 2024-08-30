@@ -6,6 +6,9 @@
 .form__back {
   width: 24px;
   height: 24px;
+  > * > * {
+    stroke: var(--dark-theme-background);
+  }
 }
 .form__preview {
   overflow: hidden;
@@ -54,7 +57,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--def-sec-gray);
+  background-color: var(--input-color);
+  color: var(--input-text-color);
   margin-bottom: 6px;
   max-height: 40px;
 }
@@ -67,6 +71,7 @@
   align-items: center;
 }
 .form__label_image {
+  background-color: var(--input-color);
   width: 100%;
   display: flex;
   justify-content: center;
@@ -88,13 +93,18 @@
   gap: 4px;
   align-items: center;
   padding: 30px 0;
-  background: var(--def-sec-gray);
+  background-color: var(--input-color);
+  color: var(--input-text-color);
   > input {
     position: absolute;
     opacity: 0;
   }
   > * {
     pointer-events: none;
+  }
+  > * > * {
+    pointer-events: none;
+    fill: var(--input-text-color);
   }
 }
 .upload_image {
@@ -122,6 +132,7 @@
 }
 
 .form {
+  padding-bottom: 40px;
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -143,7 +154,8 @@
   position: fixed;
   bottom: 20px;
   width: calc(100% - var(--container-padding) * 2);
-  max-width: 100%;
+
+  max-width: calc(var(--container-max-width) - var(--container-padding) * 2);
   flex-direction: column;
   display: flex;
   justify-content: center;
@@ -167,7 +179,7 @@
   }
 }
 .dark {
-  background-color: var(--dark-theme-background);
+  background-color: var(--dark-color);
 }
 .top {
   display: flex;
@@ -193,11 +205,11 @@
 
 .form__input_button {
   border-radius: 8px;
-  background-color: var(--def-sec-gray);
+  background-color: var(--input-color);
   padding: 10px 12px;
   font-family: var(--font-family);
   font-weight: 400;
-  color: var(--gray-backgr-element);
+  color: var(--input-text-color);
   text-align: left;
   font-size: 14px;
 }
@@ -240,7 +252,6 @@
     transform: translateY(-50%);
     width: 28px;
     aspect-ratio: 1;
-    background-image: url("../../../shared/assets/search_icon.svg");
   }
   > input {
     padding: 12px 16px 12px 56px;
@@ -249,6 +260,20 @@
     font-size: 17px;
     line-height: 129%;
     letter-spacing: 0.03em;
+  }
+}
+html[data-theme="dark"] {
+  .modal__input {
+    &::after {
+      background-image: url("../../../shared/assets/search_icon_dark.svg");
+    }
+  }
+}
+html[data-theme="light"] {
+  .modal__input {
+    &::after {
+      background-image: url("../../../shared/assets/search_icon.svg");
+    }
   }
 }
 .modal__top {

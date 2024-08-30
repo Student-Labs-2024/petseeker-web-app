@@ -1,5 +1,5 @@
 import React from "react";
-import { petModel } from "@entities/pet/index";
+import { shelterModel } from "@entities/shelter/";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./AddShelter.module.scss";
@@ -17,8 +17,8 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
 }) => {
-  const storedImages = useAppSelector((state) => state.pets.images);
-  const previewUrl = useAppSelector((state) => state.pets.previewUrl);
+  const storedImages = useAppSelector((state) => state.shelter.images);
+  const previewUrl = useAppSelector((state) => state.shelter.previewUrl);
   const { control, handleSubmit, reset } = useForm<FormData>({
     defaultValues: {
       imageFiles:
@@ -29,10 +29,10 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
 
   const handleImageSave = (files: FileList) => {
     const filesArray = Array.from(files);
-    dispatch(petModel.addImages(filesArray));
+    dispatch(shelterModel.addImages(filesArray));
     if (filesArray.length > 0) {
       const preview = URL.createObjectURL(filesArray[0]);
-      dispatch(petModel.setPreviewUrl(preview));
+      dispatch(shelterModel.setPreviewUrl(preview));
     }
   };
   const handleFileChange = (

@@ -12,14 +12,16 @@ export const FilterPetType: React.FC = () => {
     const target = event.target as HTMLButtonElement;
     dispatch(petModel.setFavoriteFilters({ [target.name]: target.value }));
   };
+  const resetFilters = () => {
+    dispatch(petModel.resetFavoriteFilters(undefined));
+  };
 
   return (
     <div className={styles.filter_list}>
       <Button
-        isDefault={!(filters.pet_type === "")}
+        isDefault={filters !== undefined}
         name="pet_type"
-        value=""
-        onClick={handleFilter}
+        onClick={resetFilters}
         isSmall={true}
       >
         Все
@@ -28,7 +30,7 @@ export const FilterPetType: React.FC = () => {
         name="pet_type"
         value="Кошка"
         onClick={handleFilter}
-        isDefault={!(filters.pet_type === "Кошка")}
+        isDefault={!(filters?.pet_type === "Кошка")}
         isSmall={true}
       >
         Кошки
@@ -37,7 +39,7 @@ export const FilterPetType: React.FC = () => {
         name="pet_type"
         value="Собака"
         onClick={handleFilter}
-        isDefault={!(filters.pet_type === "Собака")}
+        isDefault={!(filters?.pet_type === "Собака")}
         isSmall={true}
       >
         Собаки

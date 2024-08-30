@@ -3,12 +3,10 @@
   flex-direction: column;
 }
 .code_mask {
-    display: flex;
-    flex-direction: column;
-  > * {
+  display: flex;
+  flex-direction: column;
+  > input {
     letter-spacing: 6px;
     text-align: center;
   }
-
-
 }
