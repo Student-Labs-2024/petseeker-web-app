@@ -180,7 +180,7 @@ export const PetCardForm: React.FC = () => {
               t={t}
               watch={watch}
               getValues={getValues}
-              register={register}
+              register={register}   
               onChangeForm={handleSubmit(onChangeForm)}
               setValue={setValue}
               errors={errors}

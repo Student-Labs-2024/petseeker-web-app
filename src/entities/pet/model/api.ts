@@ -1,10 +1,13 @@
-import { Pet, PetDetail, UploadImageRequest } from "./type";
 import { baseApi } from "@shared/api";
-import { buildQueryString } from "@/shared/hooks/buildQueryString";
+import { buildQueryString } from "@/shared/hooks/buildQueryString"; // Импортируем хук
+import { PetApiResponse, PetDetail } from "../model/type";
 
 export const petsApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    getPets: builder.query<Pet[], { pet_type?: string; male?: string }>({
+    getPets: builder.query<
+      PetApiResponse,
+      { page?: number; per_page?: number; pet_type?: string; male?: string }
+    >({
       query: (params) => buildQueryString("/api/search-announcement/", params),
     }),
     getPetDetail: builder.query<PetDetail, { id: string }>({
@@ -37,7 +40,7 @@ export const petsApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Favorites"],
     }),
-    getFavorites: builder.query<Pet[], { pet_type?: string }>({
+    getFavorites: builder.query<Pet[], { pet_type?: string } | void>({
       query: (params) => buildQueryString("/api/favourites/", params),
       providesTags: ["Favorites"],
     }),

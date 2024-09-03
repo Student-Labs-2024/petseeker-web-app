@@ -1,3 +1,5 @@
+import { EntityState } from "@reduxjs/toolkit";
+
 export type Pet = {
   id: number;
   name: string;
@@ -6,6 +8,13 @@ export type Pet = {
   address: string;
   user: string;
   images?: string[];
+};
+
+export type PetApiResponse = {
+  results: Pet[];
+  next: string | null;
+  previous: string | null;
+  count: number;
 };
 
 export type PetDetail = {
@@ -29,30 +38,21 @@ export type PetDetail = {
   allergenicity?: null;
   health_issues?: string;
   vaccinations?: true;
-  weigth?: number;
-  dimmensions?: number;
+  weight?: number;
+  dimensions?: number;
   temperament?: string;
   shelter?: number;
   images?: string[];
 };
 
-export type PetState = {
-  pets: Pet[];
-  loading: boolean;
-  error: string | null;
-  activeButton?: string | null;
-  openFilters: boolean;
-  step: number;
-  data: FormDataType;
-  historySearch: string[];
-  searchOnFocus: boolean;
-  filters: Record<string, any>;
-  images: File[];
-  ids: number[];
-  favoriteFilters: Record<string, any>;
-  previewUrl: string;
-  addPetUrl: string;
+export type Favorite = {
+  id: number;
 };
+
+export type FavoritesState = EntityState<Favorite, number> & {
+  filters: Record<string, any>;
+};
+
 export const announcmentValues = {
   private: "/api/private-announcement/create/",
   shelter: "/api/shelter-announcement/create/",
@@ -154,4 +154,24 @@ export type FilterState = {
   health__issues: string;
   wool_type: string;
   allergenicity: string;
+};
+
+export type PetState = EntityState<Pet, number> & {
+  pets: Pet[];
+  loading: boolean;
+  error: string | null;
+  activeButton?: string | null;
+  openFilters: boolean;
+  step: number;
+  data: FormDataType;
+  historySearch: string[];
+  searchOnFocus: boolean;
+  filters: Record<string, any>;
+  images: File[];
+  ids: number[];
+  favoriteFilters: Record<string, any>;
+  previewUrl: string;
+  addPetUrl: string;
+
+  favorites: FavoritesState;
 };

@@ -1,6 +1,11 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { petModel } from "../index";
-
+import {
+  createSlice,
+  createEntityAdapter,
+  PayloadAction,
+} from "@reduxjs/toolkit";
+import { FavoritesState, FilterState, PetState, Pet, Favorite } from "./type";
+import { RootState } from "@app/store";
 const initialFilterState: petModel.FilterState = {
   pet_type: undefined,
   male: undefined,
@@ -30,8 +35,18 @@ const initialFormDataState: petModel.FormDataType = {
   state: undefined,
   health_issues: undefined,
 };
-const initialState: petModel.PetState = {
-  pets: [],
+
+const petsAdapter = createEntityAdapter<Pet>();
+
+const favoritesAdapter = createEntityAdapter<Favorite>();
+
+const initialFavoritesState: FavoritesState = {
+  ...favoritesAdapter.getInitialState(),
+  filters: {},
+};
+
+const initialState: PetState = {
+  ...petsAdapter.getInitialState(),
   loading: false,
   error: null,
   activeButton: "1",
@@ -46,12 +61,22 @@ const initialState: petModel.PetState = {
   images: [],
   previewUrl: "",
   addPetUrl: undefined,
+  favorites: initialFavoritesState,
 };
 
 const petsSlice = createSlice({
   name: "pets",
   initialState,
   reducers: {
+    setAllPets(state, action: PayloadAction<Pet[]>) {
+      petsAdapter.setAll(state, action.payload);
+    },
+    addPets(state, action: PayloadAction<Pet[]>) {
+      petsAdapter.addMany(state, action.payload);
+    },
+    resetAllPets(state) {
+      petsAdapter.removeAll(state);
+    },
     setActiveButton(state, action: PayloadAction<string>) {
       state.activeButton = action.payload;
     },
@@ -68,8 +93,8 @@ const petsSlice = createSlice({
       };
     },
     setFavoriteFilters(state, action: PayloadAction<Record<string, any>>) {
-      state.favoriteFilters = {
-        ...state.favoriteFilters,
+      state.favorites.filters = {
+        ...state.favorites.filters,
         ...action.payload,
       };
     },
@@ -93,9 +118,8 @@ const petsSlice = createSlice({
       state.historySearch = action.payload;
     },
     resetFilters(state) {
-      state.filters = initialState.filters;
+      state.filters = initialFilterState;
     },
-
     nextStep(state) {
       state.step += 1;
     },
@@ -116,21 +140,21 @@ const petsSlice = createSlice({
     clearImages: (state) => {
       state.images = [];
     },
-    addFavorites: (state, action: PayloadAction<number | number[]>) => {
-      const idsToAdd = Array.isArray(action.payload)
+    addFavorites(state, action: PayloadAction<Favorite | Favorite[]>) {
+      const favorites = Array.isArray(action.payload)
         ? action.payload
         : [action.payload];
-      const uniqueIds = new Set([...state.ids, ...idsToAdd]);
-      state.ids = Array.from(uniqueIds);
+      favoritesAdapter.addMany(state.favorites, favorites);
     },
-    removeFavorite: (state, action: PayloadAction<number>) => {
-      state.ids = state.ids.filter((id) => id !== action.payload);
+    removeFavorite(state, action: PayloadAction<Favorite["id"]>) {
+      favoritesAdapter.removeOne(state.favorites, action.payload);
     },
     setAddPetUrl(state, action: PayloadAction<string>) {
       state.addPetUrl = action.payload;
     },
   },
 });
+
 export const {
   setActiveButton,
   setOpenFilters,
@@ -150,6 +174,22 @@ export const {
   addFavorites,
   setPreviewUrl,
   setAddPetUrl,
+
+  addPets,
+  resetAllPets,
+  setAllPets,
 } = petsSlice.actions;
 
 export const petsReducer = petsSlice.reducer;
+
+export const {
+  selectAll: selectAllPets,
+  selectById: selectPetById,
+  selectIds: selectPetIds,
+} = petsAdapter.getSelectors((state: RootState) => state.pets);
+
+export const {
+  selectAll: selectAllFavorites,
+  selectById: selectFavoriteById,
+  selectIds: selectFavoriteIds,
+} = favoritesAdapter.getSelectors((state: RootState) => state.pets.favorites);

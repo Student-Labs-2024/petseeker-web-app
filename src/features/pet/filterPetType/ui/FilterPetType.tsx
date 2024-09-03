@@ -7,7 +7,7 @@ import { petModel } from "@entities/pet/index";
 import { buttonsData } from "@shared/constants/filterPetsConsts";
 export const FilterPetType: React.FC = () => {
   const dispatch = useAppDispatch();
-  const filters = useAppSelector((state) => state.pets.favoriteFilters);
+  const filters = useAppSelector((state) => state.pets.favorites.filters);
   const handleFilter = (event: React.MouseEvent<HTMLButtonElement>) => {
     const target = event.target as HTMLButtonElement;
     dispatch(petModel.setFavoriteFilters({ [target.name]: target.value }));
