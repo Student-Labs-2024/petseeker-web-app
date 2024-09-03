@@ -1,5 +1,5 @@
 import React, { forwardRef } from "react";
-import * as petModel from "@entities/pet";
+import { petModel, PetCard } from "@entities/pet";
 import styles from "./card.module.scss";
 import { petListConsts } from "@shared/constants";
 import { useAppSelector } from "@/shared/hooks/";
@@ -7,7 +7,7 @@ interface PetCellProps {
   columnIndex: number;
   rowIndex: number;
   style: React.CSSProperties;
-  allPets: petModel.type.Pet[];
+  allPets: petModel.Pet[];
   petItemRefs: React.RefObject<(HTMLDivElement | null)[]>;
 }
 
@@ -16,10 +16,10 @@ const PetCell = forwardRef<HTMLDivElement, PetCellProps>(
     const index = rowIndex * petListConsts.columnCount + columnIndex;
     const pet = allPets[index];
     const favorite = useAppSelector((state) =>
-      petModel.slice.selectFavoriteById(state, pet?.id)
+      petModel.selectFavoriteById(state, pet?.id)
     );
     if (!pet) return null;
-
+    console.log(pet);
     return (
       <div
         key={pet.id}
@@ -31,7 +31,7 @@ const PetCell = forwardRef<HTMLDivElement, PetCellProps>(
           }
         }}
       >
-        <petModel.PetCard
+        <PetCard
           key={pet.id}
           description={pet}
           isSaved={!!favorite}

@@ -3,7 +3,7 @@ import react from "@vitejs/plugin-react";
 import path from "path";
 import svgr from "@svgr/rollup";
 import dotenv from "dotenv";
-import fixReactVirtualized from 'esbuild-plugin-react-virtualized'
+import fixReactVirtualized from "esbuild-plugin-react-virtualized";
 dotenv.config();
 export default defineConfig({
   resolve: {
@@ -27,13 +27,10 @@ export default defineConfig({
         rewrite: (path) => path.replace(/^\/api/, ""),
       },
     },
-  },  
+  },
   optimizeDeps: {
     esbuildOptions: {
       plugins: [fixReactVirtualized],
     },
   },
 });
-
-
-
