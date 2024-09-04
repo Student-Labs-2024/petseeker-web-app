@@ -21,6 +21,7 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
   getValues,
   watch,
   setValue,
+  t,
 }) => {
   const breedValue = watch("breed");
   const [isOpenModal, setIsOpenModal] = useState(false);
@@ -74,7 +75,7 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
                 onClick={handleCloseModal}
               ></button>
               <div className={styles.modal__title}>
-                <Text myClass="bold_medium_big">Порода</Text>
+                <Text myClass="bold_medium_big">{t("breed")}</Text>
               </div>
             </div>
             <div className={styles.modal__input}>
@@ -104,12 +105,12 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
 
         <div className={styles.top}>
           <Star />
-          <Text myClass="bold_big">Характеристики</Text>
+          <Text myClass="bold_big">{t("characteristics")}</Text>
         </div>
         <form onSubmit={onChangeForm} className={styles.form}>
           <div className={styles.form__item}>
             <Label>
-              <Text myClass="btn">Порода</Text>
+              <Text myClass="btn">{t("breed")}</Text>
               <button
                 className={styles.form__input_button}
                 type="button"
@@ -121,7 +122,7 @@ export const CharacteristicForm2: React.FC<InfoFormProps> = ({
           </div>
 
           <div className={styles.bottom}>
-            <Button type="submit">Далее</Button>
+            <Button type="submit">{t("next")}</Button>
           </div>
         </form>
       </div>

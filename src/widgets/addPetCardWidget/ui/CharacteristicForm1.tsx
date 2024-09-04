@@ -1,18 +1,15 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { petModel } from "@entities/pet/";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
 import { useAppDispatch } from "@/shared/hooks";
-import { useAppSelector } from "@/shared/hooks";
 import { Label } from "@shared/ui/label";
 import { Radio } from "@shared/ui/radio";
 import { Button } from "@shared/ui/button";
 import { Input } from "@shared/ui/input";
-import { useForm, Controller } from "react-hook-form";
-import classNames from "classnames";
-import { UseFormRegister } from "react-hook-form";
+import { Controller } from "react-hook-form";
 import { InfoFormProps } from "../model/type";
 import dogSmall from "@shared/assets/dog_small.svg";
 import dogMedium from "@shared/assets/dog_medium.svg";
@@ -20,6 +17,7 @@ import dogFat from "@shared/assets/dog_fat.svg";
 import catSmall from "@shared/assets/cat_small.svg";
 import catMedium from "@shared/assets/cat_medium.svg";
 import catFat from "@shared/assets/cat_fat.svg";
+
 export const CharacteristicForm1: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
@@ -30,26 +28,27 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
   t,
 }) => {
   const dispatch = useAppDispatch();
-  const isCatType = getValues("pet_type") === "Кошка";
+  const isCatType = getValues("pet_type") === t("cat");
   const smallAnimalImage = isCatType ? catSmall : dogSmall;
-  const mediumAnimallImage = isCatType ? catMedium : dogMedium;
+  const mediumAnimalImage = isCatType ? catMedium : dogMedium;
   const fatAnimalImage = isCatType ? catFat : dogFat;
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Star />
-        <Text myClass="bold_big">Характеристики</Text>
+        <Text myClass="bold_big">{t("characteristics")}</Text>
       </div>
       <form onSubmit={onChangeForm} className={styles.form}>
         <div className={styles.form__item}>
-          <Text myClass="btn">Телосложение</Text>
+          <Text myClass="btn">{t("bodyType")}</Text>
           <div className={styles.form__item_flex}>
             <label className={styles.form__label_column}>
               <div className={styles.form__label_image}>
-                <img src={smallAnimalImage} alt="" />
+                <img src={smallAnimalImage} alt={t("thin")} />
               </div>
               <Text myClass="btn" color="gray">
-                Худое
+                {t("thin")}
               </Text>
               <Radio
                 required={true}
@@ -60,10 +59,10 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
             </label>
             <label className={styles.form__label_column}>
               <div className={styles.form__label_image}>
-                <img src={mediumAnimallImage} alt="" />
+                <img src={mediumAnimalImage} alt={t("average")} />
               </div>
               <Text myClass="btn" color="gray">
-                Среднее
+                {t("average")}
               </Text>
               <Radio
                 required={true}
@@ -74,10 +73,10 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
             </label>
             <label className={styles.form__label_column}>
               <div className={styles.form__label_image}>
-                <img src={fatAnimalImage} alt="" />
+                <img src={fatAnimalImage} alt={t("full")} />
               </div>
               <Text myClass="btn" color="gray">
-                Полное
+                {t("full")}
               </Text>
               <Radio
                 required={true}
@@ -90,7 +89,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
         </div>
         <div className={styles.form__item}>
           <Label>
-            <Text myClass="btn">Вес</Text>
+            <Text myClass="btn">{t("weight")}</Text>
             <Controller
               name="weigth"
               control={control}
@@ -103,7 +102,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
                   type="number"
                   errorMessage={errors.weigth?.message}
                   ref={field.ref}
-                  placeholder={"Введите значение"}
+                  placeholder={t("enterValue")}
                   value={field.value}
                   onChange={field.onChange}
                   myClass="form_input"
@@ -113,10 +112,10 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </Label>
         </div>
         <div className={styles.form__item}>
-          <Text myClass="btn">Возраст</Text>
+          <Text myClass="btn">{t("age")}</Text>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
-              Маленький от 0 до 1 года
+              {t("ageSmall")}
             </Text>
             <Radio
               required={true}
@@ -127,7 +126,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
-              Молодой от 1 до 7 лет
+              {t("ageYoung")}
             </Text>
             <Radio
               required={true}
@@ -138,7 +137,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
-              Взрослый от 7 до 12 лет
+              {t("ageAdult")}
             </Text>
             <Radio
               required={true}
@@ -149,7 +148,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
-              Старый 12 и более лет
+              {t("ageOld")}
             </Text>
             <Radio
               required={true}
@@ -160,7 +159,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </label>
           <label className={styles.form__label}>
             <Text myClass="btn" color="gray">
-              Неизвестно
+              {t("ageUnknown")}
             </Text>
             <Radio
               required={true}
@@ -171,7 +170,7 @@ export const CharacteristicForm1: React.FC<InfoFormProps> = ({
           </label>
         </div>
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button type="submit">{t("next")}</Button>
         </div>
       </form>
     </div>

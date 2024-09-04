@@ -1,5 +1,4 @@
-import React, { useState } from "react";
-import { petModel } from "@entities/pet/index";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
@@ -11,7 +10,10 @@ import { useAppDispatch } from "@/shared/hooks";
 import { useAppSelector } from "@/shared/hooks";
 import classNames from "classnames";
 import { InfoFormProps } from "../model/type";
+import { petModel } from "@entities/pet";
+
 export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
+  const { t } = useTranslation("petCardForm");
   const darkCardStyle = classNames(styles.card, styles.dark);
   const dispatch = useAppDispatch();
 
@@ -28,9 +30,8 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
     <div className={styles.container}>
       <div className={styles.top}>
         <Star />
-        <Text myClass="bold_big">Вид объявления</Text>
+        <Text myClass="bold_big">{t("announcementType")}</Text>
       </div>
-      {/* замапить кнопки? */}
       <button
         value={petModel?.announcmentStatus.looking_home}
         name={petModel?.announcmentValues?.shelter}
@@ -38,14 +39,12 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text myClass="bold_medium">Формат приюта</Text>
+          <Text myClass="bold_medium">{t("shelterFormat")}</Text>
           <Private />
         </div>
         <div className={styles.card__text}>
           <Text color="light_gray" myClass="small">
-            <div> Объявления формата приют помогает</div>
-            <div> находить семьи для животных</div>
-            <div> и привлекает материальную помощь</div>
+            {t("shelterDescription")}
           </Text>
         </div>
       </button>
@@ -56,14 +55,12 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={styles.card}
       >
         <div className={styles.card__top}>
-          <Text myClass="bold_medium">Формат пользователя</Text>
+          <Text myClass="bold_medium">{t("userFormat")}</Text>
           <Shelter />
         </div>
         <div className={styles.card__text}>
           <Text color="light_gray" myClass="small">
-            <div>Объявление от лица пользователя</div>
-            <div>привлекает больше внимания </div>
-            <div>и помогает быстро найти дом для питомца</div>
+            {t("userDescription")}
           </Text>
         </div>
       </button>
@@ -73,14 +70,12 @@ export const TypeForm: React.FC<InfoFormProps> = ({ setValue }) => {
         className={darkCardStyle}
       >
         <div className={styles.card__top}>
-          <Text myClass="bold_medium">Сообщить о потере питомца</Text>
+          <Text myClass="bold_medium">{t("reportLostPet")}</Text>
           <Message />
         </div>
         <div className={styles.card__text}>
           <Text color="light_gray" myClass="small">
-            <div>Потеряли домашнего питомца </div>
-            <div>или нашли питомца из объявления?</div>
-            <div>Сообщите об этом</div>
+            {t("reportDescription")}
           </Text>
         </div>
       </button>

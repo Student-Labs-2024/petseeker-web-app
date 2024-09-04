@@ -32,7 +32,8 @@ import { ShelterModal } from "./ShelterModal";
 import { useNavigate } from "react-router-dom";
 import { useAppDispatch } from "@/shared/hooks/index";
 import { RemoveAccountButton } from "@features/user/removeAccount";
-const apiUrl = import.meta.env.VITE_APP_URL;
+import { apiUrl } from "@shared/constants";
+
 export const ProfileInfo: React.FC = () => {
   const isProfilePage = location.pathname === PROFILE;
   const totalStars = 5;

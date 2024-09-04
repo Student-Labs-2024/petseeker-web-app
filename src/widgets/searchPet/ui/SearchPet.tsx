@@ -28,6 +28,7 @@ export const SearchPet: React.FC = () => {
   const petTypeData = watch("name");
   const history = useAppSelector((state) => state.pets.historySearch);
   const filters = useAppSelector((state) => state.pets.filters);
+
   petModel.useGetPetsQuery(filters);
   const searchValue = getValues("name");
 

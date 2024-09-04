@@ -1,4 +1,5 @@
 .container {
+  flex: 1;
   position: relative;
   margin-top: 24px;
   width: 100%;
@@ -6,39 +7,36 @@
   display: flex;
 }
 
-
-.petItem{
-
+.petItem {
   height: auto !important;
-  padding-bottom:clamp(24px,5vw,30px);
+  padding-bottom: clamp(24px, 5vw, 30px);
   display: flex;
-  > *{
-    width: calc(100% - clamp(5px,1vw,8px));
-  }
-
-}
-.petItem:nth-child(odd){
-  > *{
-     margin-right: auto;
+  > * {
+    width: calc(100% - clamp(5px, 1vw, 8px));
   }
 }
-.petItem:nth-child(even){
-  > *{
+.petItem:nth-child(odd) {
+  > * {
+    margin-right: auto;
+  }
+}
+.petItem:nth-child(even) {
+  > * {
     margin-left: auto;
-  
   }
 }
-.grid{  z-index: 8;
-  > *{
+.grid {
+  z-index: 8;
+  > * {
     background-color: var(--background-color);
-    margin-bottom:100px;
+    margin-bottom: 100px;
   }
-&::-webkit-scrollbar {
-  display: none; 
-}}
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
 
-.isFetching{
-
+.isFetching {
   margin-top: auto;
-  margin-bottom: var( --navbar-height);
+  margin-bottom: var(--navbar-height);
 }

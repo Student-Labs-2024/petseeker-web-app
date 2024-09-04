@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { UserState } from "./type";
 
 export const initialState: UserState = {
-  token: undefined,
   user: null,
   phoneNumber: undefined,
   name: undefined,

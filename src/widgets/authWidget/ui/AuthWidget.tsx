@@ -35,7 +35,6 @@ export const AuthWidget: React.FC = () => {
   } = useForm({
     defaultValues: {
       phoneNumber: phoneNumber,
-
       code: code,
     },
   });
@@ -93,9 +92,7 @@ export const AuthWidget: React.FC = () => {
     field.onChange(onlyNumbers);
     dispatch(userModel.setCode(onlyNumbers));
   };
-  const maskedNumber = (phoneNumber: string): string => {
-    return `+${phoneNumber[0]} ${phoneNumber.slice(1, 4)} ***-**-${phoneNumber.slice(9)}`;
-  };
+
   return (
     <div className={styles.auth}>
       <div className={styles.auth__container}>
@@ -112,7 +109,10 @@ export const AuthWidget: React.FC = () => {
             <>
               <Text myClass="btn">Введите код из смс</Text>
               <Text myClass="medium">
-                Отправили на {maskedNumber(phoneNumber)}
+                Отправили на
+                <InputMask mask={` ${phoneConsts.mask}`} value={phoneNumber}>
+                  <input className={styles.medium} />
+                </InputMask>
               </Text>
             </>
           ) : (

@@ -19,7 +19,7 @@ const PetCell = forwardRef<HTMLDivElement, PetCellProps>(
       petModel.selectFavoriteById(state, pet?.id)
     );
     if (!pet) return null;
-    console.log(pet);
+
     return (
       <div
         key={pet.id}

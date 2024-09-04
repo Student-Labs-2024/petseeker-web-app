@@ -7,7 +7,6 @@ import { Select } from "@shared/ui/select";
 import { Form } from "@shared/ui/form";
 import { Button } from "@shared/ui/button";
 import { useTranslation } from "react-i18next";
-
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Back } from "@shared/assets/back_arrow_icon.svg";
@@ -25,7 +24,7 @@ import { CharacteristicForm4 } from "./CharacteristicForm4";
 import { DescriptionForm } from "./DescriptionForm";
 import { ImagesForm } from "./ImagesForm";
 import { AddressForm } from "./AddressForm";
-
+import { petCardFormSteps } from "@shared/constants";
 export const PetCardForm: React.FC = () => {
   const { t } = useTranslation("petCardForm");
   const step = useAppSelector((state) => state.pets.step);
@@ -139,6 +138,7 @@ export const PetCardForm: React.FC = () => {
       }
     }
   };
+
   return (
     <>
       <div className={styles.form}>
@@ -148,13 +148,15 @@ export const PetCardForm: React.FC = () => {
           </button>
           <button onClick={handleSave} className={styles.form__save}>
             <Text myClass="medium" color="btn_color">
-              Сохранить и выйти
+              {t("save")}
             </Text>
           </button>
         </div>
         {match(step)
-          .with(1, () => <TypeForm setValue={setValue} />)
-          .with(2, () => (
+          .with(petCardFormSteps.typeForm, () => (
+            <TypeForm t={t} setValue={setValue} />
+          ))
+          .with(petCardFormSteps.infoForm, () => (
             <InfoForm
               t={t}
               errors={errors}
@@ -164,7 +166,7 @@ export const PetCardForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(3, () => (
+          .with(petCardFormSteps.characteristicForm1, () => (
             <CharacteristicForm1
               t={t}
               getValues={getValues}
@@ -175,18 +177,18 @@ export const PetCardForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(4, () => (
+          .with(petCardFormSteps.characteristicForm2, () => (
             <CharacteristicForm2
               t={t}
               watch={watch}
               getValues={getValues}
-              register={register}   
+              register={register}
               onChangeForm={handleSubmit(onChangeForm)}
               setValue={setValue}
               errors={errors}
             />
           ))
-          .with(5, () => (
+          .with(petCardFormSteps.characteristicForm3, () => (
             <CharacteristicForm3
               t={t}
               control={control}
@@ -196,7 +198,7 @@ export const PetCardForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(6, () => (
+          .with(petCardFormSteps.characteristicForm4, () => (
             <CharacteristicForm4
               t={t}
               control={control}
@@ -206,7 +208,7 @@ export const PetCardForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(7, () => (
+          .with(petCardFormSteps.descriptionForm, () => (
             <DescriptionForm
               t={t}
               control={control}
@@ -216,14 +218,14 @@ export const PetCardForm: React.FC = () => {
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(8, () => (
+          .with(petCardFormSteps.imagesForm, () => (
             <ImagesForm
               t={t}
               handleNext={handleNext}
               onChangeForm={handleSubmit(onChangeForm)}
             />
           ))
-          .with(9, () => (
+          .with(petCardFormSteps.addressForm, () => (
             <AddressForm
               t={t}
               control={control}

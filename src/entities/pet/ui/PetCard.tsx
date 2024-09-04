@@ -8,7 +8,7 @@ import useFormattedDate from "@shared/hooks/useFormattedDate/useFormattedDate";
 import { SaveCard } from "@/features/pet/savePet";
 import classNames from "classnames";
 import cat from "@shared/assets/cat.png";
-const apiUrl = import.meta.env.VITE_APP_URL;
+import { apiUrl } from "@shared/constants";
 type PetProps = {
   description: petModel.Pet;
   actionSlots?: React.ReactNode;
@@ -22,13 +22,15 @@ export const PetCard: FC<PetProps> = ({
   isSaved = false,
 }) => {
   const formattedDate = useFormattedDate(description.published_at);
-
   const petCardStyle = classNames(styles.card__container, {
     [styles.favorite]: isFavoritePage,
   });
   const statusStyle = classNames(styles.status, {
     [styles.status_red]: description.status === "lost",
   });
+  const imageSrc = description.images?.length
+    ? `${apiUrl}${description.images[0]}`
+    : cat;
   return (
     <>
       <NavLink className={petCardStyle} to={`${PET_CARD}/${description.id}`}>
@@ -38,12 +40,7 @@ export const PetCard: FC<PetProps> = ({
               {petModel.announcmentStatusTranslate[description.status]}
             </Text>
           </span>
-          <img
-            src={
-              description.images?.length ? apiUrl + description.images[0] : cat
-            }
-            alt=""
-          />
+          <img src={imageSrc} alt="" />
         </div>
         <div className={styles.card__content}>
           <div className={styles.card__like_container}>

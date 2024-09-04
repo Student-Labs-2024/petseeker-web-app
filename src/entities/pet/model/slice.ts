@@ -1,3 +1,14 @@
+import {
+  announcmentValues,
+  announcmentState,
+  announcmentStatus,
+  announcmentStatusTranslate,
+  announcmentAge,
+  announcmentWoolType,
+  announcmentDimensions,
+  announcmentPetType,
+} from "./type";
+
 import { petModel } from "../index";
 import {
   createSlice,
@@ -6,6 +17,7 @@ import {
 } from "@reduxjs/toolkit";
 import { FavoritesState, FilterState, PetState, Pet, Favorite } from "./type";
 import { RootState } from "@app/store";
+
 const initialFilterState: petModel.FilterState = {
   pet_type: undefined,
   male: undefined,
@@ -15,6 +27,7 @@ const initialFilterState: petModel.FilterState = {
   wool_type: undefined,
   allergenicity: undefined,
 };
+
 const initialFormDataState: petModel.FormDataType = {
   pet_type: undefined,
   name: undefined,
@@ -37,7 +50,6 @@ const initialFormDataState: petModel.FormDataType = {
 };
 
 const petsAdapter = createEntityAdapter<Pet>();
-
 const favoritesAdapter = createEntityAdapter<Favorite>();
 
 const initialFavoritesState: FavoritesState = {
@@ -62,6 +74,16 @@ const initialState: PetState = {
   previewUrl: "",
   addPetUrl: undefined,
   favorites: initialFavoritesState,
+  announcements: {
+    values: announcmentValues,
+    state: announcmentState,
+    status: announcmentStatus,
+    statusTranslate: announcmentStatusTranslate,
+    age: announcmentAge,
+    woolType: announcmentWoolType,
+    dimensions: announcmentDimensions,
+    petType: announcmentPetType,
+  },
 };
 
 const petsSlice = createSlice({
@@ -129,11 +151,9 @@ const petsSlice = createSlice({
     setFormData(state, action: PayloadAction<petModel.FormDataType>) {
       state.data = { ...state.data, ...action.payload };
     },
-
     addImages: (state, action: PayloadAction<File[]>) => {
       state.images = action.payload;
     },
-
     setPreviewUrl: (state, action: PayloadAction<string>) => {
       state.previewUrl = action.payload;
     },
@@ -174,7 +194,6 @@ export const {
   addFavorites,
   setPreviewUrl,
   setAddPetUrl,
-
   addPets,
   resetAllPets,
   setAllPets,

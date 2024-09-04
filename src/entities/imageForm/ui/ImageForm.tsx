@@ -1,14 +1,12 @@
 import React from "react";
-
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./ImageForm.module.scss";
-
 import { Controller } from "react-hook-form";
-
 import { ReactComponent as ImageIcon } from "@shared/assets/image_icon.svg";
 import editIcon from "@shared/assets/edit_icon.svg";
 import { Control } from "react-hook-form";
+import { imageFormConsts } from "@shared/constants";
 type InfoFormProps = {
   handleFileChange: (e: React.ChangeEvent<HTMLInputElement>, data: any) => void;
   control?: Control<any>;
@@ -34,7 +32,7 @@ export const ImageForm: React.FC<InfoFormProps> = ({
             <img
               className={styles.preview_image}
               src={previewUrl}
-              alt="Preview"
+              alt={imageFormConsts.preview}
             />
           )}
           <button className={styles.edit_btn}>
@@ -54,7 +52,7 @@ export const ImageForm: React.FC<InfoFormProps> = ({
             render={({ field: { onChange, ref, disabled } }) => (
               <input
                 type="file"
-                accept="image/png, image/jpeg"
+                accept={imageFormConsts.accept}
                 multiple
                 disabled={disabled}
                 ref={ref}

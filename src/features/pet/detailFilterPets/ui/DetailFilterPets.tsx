@@ -8,6 +8,10 @@ import { ReactComponent as Close } from "@shared/assets/close_icon.svg";
 import { pluralize } from "numeralize-ru";
 
 export const DetailFilterPets: React.FC = () => {
+  const { values, age, woolType, petType } = useAppSelector(
+    (state) => state.pets.announcements
+  );
+
   const filters = useAppSelector((state) => state.pets.filters);
   const [filtersToggle, setFiltersToggle] = useState({
     vaccinations: false,
@@ -45,7 +49,9 @@ export const DetailFilterPets: React.FC = () => {
     }));
     dispatch(petModel.setFilters({ [target.name]: [target.value] }));
   };
-
+  const getIsDefault = (type: string, filterType: string) => {
+    return type !== filterType;
+  };
   return (
     <div className={styles.filter__container}>
       <div className={styles.filter}>
@@ -72,11 +78,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentPetType.cat !== filters.pet_type
-                  }
+                  isDefault={getIsDefault(petType.cat, filters.pet_type)}
                   name="pet_type"
-                  value={petModel.announcmentPetType.cat}
+                  value={petType.cat}
                   onClick={handleFilter}
                 >
                   Кошка
@@ -85,11 +89,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentPetType.dog !== filters.pet_type
-                  }
+                  isDefault={getIsDefault(petType.dog, filters.pet_type)}
                   name="pet_type"
-                  value={petModel.announcmentPetType.dog}
+                  value={petType.dog}
                   onClick={handleFilter}
                 >
                   Собака
@@ -105,7 +107,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={filters.gender != "true"}
+                  isDefault={getIsDefault(filters.gender, "true")}
                   name="gender"
                   value={true}
                   onClick={handleFilter}
@@ -116,7 +118,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={filters.gender != "false"}
+                  isDefault={getIsDefault(filters.gender, "false")}
                   name="gender"
                   value={false}
                   onClick={handleFilter}
@@ -134,9 +136,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={petModel.announcmentAge.small !== filters.age}
+                  isDefault={getIsDefault(age.small, filters.age)}
                   name="age"
-                  value={petModel.announcmentAge.small}
+                  value={age.small}
                   onClick={handleFilter}
                 >
                   Маленький
@@ -145,9 +147,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={petModel.announcmentAge.young !== filters.age}
+                  isDefault={getIsDefault(age.young, filters.age)}
                   name="age"
-                  value={petModel.announcmentAge.young}
+                  value={age.young}
                   onClick={handleFilter}
                 >
                   Молодой
@@ -156,9 +158,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={petModel.announcmentAge.adult !== filters.age}
+                  isDefault={getIsDefault(age.adult, filters.age)}
                   name="age"
-                  value={petModel.announcmentAge.adult}
+                  value={age.adult}
                   onClick={handleFilter}
                 >
                   Взрослый
@@ -167,9 +169,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={petModel.announcmentAge.old !== filters.age}
+                  isDefault={getIsDefault(age.old, filters.age)}
                   name="age"
-                  value={petModel.announcmentAge.old}
+                  value={age.old}
                   onClick={handleFilter}
                 >
                   Старый
@@ -185,7 +187,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"true" !== filters.health_issues}
+                  isDefault={getIsDefault(filters.health_issues, "true")}
                   name="health_issues"
                   value="true"
                   onClick={handleFilter}
@@ -218,7 +220,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"false" !== filters.health_issues}
+                  isDefault={getIsDefault(filters.health_issues, "false")}
                   name="health_issues"
                   value="false"
                   onClick={handleFilter}
@@ -236,11 +238,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentWoolType.long !== filters.wool_type
-                  }
+                  isDefault={getIsDefault(woolType.long, filters.wool_type)}
                   name="wool_type"
-                  value={petModel.announcmentWoolType.long}
+                  value={woolType.long}
                   onClick={handleFilter}
                 >
                   Длинная
@@ -249,11 +249,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentWoolType.short !== filters.wool_type
-                  }
+                  isDefault={getIsDefault(woolType.short, filters.wool_type)}
                   name="wool_type"
-                  value={petModel.announcmentWoolType.short}
+                  value={woolType.short}
                   onClick={handleFilter}
                 >
                   Короткая
@@ -262,11 +260,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentWoolType.fluffy !== filters.wool_type
-                  }
+                  isDefault={getIsDefault(woolType.fluffy, filters.wool_type)}
                   name="wool_type"
-                  value={petModel.announcmentWoolType.fluffy}
+                  value={woolType.fluffy}
                   onClick={handleFilter}
                 >
                   Пушистая
@@ -275,11 +271,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentWoolType.tough !== filters.wool_type
-                  }
+                  isDefault={getIsDefault(woolType.tough, filters.wool_type)}
                   name="wool_type"
-                  value={petModel.announcmentWoolType.tough}
+                  value={woolType.tough}
                   onClick={handleFilter}
                 >
                   Жесткая
@@ -288,11 +282,9 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={
-                    petModel.announcmentWoolType.hairless !== filters.wool_type
-                  }
+                  isDefault={getIsDefault(woolType.hairless, filters.wool_type)}
                   name="wool_type"
-                  value={petModel.announcmentWoolType.hairless}
+                  value={woolType.hairless}
                   onClick={handleFilter}
                 >
                   Бесшерстная
@@ -308,7 +300,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"true" !== filters.allergenicity}
+                  isDefault={getIsDefault(filters.allergenicity, "true")}
                   name="allergenicity"
                   value="true"
                   onClick={handleFilter}
@@ -319,7 +311,7 @@ export const DetailFilterPets: React.FC = () => {
               <div className={styles.filter__button}>
                 <Button
                   isSmall={true}
-                  isDefault={"false" !== filters.allergenicity}
+                  isDefault={getIsDefault(filters.allergenicity, "false")}
                   name="allergenicity"
                   value="false"
                   onClick={handleFilter}

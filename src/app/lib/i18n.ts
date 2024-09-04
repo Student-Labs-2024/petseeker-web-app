@@ -23,8 +23,8 @@ i18n.use(initReactI18next).init({
       search: search.search.ru,
     },
   },
-  lng: "ru",
-  fallbackLng: "ru",
+  lng: "en",
+  fallbackLng: "en",
   ns: ["authWidget", "authForm", "confirmForm", "petCardForm", "search"],
   defaultNS: "authWidget",
   interpolation: {

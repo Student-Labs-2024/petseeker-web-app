@@ -1,24 +1,17 @@
-import React, { useEffect, useState } from "react";
-
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
-
 import { Label } from "@shared/ui/label";
-import { Radio } from "@shared/ui/radio";
 import { Button } from "@shared/ui/button";
-import { Input } from "@shared/ui/input";
-import { useForm } from "react-hook-form";
-import classNames from "classnames";
 import { Controller } from "react-hook-form";
 import { TextArea } from "@/shared/ui/textArea";
 import { InfoFormProps } from "../model/type";
+
 export const DescriptionForm: React.FC<InfoFormProps> = ({
   onChangeForm,
-  handleNext,
   control,
-  register,
   errors,
   t,
 }) => {
@@ -26,7 +19,7 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
     <div className={styles.container}>
       <div className={styles.top}>
         <Star />
-        <Text myClass="bold_big">Описание объявления</Text>
+        <Text myClass="bold_big">{t("descriptionFormTitle")}</Text>
       </div>
       <form onSubmit={onChangeForm} className={styles.form}>
         <div className={styles.form__item}>
@@ -43,7 +36,7 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
                   ref={field.ref}
                   value={field.value}
                   onChange={field.onChange}
-                  placeholder="Введите описание"
+                  placeholder={t("enterDescription")}
                   myClass="form_textArea"
                   errorMessage={errors.description?.message}
                 />
@@ -52,7 +45,7 @@ export const DescriptionForm: React.FC<InfoFormProps> = ({
           </Label>
         </div>
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button type="submit">{t("next")}</Button>
         </div>
       </form>
     </div>

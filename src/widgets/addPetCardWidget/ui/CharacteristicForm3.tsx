@@ -1,42 +1,35 @@
-import React, { useEffect, useState } from "react";
-import { petModel } from "@entities/pet";
+import React from "react";
 import { useTranslation } from "react-i18next";
+import { petModel } from "@entities/pet";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
-import { useAppDispatch } from "@/shared/hooks";
-import { useAppSelector } from "@/shared/hooks";
-import { Label } from "@shared/ui/label";
-import { Radio } from "@shared/ui/radio";
 import { Button } from "@shared/ui/button";
-import { Input } from "@shared/ui/input";
-import { useForm } from "react-hook-form";
-import classNames from "classnames";
-import { UseFormRegister } from "react-hook-form";
+import { Radio } from "@shared/ui/radio";
 import { Toggle } from "@/shared/ui/toggle";
 import { InfoFormProps } from "../model/type";
+
 export const CharacteristicForm3: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
   control,
   register,
   errors,
+  t,
 }) => {
-  const dispatch = useAppDispatch();
-
   return (
     <div className={styles.container}>
       <div className={styles.top}>
         <Star />
-        <Text myClass="bold_big">Характеристики</Text>
+        <Text myClass="bold_big">{t("characteristics")}</Text>
       </div>
       <form onSubmit={onChangeForm} className={styles.form}>
         <div className={styles.form__item}>
-          <Text myClass="btn">Алергенность</Text>
+          <Text myClass="btn">{t("allergenicity")}</Text>
 
           <label className={styles.form__label_toggle}>
             <Text myClass="medium_big" color="gray">
-              Наличие аллергена
+              {t("allergenicity")}
             </Text>
             <Toggle
               name="allergenicity"
@@ -46,15 +39,15 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
           </label>
         </div>
         <div className={styles.form__item}>
-          <Text myClass="btn">Тип шерсти</Text>
+          <Text myClass="btn">{t("woolType")}</Text>
           <label className={styles.form__label_default}>
             <Radio
               required={true}
               name="wool_type"
               control={control}
               value={petModel.announcmentWoolType.hairless}
-            ></Radio>{" "}
-            <Text myClass="medium_big">Бесшерстная</Text>
+            ></Radio>
+            <Text myClass="medium_big">{t("hairless")}</Text>
           </label>
           <label className={styles.form__label_default}>
             <Radio
@@ -62,8 +55,8 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               name="wool_type"
               control={control}
               value={petModel.announcmentWoolType.fluffy}
-            ></Radio>{" "}
-            <Text myClass="medium_big">Пушистая</Text>
+            ></Radio>
+            <Text myClass="medium_big">{t("fluffy")}</Text>
           </label>
           <label className={styles.form__label_default}>
             <Radio
@@ -72,7 +65,7 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               control={control}
               value={petModel.announcmentWoolType.tough}
             ></Radio>
-            <Text myClass="medium_big">Жесткая</Text>
+            <Text myClass="medium_big">{t("tough")}</Text>
           </label>
           <label className={styles.form__label_default}>
             <Radio
@@ -80,8 +73,8 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               name="wool_type"
               control={control}
               value={petModel.announcmentWoolType.long}
-            ></Radio>{" "}
-            <Text myClass="medium_big">Длинная</Text>
+            ></Radio>
+            <Text myClass="medium_big">{t("long")}</Text>
           </label>
           <label className={styles.form__label_default}>
             <Radio
@@ -89,12 +82,12 @@ export const CharacteristicForm3: React.FC<InfoFormProps> = ({
               name="wool_type"
               control={control}
               value={petModel.announcmentWoolType.short}
-            ></Radio>{" "}
-            <Text myClass="medium_big">Короткая</Text>
+            ></Radio>
+            <Text myClass="medium_big">{t("short")}</Text>
           </label>
         </div>
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button type="submit">{t("next")}</Button>
         </div>
       </form>
     </div>

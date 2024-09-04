@@ -1,17 +1,15 @@
 import React from "react";
-import { petModel } from "@entities/pet/index";
 import { useTranslation } from "react-i18next";
+import { petModel } from "@entities/pet/index";
 import { Text } from "@shared/ui/text";
 import styles from "./petCardForm.module.scss";
 import { ReactComponent as Star } from "@shared/assets/star_icon.svg";
 import { useForm, Controller } from "react-hook-form";
 import { Button } from "@shared/ui/button";
 import { useAppSelector, useAppDispatch } from "@/shared/hooks";
-import { TextArea } from "@/shared/ui/textArea";
-import { ReactComponent as ImageIcon } from "@shared/assets/image_icon.svg";
-import { InfoFormProps } from "../model/type";
-import editIcon from "@shared/assets/edit_icon.svg";
 import { ImageForm } from "@entities/imageForm";
+import { InfoFormProps } from "../model/type";
+
 type FormData = {
   imageFiles: FileList | null;
 };
@@ -19,10 +17,11 @@ type FormData = {
 export const ImagesForm: React.FC<InfoFormProps> = ({
   onChangeForm,
   handleNext,
+  t,
 }) => {
   const storedImages = useAppSelector((state) => state.pets.images);
   const previewUrl = useAppSelector((state) => state.pets.previewUrl);
-  const { control, handleSubmit, reset } = useForm<FormData>({
+  const { control, handleSubmit } = useForm<FormData>({
     defaultValues: {
       imageFiles:
         storedImages.length > 0 ? (storedImages as unknown as FileList) : null,
@@ -38,6 +37,7 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
       dispatch(petModel.setPreviewUrl(preview));
     }
   };
+
   const handleFileChange = (
     e: React.ChangeEvent<HTMLInputElement>,
     onChange: (files: FileList | null) => void
@@ -47,13 +47,14 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
       onChange(e.target.files);
     }
   };
+
   return (
     <div className={styles.container}>
       <div className={styles.top}>
-        <Text myClass="bold_big">Добавьте фотографии</Text>
+        <Text myClass="bold_big">{t("addPhotos")}</Text>
       </div>
       <Text color="dark" myClass="btn">
-        не более 10 изображений
+        {t("maxImages")}
       </Text>
       <form onSubmit={handleSubmit(handleNext)} className={styles.form}>
         <ImageForm
@@ -62,7 +63,7 @@ export const ImagesForm: React.FC<InfoFormProps> = ({
           control={control}
         />
         <div className={styles.bottom}>
-          <Button type="submit">Далее</Button>
+          <Button type="submit">{t("next")}</Button>
         </div>
       </form>
     </div>

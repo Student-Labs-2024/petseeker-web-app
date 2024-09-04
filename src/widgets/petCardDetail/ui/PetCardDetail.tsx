@@ -19,7 +19,8 @@ import { petModel } from "@entities/pet/";
 import test from "@shared/assets/cat.png";
 import { SaveCard } from "@features/pet/savePet";
 import { match } from "ts-pattern";
-const apiUrl = import.meta.env.VITE_APP_URL;
+import { apiUrl } from "@/shared/constants";
+
 export const PetCardDetail: React.FC = () => {
   const { id } = useParams();
   const favorites = useAppSelector((state) => state.pets.ids);

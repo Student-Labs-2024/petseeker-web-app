@@ -26,8 +26,8 @@ export const EditUser: React.FC = () => {
   const defaultValues = {
     name: profileData?.name,
     surname: profileData?.surname,
-    phone_number: profileData?.phone_number,
-    telegram: profileData?.telegram,
+    phone_number: profileData?.phone_number || "",
+    telegram: profileData?.telegram || "",
     patronymic: profileData?.patronymic,
     male: profileData?.male,
   };
@@ -186,7 +186,7 @@ export const EditUser: React.FC = () => {
           <Controller
             name="phone_number"
             control={control}
-            defaultValue=""
+            defaultValue={defaultValues.phone_number}
             rules={{ required: "Phone number is required" }}
             render={({ field }) => (
               <InputMask
@@ -206,7 +206,7 @@ export const EditUser: React.FC = () => {
           <Controller
             name="telegram"
             control={control}
-            defaultValue=""
+            defaultValue={defaultValues.telegram}
             rules={{
               pattern: {
                 value: /^@[a-zA-Z0-9_]{1,32}$/,

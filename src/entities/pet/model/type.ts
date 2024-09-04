@@ -172,6 +172,6 @@ export type PetState = EntityState<Pet, number> & {
   favoriteFilters: Record<string, any>;
   previewUrl: string;
   addPetUrl: string;
-
   favorites: FavoritesState;
+  announcements: any;
 };
